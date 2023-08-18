@@ -6,7 +6,7 @@ import './ImageGallary.css'
 
 
 // this is child component step4:- passing setImagePath as a props
-const ImageGallaryModal = ({ buttonComponent , setImagePath}) => {
+const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
 
   const [show, setShow] = useState(false);
   const [file, setFile] = useState([]);
@@ -21,7 +21,7 @@ const ImageGallaryModal = ({ buttonComponent , setImagePath}) => {
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBLORxmuwMNWRDP-AHNGnLl9fO-vaHpr1iA&usqp=CAU"
 
   ])
- 
+
   const [selectedImg, setSelectedImg] = useState(null);
 
   const handleShow = () => {
@@ -40,8 +40,8 @@ const ImageGallaryModal = ({ buttonComponent , setImagePath}) => {
   function handleDelete() {
     setArr(arr.filter((img, index) => index !== selectedImg));
   };
-//step2:- Here we call the HandleUpload function ,This is the function for handleupload 
-  function handleUpload(){
+  //step2:- Here we call the HandleUpload function ,This is the function for handleupload 
+  function handleUpload() {
     // step3:- Here we select the image and checking the index of the selected image where it lies on the arr
     setImagePath(arr[selectedImg])
     handleClose();
@@ -118,7 +118,7 @@ const ImageGallaryModal = ({ buttonComponent , setImagePath}) => {
                 {selectedImg != null && <div>
                   <Button variant="danger" style={{ marginRight: '200px' }} onClick={() => handleDelete()}>Delete Image</Button>
                   {/* step-1 : here we create a handleUpload function */}
-                  <Button variant="info" onClick={()=> handleUpload()}>Upload Image</Button>
+                  <Button variant="info" onClick={() => handleUpload()}>Upload Image</Button>
                 </div>}
                 <Button variant="secondary" size="sm" active style={{ float: 'right !important' }} onClick={() => handleClose()}>
                   Close
