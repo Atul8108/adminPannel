@@ -44,10 +44,18 @@
 }
 .card{
     padding: 20px !important;
-    max-height: 300px;
+}
+.card>img{
+    width: 100%;
+    height: 100%;
 }
 .card2{
     margin-top: 15px;
+}
+
+.inside-card >img{
+    height: 100%;
+    width: 100%;
 }
 .dropdown .dropdown-toggle{
     background-color: transparent !important;

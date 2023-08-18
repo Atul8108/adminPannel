@@ -5,10 +5,24 @@ import { useDropzone } from 'react-dropzone';
 import './ImageGallary.css'
 
 
-const ImageGallaryModal = ({ buttonComponent }) => {
-  
+// this is child component step4:- passing setImagePath as a props
+const ImageGallaryModal = ({ buttonComponent , setImagePath}) => {
+
   const [show, setShow] = useState(false);
   const [file, setFile] = useState([]);
+  const [arr, setArr] = useState([
+    "https://play-lh.googleusercontent.com/4iYfabsphrq4CE-37nGVAUI1cFFYQl5qm5nyJ7EENlgI1WHLmAGJznvFQQO-dHlV6O8=w526-h296-rw",
+    "https://www.searchenginejournal.com/wp-content/uploads/2022/06/image-search-1600-x-840-px-62c6dc4ff1eee-sej.png",
+    "https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8fDA%3D&w=1000&q=80",
+    "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w=",
+    "https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=2000",
+    "https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk=",
+    "https://i0.wp.com/www.flutterbeads.com/wp-content/uploads/2021/11/set-background-image-flutter-hero.jpeg?fit=1920%2C1280&ssl=1",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBLORxmuwMNWRDP-AHNGnLl9fO-vaHpr1iA&usqp=CAU"
+
+  ])
+ 
+  const [selectedImg, setSelectedImg] = useState(null);
 
   const handleShow = () => {
     setShow(true);
@@ -18,23 +32,20 @@ const ImageGallaryModal = ({ buttonComponent }) => {
     setSelectedImg(null);
     setShow(false)
   }
-
-  let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-
   const onDrop = useCallback(acceptedFiles => {
     setFile(acceptedFiles);
   }, [])
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
-  const [selectedImg, setSelectedImg] = useState(null);
-  
-  const handleDelete = i => {
-    setSelectedImg(selectedImg.filter((img, index) => index !== i));
-  };
 
-  const handleAddition = img => {
-    setSelectedImg([...selectedImg, img]);
-    console.log(setSelectedImg)
+  function handleDelete() {
+    setArr(arr.filter((img, index) => index !== selectedImg));
   };
+//step2:- Here we call the HandleUpload function ,This is the function for handleupload 
+  function handleUpload(){
+    // step3:- Here we select the image and checking the index of the selected image where it lies on the arr
+    setImagePath(arr[selectedImg])
+    handleClose();
+  }
   return (
     <>
       <div className="btn-section mb-3" style={{ maxWidth: 'max-content' }}
@@ -93,7 +104,7 @@ const ImageGallaryModal = ({ buttonComponent }) => {
                     arr.map((item, index) => {
                       return (
                         <div className="col" style={{ paddingTop: '20px' }} onClick={() => setSelectedImg(index)}>
-                          <img src="https://play-lh.googleusercontent.com/4iYfabsphrq4CE-37nGVAUI1cFFYQl5qm5nyJ7EENlgI1WHLmAGJznvFQQO-dHlV6O8=w526-h296-rw" alt="gaming"
+                          <img src={item} alt="gaming"
                             style={{ width: '200px', height: '200px', objectFit: 'cover', border: selectedImg === index ? "2px solid green" : 'none' }} />
                         </div>
                       )
@@ -105,13 +116,13 @@ const ImageGallaryModal = ({ buttonComponent }) => {
 
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 {selectedImg != null && <div>
-                  <Button variant="danger" style={{ marginRight: '200px' }} onClick={handleDelete}>Delete Image</Button>
-                  <Button variant="info" onClick={handleAddition}>Upload Image</Button>
+                  <Button variant="danger" style={{ marginRight: '200px' }} onClick={() => handleDelete()}>Delete Image</Button>
+                  {/* step-1 : here we create a handleUpload function */}
+                  <Button variant="info" onClick={()=> handleUpload()}>Upload Image</Button>
                 </div>}
                 <Button variant="secondary" size="sm" active style={{ float: 'right !important' }} onClick={() => handleClose()}>
                   Close
                 </Button>
-
               </div>
             </div>
           </div>

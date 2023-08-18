@@ -8,17 +8,30 @@ import ImageGallaryModal from "../ImageGallaryModel/ImageGallaryModal";
 import TextEditor from "../TextEditor/TextEditor";
 import { BsCardImage } from "react-icons/bs"
 import { WithContext as ReactTags } from 'react-tag-input';
-
-
+// import ImageUploading from 'react-images-uploading';
+// this is parent component
 const RightNav = () => {
 
   const [value, setValue] = useState(null);
   const editorRef = useRef(null);
   const [tags, setTags] = useState([]);
-  
+  // here storeing the image 
+  const [imageToShow, setImageToShow] = useState(null)
+  const [imageToShowSecond, setImageToShowSecond] = useState(null)
+  // const [images, setImages] = React.useState([]);
+  // const maxNumber = 69;
+
+  // const onChange = (imageList, addUpdateIndex) => {
+  //   // data for submit
+  //   console.log(imageList, addUpdateIndex);
+  //   setImages(imageList);
+  // };
+
+  function editorImageInsert(a) {
+    editorRef.current.editorCommands.commands.exec.insertimage('InsertImage', false, a);
+  }
 
   const handleSelect = (e) => {
-    console.log(e);
     setValue(e)
   }
 
@@ -50,10 +63,8 @@ const RightNav = () => {
   const handleAddition = tag => {
     setTags([...tags, tag]);
   };
-  //for accepting the data from child to parent
-  // function GetData(){
-  //   console.log('hii')
-  // }
+  let arrToStore =[]
+  arrToStore.push(setImageToShowSecond)
   return (
     <>
       <div className="RightNav">
@@ -125,14 +136,15 @@ const RightNav = () => {
                   </InputGroup>
                   <p>Type tag and hit enter</p>
                   <div className="d-flex align-items-center">
-                    <ImageGallaryModal buttonComponent={
+                    <ImageGallaryModal setImagePath={(a) => { editorImageInsert(a) }} buttonComponent={
                       <Button className="select-btn-with-image">
-                        <span> <BsCardImage /> </span> <span> Additional Image</span>
+                        <span> <BsCardImage /> </span> <span> Add Image</span>
                       </Button>} />
                     &nbsp;&nbsp;
                     <h6 className="mb-3 text-danger fw-600">
                       ( ONLY JPEG,PNG )</h6>
                   </div>
+
                   {/* text editor */}
                 </form>
               </div>
@@ -147,22 +159,75 @@ const RightNav = () => {
             <div className="col-md-3">
               <div className="card">
                 <p style={{ fontWeight: '500' }}>Image</p>
-                <ImageGallaryModal buttonComponent={
+                {/* calling the props setImagePath which accept the one parameter a and passing it to the setImageshow which show the image */}
+                <ImageGallaryModal setImagePath={(a) => { setImageToShow(a) }} buttonComponent={
                   <Button className="select-btn">
                     Select Image
                   </Button>} />
+
                 {/* geting data from child components */}
-                <ImageGallaryModal/>
+
+                {imageToShow != null && <img src={imageToShow} alt="UplodadeImage" />}
+                <ImageGallaryModal />
 
               </div>
               {/* MODAL FOR IMAGE CARD */}
               <div className="card card2 ">
                 <span style={{ fontWeight: '500', marginBottom: 'none' }}>Additional Image</span>
-                <p style={{}}>More main images (slider will be active)</p>
-                <ImageGallaryModal buttonComponent={
+                <p>More main images (slider will be active)</p>
+                <ImageGallaryModal setImagePath={(a) => { setImageToShowSecond(a) }} buttonComponent={
                   <Button className="select-btn">
                     Select Image
                   </Button>} />
+                {imageToShowSecond != null &&
+                  <div className="position-relative inside-card">
+                    <div className="position-absolute top-0 end-0">
+                      <button style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
+                      </button>
+                    </div>
+                    <img src={imageToShowSecond} alt="AdditionalImage" />
+                    {/* <img src={imageToShowSecond} alt="AdditionalImage" /> */}
+                  </div>
+                }
+                {/* <ImageUploading
+                  multiple
+                  value={images}
+                  onChange={onChange}
+                  maxNumber={maxNumber}
+                  dataURLKey="data_url"
+                >
+                  {({
+                    imageList,
+                    onImageUpload,
+                    onImageRemoveAll,
+                    onImageUpdate,
+                    onImageRemove,
+                    isDragging,
+                    dragProps,
+                  }) => (
+                    // write your building UI
+                    <div className="upload__image-wrapper">
+                      <button
+                        style={isDragging ? { color: 'red' } : undefined}
+                        onClick={onImageUpload}
+                        {...dragProps}
+                      >
+                        Click or Drop here
+                      </button>
+                      &nbsp;
+                      <button onClick={onImageRemoveAll}>Remove all images</button>
+                      {imageList.map((image, index) => (
+                        <div key={index} className="image-item">
+                          <img src={image['data_url']} alt="" width="100" />
+                          <div className="image-item__btn-wrapper">
+                            <button onClick={() => onImageUpdate(index)}>Update</button>
+                            <button onClick={() => onImageRemove(index)}>Remove</button>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </ImageUploading> */}
               </div>
               <div className="card mt-3">
                 <span style={{ fontWeight: '500', marginBottom: 'none' }}>Category</span>
