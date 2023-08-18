@@ -19,7 +19,12 @@ const RightNav = () => {
   const [imageToShowSecond, setImageToShowSecond] = useState([])
 
   function multiImgFunc(a) {
-    setImageToShowSecond([...imageToShowSecond, a]);
+    if(imageToShowSecond.includes(a)){
+      console.log('element found')
+    }
+    else{
+      setImageToShowSecond([...imageToShowSecond, a]);
+    }
   }
   
   const AdditionalDelete=(i)=>{

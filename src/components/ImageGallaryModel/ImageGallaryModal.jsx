@@ -42,7 +42,7 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
   };
   //step2:- Here we call the HandleUpload function ,This is the function for handleupload 
   function handleUpload() {
-    // step3:- Here we select the image and checking the index of the selected image where it lies on the arr
+    // step3:- Here we select the image
     setImagePath(arr[selectedImg])
     handleClose();
   }
