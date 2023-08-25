@@ -6,9 +6,14 @@
     box-sizing: border-box;
 }
 
+.global-layout .close{
+    width: 0vw !important;
+}
+
 .leftnav{
+    transition: all 0.1s ease;
     background-color: rgb(31, 28, 28) ;
-    width: 15%;
+    width: 15vw;
     min-height: 100vh;
 }
 .leftnav>h4{

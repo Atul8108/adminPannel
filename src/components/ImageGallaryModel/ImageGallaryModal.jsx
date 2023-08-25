@@ -48,10 +48,7 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
   }
   return (
     <>
-      <div className="btn-section mb-3" style={{ maxWidth: 'max-content' }}
-        onClick={() => handleShow()} >
-        {buttonComponent}
-      </div >
+      <div className="btn-section mb-3" style={{ maxWidth: 'max-content' }} onClick={() => handleShow()} >{buttonComponent} </div>
       <Modal
         show={show}
         onHide={() => handleClose()}
@@ -66,7 +63,7 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
         <Modal.Body>
           <div className="container-fluid">
             <div className="row ">
-              <div className="col-md-4 " style={{ border: '1px solid c3c1c1' }}>
+              <div className="col-md-3 " style={{ border: '1px solid c3c1c1' }}>
                 <div className="row">
                   <div className="col-12">
                     <section className="container">
@@ -98,12 +95,12 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
                   }
                 </div>
               </div>
-              <div className="col-md-8">
+              <div className="col-md-9">
                 <div className="row" style={{ height: "80vh", overflowY: 'scroll' }}>
                   {
                     arr.map((item, index) => {
                       return (
-                        <div className="col" style={{ paddingTop: '20px' }} onClick={() => setSelectedImg(index)}>
+                        <div key={index} className="col" style={{ paddingTop: '20px' }} onClick={() => setSelectedImg(index)}>
                           <img src={item} alt="gaming"
                             style={{ width: '200px', height: '200px', objectFit: 'cover', border: selectedImg === index ? "2px solid green" : 'none' }} />
                         </div>
