@@ -50,6 +50,7 @@ const RightNav = ({title}) => {
 
     let blogData ={
       "title": title.value ,
+      "mainImage" : imageToShow,
       "description": desCription.value,
       "tags" : tag.value,
       "check1": check1.value,
