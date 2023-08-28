@@ -46,13 +46,12 @@ const RightNav = ({title}) => {
     const desCription = document.getElementById("description")
     const check1 = document.getElementById('check1')
     const check2 = document.getElementById('check2')
-    const tag = document.getElementById('tag')
 
     let blogData ={
       "title": title.value ,
       "mainImage" : imageToShow,
       "description": desCription.value,
-      "tags" : tag.value,
+      "key": tags,
       "check1": check1.value,
       "check2": check2.value,
       "editor": editorRef.current.getContent(),
@@ -60,9 +59,7 @@ const RightNav = ({title}) => {
       "dropdownValue" : value
     }
     await setPostDataList([...postDataList,blogData]);
-
     localStorage.setItem('blogList', JSON.stringify(postDataList))
-
   }
 
   const handleDelete = i => {

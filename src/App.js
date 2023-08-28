@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import HomeView from "./views/HomeView";
-import Login from "./views/Login";
-import ViewBlog from "./views/ViewBlog";
+import HomeView from "./views/Home/HomeView";
+import Login from "./views/Login/Login";
+import ViewBlog from "./views/ViewBlog/ViewBlog";
 
 
 function App() {

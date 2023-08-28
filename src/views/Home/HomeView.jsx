@@ -1,7 +1,7 @@
 import React from "react";
-import RightNav from "../components/Right_Pannel/RightNav";
-import LeftNav from "../components/Left_Pannel/LeftNav"
-import Header from "../components/Header/Header";
+import RightNav from "../../components/Right_Pannel/RightNav";
+import LeftNav from "../../components/Left_Pannel/LeftNav"
+import Header from "../../components/Header/Header";
 import "./homeView.css"
 
 const HomeView = () => {
