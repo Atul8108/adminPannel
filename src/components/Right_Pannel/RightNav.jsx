@@ -17,11 +17,11 @@ import "react-toastify/dist/ReactToastify.css"
 // this is parent component
 const RightNav = ({ title }) => {
 
-  const [value, setValue] = useState(null);
+  let [value, setValue] = useState(null);
   const editorRef = useRef(null);
-  const [tags, setTags] = useState([]);
+  let [tags, setTags] = useState([]);
   // here storeing the image 
-  const [imageToShow, setImageToShow] = useState(null)
+  let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
   const [postDataList, setPostDataList] = useState([]);
 
@@ -91,8 +91,16 @@ const RightNav = ({ title }) => {
       await setPostDataList([...postDataList, blogData]);
       localStorage.setItem('blogList', JSON.stringify(postDataList))
       toast("Your Blog is Posted");
+
+      title.value = null;
+      desCription.value =null;
+      tags=([])
+      imageToShow= ("");
+      console.log(imageToShow)
     }
+    
   }
+
 
   const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
@@ -118,7 +126,7 @@ const RightNav = ({ title }) => {
           <div className="row m-0">
             <div className="col-md-9">
               <div className="blog-input Card1">
-                <form>
+                <form >
                   <p>Title</p>
                   <InputGroup className="mb-3">
                     <Form.Control
@@ -195,22 +203,11 @@ const RightNav = ({ title }) => {
               <TextEditor editorRef={editorRef} />
               <div className="Publish-btn">
                 <p>Publish</p>
-                <Button onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
+                <Button  onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
                 <Button variant="warning">Save as Draft</Button>{' '}
                 <ToastContainer />
               </div>
             </div>
-            {/* submit blog data */}
-
-            {/* <div className="card" style={{ width: '18rem' , marginLeft:'50px' }}>
-              <img className="card-img-top" src="https://play-lh.googleusercontent.com/4iYfabsphrq4CE-37nGVAUI1cFFYQl5qm5nyJ7EENlgI1WHLmAGJznvFQQO-dHlV6O8=w526-h296-rw" alt="Cardimagecap" />
-                <div className="card-body">
-                  <h5 id="update-title" className="card-title">title</h5>
-                  <p id="desc" className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <p id="keword" className='card-text'>KeyWord</p>
-                  <a href="/" className="btn btn-primary">Check Post</a>
-                </div>
-            </div> */}
 
             {/* MODAL FOR IMAGE CARD */}
             <div className="col-md-3">
