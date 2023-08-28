@@ -9,8 +9,13 @@ import TextEditor from "../TextEditor/TextEditor";
 import { BsCardImage } from "react-icons/bs"
 import { WithContext as ReactTags } from 'react-tag-input';
 import $ from "jquery"
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css"
+
+
+
 // this is parent component
-const RightNav = ({title}) => {
+const RightNav = ({ title }) => {
 
   const [value, setValue] = useState(null);
   const editorRef = useRef(null);
@@ -21,16 +26,16 @@ const RightNav = ({title}) => {
   const [postDataList, setPostDataList] = useState([]);
 
   function multiImgFunc(a) {
-    if(imageToShowSecond.includes(a)){
-      console.log('element found')
+    if (imageToShowSecond.includes(a)) {
+      toast("Image already selected")
     }
-    else{
+    else {
       setImageToShowSecond([...imageToShowSecond, a]);
     }
   }
-  
-  const AdditionalDelete=(i)=>{
-    setImageToShowSecond(imageToShowSecond.filter((img , index) => index !== i))
+
+  const AdditionalDelete = (i) => {
+    setImageToShowSecond(imageToShowSecond.filter((img, index) => index !== i))
   }
 
   function editorImageInsert(a) {
@@ -41,25 +46,52 @@ const RightNav = ({title}) => {
     setValue(e)
   }
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     const title = document.getElementById("title")
     const desCription = document.getElementById("description")
     const check1 = document.getElementById('check1')
     const check2 = document.getElementById('check2')
-
-    let blogData ={
-      "title": title.value ,
-      "mainImage" : imageToShow,
-      "description": desCription.value,
-      "key": tags,
-      "check1": check1.value,
-      "check2": check2.value,
-      "editor": editorRef.current.getContent(),
-      "image": imageToShowSecond,
-      "dropdownValue" : value
+    if (!title.value) {
+      toast("title is empty")
     }
-    await setPostDataList([...postDataList,blogData]);
-    localStorage.setItem('blogList', JSON.stringify(postDataList))
+    else if (!imageToShow) {
+      toast('Upload the Image')
+    }
+    else if (!desCription.value) {
+      toast('description is empty')
+    }
+    else if (!tags) {
+      toast("Please Enter the Keyword")
+    }
+    else if (!check1.value) {
+      toast('Please Check The box')
+    }
+    else if (!check2.value) {
+      toast('Please Check The box')
+    }
+    else if (!imageToShowSecond) {
+      toast('Please add the second Image')
+    }
+    else if (!value) {
+      toast('Please select category')
+    }
+
+    else {
+      let blogData = {
+        "title": title.value,
+        "mainImage": imageToShow,
+        "description": desCription.value,
+        "key": tags,
+        "check1": check1.value,
+        "check2": check2.value,
+        "editor": editorRef.current.getContent(),
+        "image": imageToShowSecond,
+        "dropdownValue": value
+      }
+      await setPostDataList([...postDataList, blogData]);
+      localStorage.setItem('blogList', JSON.stringify(postDataList))
+      toast("Your Blog is Posted");
+    }
   }
 
   const handleDelete = i => {
@@ -73,7 +105,7 @@ const RightNav = ({title}) => {
   const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
-  $(".navbar-toggler").click(() => {
+    $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
     })
   }, [isOpen])
@@ -82,7 +114,7 @@ const RightNav = ({title}) => {
     <>
       <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
         <div className="container-fluid">
-        <h4>Create Blog</h4>
+          <h4>Create Blog</h4>
           <div className="row m-0">
             <div className="col-md-9">
               <div className="blog-input Card1">
@@ -165,6 +197,7 @@ const RightNav = ({title}) => {
                 <p>Publish</p>
                 <Button onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
                 <Button variant="warning">Save as Draft</Button>{' '}
+                <ToastContainer />
               </div>
             </div>
             {/* submit blog data */}
@@ -206,12 +239,12 @@ const RightNav = ({title}) => {
                 {imageToShowSecond.length > 0 &&
                   imageToShowSecond.map((item, index) => {
                     return (
-                      <div  className="position-relative inside-card">
+                      <div className="position-relative inside-card">
                         <div className="position-absolute top-0 end-0">
-                          <button onClick={()=>AdditionalDelete(index)} style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
+                          <button onClick={() => AdditionalDelete(index)} style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
                           </button>
                         </div>
-                        <img id='AdditionalImage' key={index} src={item} alt="AdditionalImage" style={{marginBottom:'15px'}}/>
+                        <img id='AdditionalImage' key={index} src={item} alt="AdditionalImage" style={{ marginBottom: '15px' }} />
                       </div>
                     )
                   })
@@ -226,9 +259,9 @@ const RightNav = ({title}) => {
                   id="dropdown-menu-align-left"
                   onSelect={handleSelect}
                 >
-                  <Dropdown.Item  id="dropdown-menu-align-left" eventKey="News">News</Dropdown.Item>
-                  <Dropdown.Item  id="dropdown-menu-align-left" eventKey="Feeds">Feeds</Dropdown.Item>
-                  <Dropdown.Item  id="dropdown-menu-align-left" eventKey="Headline">Headline</Dropdown.Item>
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="News">News</Dropdown.Item>
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="Feeds">Feeds</Dropdown.Item>
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="Headline">Headline</Dropdown.Item>
                 </DropdownButton>
               </div>
             </div>
