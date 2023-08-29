@@ -24,7 +24,7 @@ const BlogPage = () => {
                        <h1 className='title'>{singleBlog?.current?.title}</h1>
                     <p>{singleBlog.current?.dropdownValue}</p>
                     <div className='image'>
-                        <img src={singleBlog.current?.mainImage} alt="MainImage" />
+                        <img className="MainImage" src={singleBlog.current?.mainImage} alt="MainImage" />
                         <p className='Description'>{singleBlog?.current?.description}</p>
                         <p>{new DOMParser().parseFromString(singleBlog?.current?.editor, 'text/xml').firstChild.innerHTML}</p>
                         <img className='additionalImage' src={singleBlog?.current?.image} alt=''/>

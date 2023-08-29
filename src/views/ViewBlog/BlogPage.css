@@ -19,8 +19,11 @@
     display: flex;
 }
 .blog-page{
-    width: 300px;
+    width: 100%;
 }
 .inner-container{
     text-align: center;
+}
+.MainImage{
+    width: 400px;
 }
