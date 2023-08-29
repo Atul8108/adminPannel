@@ -5,10 +5,10 @@ import Header from '../../components/Header/Header'
 import { Button } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import { Link } from 'react-router-dom'
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
-
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
   }, []);
@@ -27,7 +27,7 @@ const ViewBlog = () => {
           <Header />
           <div className="row">
             {
-              bloglist.map((data, index) => {
+              bloglist?.map((data, index) => {
                 return (
                   <div className="card col-md-3 p-3">
                     <img className="card-img-top" src={data.mainImage} alt="Cardimagecap" />
@@ -44,10 +44,11 @@ const ViewBlog = () => {
                         }
                       </div>
 
-                      <p className='About'>About: {new DOMParser().parseFromString(data.editor, 'text/xml').firstChild.innerHTML}</p>
+                      <p className='About'>About:{new DOMParser().parseFromString(data.editor, 'text/xml').firstChild.innerHTML} </p>
                       <p className='card-feeds'>Category: {data.dropdownValue}</p>
+                      <p>date and time : {data.createDateTime}</p>
                       <div className="button">
-                        <Button href="/" className="btn btn-sm btn-primary">Check Post</Button>
+                        <Link to={"/blog-page/"+index}><Button  className="btn btn-sm btn-primary">Check Post</Button></Link>                      
                         <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button>
                         <ToastContainer />
                       </div>

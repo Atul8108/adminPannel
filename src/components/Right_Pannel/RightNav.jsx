@@ -23,7 +23,6 @@ const RightNav = ({ title }) => {
   // here storeing the image 
   let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
-  const [postDataList, setPostDataList] = useState([]);
 
   function multiImgFunc(a) {
     if (imageToShowSecond.includes(a)) {
@@ -49,8 +48,9 @@ const RightNav = ({ title }) => {
   const handleSubmit = async () => {
     const title = document.getElementById("title")
     const desCription = document.getElementById("description")
-    const check1 = document.getElementById('check1')
+    let check1 = document.getElementById('check1')
     const check2 = document.getElementById('check2')
+    const tag = document.getElementById("tag")
     if (!title.value) {
       toast("title is empty")
     }
@@ -86,19 +86,25 @@ const RightNav = ({ title }) => {
         "check2": check2.value,
         "editor": editorRef.current.getContent(),
         "image": imageToShowSecond,
-        "dropdownValue": value
+        "dropdownValue": value,
+        "createDateTime": new Date().toLocaleString() 
       }
-      await setPostDataList([...postDataList, blogData]);
-      localStorage.setItem('blogList', JSON.stringify(postDataList))
+      let tempArr = [];
+      tempArr = [...tempArr,blogData]
+      localStorage.setItem('blogList', JSON.stringify(tempArr))
       toast("Your Blog is Posted");
 
       title.value = null;
       desCription.value =null;
-      tags=([])
-      imageToShow= ("");
-      console.log(imageToShow)
-    }
-    
+      tag.value = null;
+      check1.checked= false;
+      check2.checked= false;
+      setTags([]);
+      setImageToShow(null);
+      setImageToShowSecond([]);
+      editorRef.current.getContent()
+      editorRef.current.setContent('')
+    }  
   }
 
 
@@ -221,7 +227,7 @@ const RightNav = ({ title }) => {
 
                 {/* geting data from child components */}
 
-                {imageToShow != null && <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
+                {imageToShow != null &&  <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
 
 
               </div>
@@ -264,6 +270,7 @@ const RightNav = ({ title }) => {
             </div>
           </div>
         </div>
+        
       </div>
     </>
   );
