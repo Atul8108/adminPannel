@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+.global-layout .close{
+    width: 0vw !important;
+}
+
+.leftnav{
+    transition: all 0.1s ease;
+    background-color: rgb(31, 28, 28) ;
+    width: 15vw;
+    min-height: 100vh;
+}
+.leftnav>h4{
+    color: white;
+    padding-left: 64px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.Admin{
+    display: flex;
+    flex-direction: row;
+}
+.admin_online{
+    margin-left: 10px;
+}
+
+.admin_online>p{
+    color: white;
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.profile_image{
+    width: 50px;
+    height: 50px;
+    margin-left: 30px;
+}
+.List{
+    margin-top: 20px;
+    color: white;
+}
+.accordion{
+    --bs-accordion-border-color: none !important;
+}
+.accordion-body{
+    padding: 0 !important;
+}
+
+.accordion-button{
+    background-color: rgb(31, 28, 28);
+    color: white;
+    border: 0;
+}
+
+.accordion-item {
+    border: none;
+    background-color: transparent !important;
+}
+.accordion-button::after{
+    border: none;
+}
+.accordion-button:focus{
+    box-shadow: none;
+}
+.accordion-button:not(.collapsed) {
+    background-color: transparent !important;
+    border: none;
+    color: white;
+}
+
+.nav-link{
+    color: white;
+}

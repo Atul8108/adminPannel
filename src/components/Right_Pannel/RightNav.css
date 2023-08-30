@@ -1,0 +1,179 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.RightNav{
+    width:85vw;
+    overflow-x: hidden;
+}
+.RightNav .container-fluid{
+    background-color: rgb(223, 237, 250);
+}
+.main-content .closeRightNav{
+    width:  98.70vw;
+    padding: 0;
+}
+
+.RightNav>h4{
+    padding-top: 10px;
+    padding-left: 20px;
+
+}
+.navbar-toggler{
+    border: none;
+}
+
+.Card1{
+    padding: 15px;
+    margin-bottom: 25px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+.Card1>p{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.Publish-btn{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 350px;
+    height: 120px;
+    border-radius: 5px;
+    background-color: aliceblue;
+}
+.Publish-btn>p{
+    padding: 10px 10px;
+    font-weight: 500;
+}
+.card{
+    padding: 20px !important;
+}
+.card>img{
+    width: 100%;
+    height: 100%;
+}
+.card2{
+    margin-top: 15px;
+}
+
+.inside-card >img{
+    height: 100%;
+    width: 100%;
+}
+.dropdown .dropdown-toggle{
+    background-color: transparent !important;
+    color: black !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border: 1px solid black;
+}
+
+.dropdown-toggle::after{
+    /* margin-left:inherit; */
+    /* justify-content:flex-end; */
+    padding-left: 0px;
+    text-align: start;
+}
+
+.dropdown-menu.show{
+    width: 100%;
+}
+.select-btn{
+    background-color: #483285 !important;
+    border: none;
+}
+
+.select-btn-with-image{
+    background-color: #32855e !important;
+    border: none;
+}
+
+.modal-content1{
+    border: none;
+    width: 900px;
+    height: 800px;
+    border: 1px solid red;
+    max-width: none !important;
+}
+.modal{
+    display: flex;
+}
+
+.modal-80w{
+    min-width: 80vw !important;
+    max-width: 80vw !important;
+}
+
+.modal-header{
+    padding: 7px 15px !important;
+}
+
+.modal-title{
+    font-size: 22px !important;
+}
+.modal-body{
+    padding: none;
+}
+
+.card-modal{
+    margin-top: 20px !important;
+    padding: 35px !important;
+    min-width: 100%;
+    border: 3px dashed #c3c1c1;
+}
+.close{
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.form-check-input{
+    padding: 10px;
+    position: relative !important;
+} 
+.col {
+    min-width: unset !important;
+}
+
+.ReactTags__tagInput{
+    display: inline-grid !important;
+}
+.ReactTags__tagInputField{
+    border: 1px solid #b4b5b6;
+    border-radius: 3px;
+    width: 350px;
+    padding: 5px;
+    margin-left: 0px;
+    margin-bottom: 10px;
+}
+p{
+    margin: 0;
+    margin-bottom: 5px;
+}
+.tag-wrapper{
+    border-radius: 5px;;
+    background-color: rgb(223, 221, 221);
+    padding: 10px;
+    margin-right: 5px;
+
+}
+.ReactTags__remove{
+    background-color: white;
+    border-radius: 50%;
+    padding: 3px;
+    margin-left: 11px;
+    border: none;
+    height: 14px;
+    padding-top: 0px;
+    padding-bottom: 25px;
+    width: 22px;
+}
+.border-right {
+    border-right: 3px dashed #c3c1c1 !important;
+}
