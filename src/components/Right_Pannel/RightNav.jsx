@@ -12,10 +12,12 @@ import $ from "jquery"
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 
-
+// let tempArr = [];
 
 // this is parent component
 const RightNav = ({ title }) => {
+
+ 
 
   let [value, setValue] = useState(null);
   const editorRef = useRef(null);
@@ -23,6 +25,7 @@ const RightNav = ({ title }) => {
   // here storeing the image 
   let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
+  const [tempArr, setTempArr] = useState([])
 
   function multiImgFunc(a) {
     if (imageToShowSecond.includes(a)) {
@@ -85,26 +88,26 @@ const RightNav = ({ title }) => {
         "check1": check1.value,
         "check2": check2.value,
         "editor": editorRef.current.getContent(),
+        "tag": tag.value,
         "image": imageToShowSecond,
         "dropdownValue": value,
-        "createDateTime": new Date().toLocaleString() 
+        "createDateTime": new Date().toLocaleString()
       }
-      let tempArr = [];
-      tempArr = [...tempArr,blogData]
+      setTempArr([...tempArr, blogData]);
       localStorage.setItem('blogList', JSON.stringify(tempArr))
       toast("Your Blog is Posted");
 
       title.value = null;
-      desCription.value =null;
+      desCription.value = null;
       tag.value = null;
-      check1.checked= false;
-      check2.checked= false;
+      check1.checked = false;
+      check2.checked = false;
       setTags([]);
       setImageToShow(null);
       setImageToShowSecond([]);
       editorRef.current.getContent()
       editorRef.current.setContent('')
-    }  
+    }
   }
 
 
@@ -209,7 +212,7 @@ const RightNav = ({ title }) => {
               <TextEditor editorRef={editorRef} />
               <div className="Publish-btn">
                 <p>Publish</p>
-                <Button  onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
+                <Button onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
                 <Button variant="warning">Save as Draft</Button>{' '}
                 <ToastContainer />
               </div>
@@ -227,7 +230,7 @@ const RightNav = ({ title }) => {
 
                 {/* geting data from child components */}
 
-                {imageToShow != null &&  <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
+                {imageToShow != null && <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
 
 
               </div>
@@ -270,7 +273,7 @@ const RightNav = ({ title }) => {
             </div>
           </div>
         </div>
-        
+
       </div>
     </>
   );

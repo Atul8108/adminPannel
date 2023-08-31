@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
+  console.log(bloglist)
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
   }, []);
@@ -44,9 +45,8 @@ const ViewBlog = () => {
                         }
                       </div>
 
-                      <p className='About'>About:{new DOMParser().parseFromString(data.editor, 'text/xml').firstChild.innerHTML} </p>
                       <p className='card-feeds'>Category: {data.dropdownValue}</p>
-                      <p>date and time : {data.createDateTime}</p>
+                      <p>{data.createDateTime}</p>
                       <div className="button">
                         <Link to={"/blog-page/"+index}><Button  className="btn btn-sm btn-primary">Check Post</Button></Link>                      
                         <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button>
