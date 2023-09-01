@@ -94,12 +94,12 @@ const BlogPage = () => {
 
                             {
                                 singleBlog?.current?.comments?.length > 0 && (
-                                    <div>
+                                    <div className='commentbox'>
                                         <h2>Comments</h2>
                                         <ul>
                                             {singleBlog?.current?.comments?.map((c, index) => (
                                                 <li key={index}>
-                                                    <strong>{c.userName}:</strong> {c.comment}
+                                                    <p><strong>{c.userName}:</strong>&emsp;{c.comment}</p>
                                                 </li>
                                             ))}
                                         </ul>

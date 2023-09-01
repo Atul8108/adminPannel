@@ -50,7 +50,11 @@
     --bs-accordion-border-color: none !important;
 }
 .accordion-body{
+    display: inline;
     padding: 0 !important;
+}
+.accordion-body:hover{
+    text-decoration: none !important;
 }
 
 .accordion-button{

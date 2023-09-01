@@ -15,9 +15,9 @@ import "react-toastify/dist/ReactToastify.css"
 
 // this is parent component
 const RightNav = ({ title }) => {
-  
+
   let tempArr = [];
- 
+
 
   let [value, setValue] = useState(null);
   const editorRef = useRef(null);
@@ -93,7 +93,7 @@ const RightNav = ({ title }) => {
         "dropdownValue": value,
         "createDateTime": new Date().toLocaleString()
       }
-      tempArr = [...blog,blogData]
+      tempArr = [...blog, blogData]
       setBlog(tempArr);
       localStorage.setItem('blogList', JSON.stringify(tempArr))
       toast("Your Blog is Posted");
@@ -197,18 +197,17 @@ const RightNav = ({ title }) => {
                     />
                   </InputGroup>
                   <p>Type tag and hit enter</p>
-                  <div className="d-flex align-items-center">
-                    <ImageGallaryModal setImagePath={(a) => { editorImageInsert(a) }} detection={'editor'} buttonComponent={
-                      <Button className="select-btn-with-image">
-                        <span> <BsCardImage /> </span> <span> Add Image</span>
-                      </Button>} />
-                    &nbsp;&nbsp;
-                    <h6 className="mb-3 text-danger fw-600">
-                      ( ONLY JPEG,PNG )</h6>
-                  </div>
-
-                  {/* text editor */}
                 </form>
+
+              </div>
+              <div className="d-flex align-items-center addImg" style={{backgroundColor:"white"}}>
+                <ImageGallaryModal setImagePath={(a) => { editorImageInsert(a) }} detection={'editor'} buttonComponent={
+                  <Button className="select-btn-with-image">
+                    <span> <BsCardImage /> </span> <span> Add Image</span>
+                  </Button>} />
+                &nbsp;&nbsp;
+                <h6 className="mb-3 text-danger fw-600">
+                  ( ONLY JPEG,PNG )</h6>
               </div>
               <TextEditor editorRef={editorRef} />
               <div className="Publish-btn">

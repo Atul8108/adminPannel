@@ -63,6 +63,13 @@
     height: 100%;
     width: 100%;
 }
+.addImg{
+    width: 335px;
+    height: 100px;
+    padding: 34px 20px 20px 30px;
+    margin-bottom: 30px;
+    border-radius: 5px;
+}
 .dropdown .dropdown-toggle{
     background-color: transparent !important;
     color: black !important;

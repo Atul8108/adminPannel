@@ -40,7 +40,7 @@ const LeftNav = () => {
         </div>
         <div className="List">
           <Nav defaultActiveKey="/home" className="flex-column">
-            <Nav.Link href="/home" style={{}}><AiFillHome />&emsp;Home</Nav.Link>
+            <Link to="/home" style={{textDecoration:"none"}}>&emsp;<AiFillHome />&emsp;Home</Link>
             <Accordion>
               <Accordion.Item eventKey="1">
                 <Accordion.Header><MdOutlineForum />&emsp;Forum</Accordion.Header>
@@ -54,8 +54,10 @@ const LeftNav = () => {
               <Accordion.Item eventKey="1">
                 <Accordion.Header><ImBlog />&emsp;Blog</Accordion.Header>
                 <Accordion.Body>
-                  <Link to='/view-blog'>View Blog</Link>
-                  <Nav.Link eventKey="link-2">Create Blog</Nav.Link>
+                  <Link to='/view-blog' style={{textDecoration:"none"}}>&emsp;View Blog</Link>
+                  <br/>
+                  <br/>
+                  <Link to='/home' eventKey="link-2" style={{textDecoration:"none"}}>&emsp;Create Blog</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

@@ -29,7 +29,8 @@ const ViewBlog = () => {
             {
               bloglist?.map((data, index) => {
                 return (
-                  <div className="card col-md-2 p-3 m-4">
+                  <div className="card col-md-3 p-3 m-4">
+                  <Link to={'/blog-page/' + index} style={{textDecoration:"none",color:'none'}}>
                     <img className="card-img-top" src={data.mainImage} alt="Cardimagecap" />
                     <div className="card-body">
                       <h5 className="card-title">Title: {data.title}</h5>
@@ -47,16 +48,18 @@ const ViewBlog = () => {
                       <p className='card-feeds'>Category: {data.dropdownValue}</p>
                       <p>{data.createDateTime}</p>
                       <div className="button">
-                        <Link to={"/blog-page/"+index}><Button  className="btn btn-sm btn-primary">Check Post</Button></Link>                      
+                        <Link to={"/blog-page/"+index}><Button  className="btn btn-sm btn-primary">Edit Post</Button></Link>                      
                         <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button>
                         <ToastContainer />
                       </div>
                     </div>
+                    </Link>
                   </div>
                 )
               })
             }
           </div>
+         
         </div>
       </div>
 
