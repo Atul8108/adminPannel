@@ -134,6 +134,7 @@
     justify-content: flex-end;
 }
 .form-check-input{
+    display: block;
     padding: 10px;
     position: relative !important;
 } 

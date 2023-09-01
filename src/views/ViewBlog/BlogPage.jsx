@@ -10,37 +10,27 @@ const BlogPage = () => {
     let { id } = useParams();
     const blog = useRef();
     let singleBlog = useRef();
-    const [userName, setUserName] = useState("");
-    const [comment, setComment] = useState("");
     const [commentsList, setCommentsList] = useState([]);
+    let commentList = [];
 
     blog.current = JSON.parse(localStorage.getItem("blogList"));
     singleBlog.current = blog.current[id];
-    console.log(singleBlog);
 
-    const handleUserNameChange = (event) => {
-        setUserName(event.target.value);
-    };
 
-    const handleCommentChange = (event) => {
-        setComment(event.target.value);
-    };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-
-        // Create a new comment object
-        const newComment = {
-            userName,
-            comment,
+    function handleSubmit() {
+        let newComment = {
+            userName: document.getElementById("userName").value,
+            comment: document.getElementById("comment").value,
         };
 
-        // Add the new comment to the list of comments
-        setCommentsList([...commentsList, newComment]);
-
-        // Clear the input fields
-        setUserName("");
-        setComment("");
+        commentList = [...commentsList, newComment];
+        setCommentsList(commentList);
+        singleBlog.current.comments = commentList;
+        blog.current[id] = singleBlog.current;
+        console.log(blog.current[0]);
+        localStorage.setItem("blogList", JSON.stringify(blog.current));
+        document.getElementById("userName").value = null;
+        document.getElementById("comment").value = null;
     };
 
     return (
@@ -72,9 +62,8 @@ const BlogPage = () => {
                         <div className='keywords'>
                             <p className='keywords-item'><strong>Keywords:&nbsp;</strong>
                                 {
-                                    
+
                                     singleBlog?.current?.key.map((keys, index) => {
-                                        console.log(keys)
                                         return (
                                             <div className="tags"><p>{keys.text},&nbsp;</p></div>
                                         )
@@ -88,35 +77,34 @@ const BlogPage = () => {
                         {/* comment section */}
                         <div className="comment-box">
                             <h4>Comment Box</h4>
-                            <hr style={{color:"black"}}/>
+                            <hr style={{ color: "black" }} />
                             <strong><label>User Name</label></strong>
                             <input
                                 className='user-name'
                                 placeholder='User name'
-                                value={userName}
-                                onChange={handleUserNameChange}
+                                id='userName'
                             />
                             <strong><label>Comments</label></strong>
                             <textarea
                                 className='form-control'
                                 placeholder='Type Your Comment'
-                                value={comment}
-                                onChange={handleCommentChange}
+                                id='comment'
                             />
-                            <button type='submit' onClick={handleSubmit}>Submit</button>
+                            <button type='submit' onClick={() => handleSubmit()}>Submit</button>
 
-                            {commentsList.length > 0 && (
-                                <div>
-                                    <h2>Comments</h2>
-                                    <ul>
-                                        {commentsList.map((c, index) => (
-                                            <li key={index}>
-                                                <strong>{c.userName}:</strong> {c.comment}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            )}
+                            {
+                                singleBlog?.current?.comments?.length > 0 && (
+                                    <div>
+                                        <h2>Comments</h2>
+                                        <ul>
+                                            {singleBlog?.current?.comments?.map((c, index) => (
+                                                <li key={index}>
+                                                    <strong>{c.userName}:</strong> {c.comment}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                         </div>
                     </div>
 

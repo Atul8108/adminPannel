@@ -12,11 +12,11 @@ import $ from "jquery"
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 
-// let tempArr = [];
 
 // this is parent component
 const RightNav = ({ title }) => {
-
+  
+  let tempArr = [];
  
 
   let [value, setValue] = useState(null);
@@ -25,7 +25,7 @@ const RightNav = ({ title }) => {
   // here storeing the image 
   let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
-  const [tempArr, setTempArr] = useState([])
+  const [blog, setBlog] = useState([])
 
   function multiImgFunc(a) {
     if (imageToShowSecond.includes(a)) {
@@ -93,7 +93,8 @@ const RightNav = ({ title }) => {
         "dropdownValue": value,
         "createDateTime": new Date().toLocaleString()
       }
-      setTempArr([...tempArr, blogData]);
+      tempArr = [...blog,blogData]
+      setBlog(tempArr);
       localStorage.setItem('blogList', JSON.stringify(tempArr))
       toast("Your Blog is Posted");
 

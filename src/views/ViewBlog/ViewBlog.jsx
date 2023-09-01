@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
-  console.log(bloglist)
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
   }, []);
