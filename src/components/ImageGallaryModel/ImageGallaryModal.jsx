@@ -109,18 +109,18 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
                   }
                 </div>
 
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  {selectedImg != null && <div className='upload-delete-btn'>
+                    <Button variant="danger" style={{ marginRight: '30px' }} onClick={() => handleDelete()}>Delete Image</Button>
+                    {/* step-1 : here we create a handleUpload function */}
+                    <Button variant="info" onClick={() => handleUpload()}>Upload Image</Button>
+                  </div>}
+                  <Button variant="secondary" size="sm" active style={{ float: 'right !important' }} onClick={() => handleClose()}>
+                    Close
+                  </Button>
+                </div>
               </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                {selectedImg != null && <div>
-                  <Button variant="danger" style={{ marginRight: '200px' }} onClick={() => handleDelete()}>Delete Image</Button>
-                  {/* step-1 : here we create a handleUpload function */}
-                  <Button variant="info" onClick={() => handleUpload()}>Upload Image</Button>
-                </div>}
-                <Button variant="secondary" size="sm" active style={{ float: 'right !important' }} onClick={() => handleClose()}>
-                  Close
-                </Button>
-              </div>
             </div>
           </div>
         </Modal.Body>

@@ -29,7 +29,7 @@ const ViewBlog = () => {
             {
               bloglist?.map((data, index) => {
                 return (
-                  <div className="card col-md-3 p-3">
+                  <div className="card col-md-2 p-3 m-4">
                     <img className="card-img-top" src={data.mainImage} alt="Cardimagecap" />
                     <div className="card-body">
                       <h5 className="card-title">Title: {data.title}</h5>

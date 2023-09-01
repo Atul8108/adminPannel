@@ -163,7 +163,7 @@ const RightNav = ({ title }) => {
                     handleAddition={handleAddition}
                   />
                   <div className="form-check">
-                    <label className="form-check-label" htmlFor="check2">
+                    <label className="form-check-label" htmlFor="check1">
                       Add to Slider
                     </label>
                     <input
