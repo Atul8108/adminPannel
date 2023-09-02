@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
+ 
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
   }, []);
@@ -19,6 +20,7 @@ const ViewBlog = () => {
     localStorage.setItem('blogList', JSON.stringify(newArr))
     toast("Your Blog is Delete");
   }
+  console.log(bloglist)
   return (
     <>
       <div className='Blog-post-container'>
@@ -48,7 +50,8 @@ const ViewBlog = () => {
                       <p className='card-feeds'>Category: {data.dropdownValue}</p>
                       <p>{data.createDateTime}</p>
                       <div className="button">
-                        <Link to={"/blog-page/"+index}><Button  className="btn btn-sm btn-primary">Edit Post</Button></Link>                      
+                        <Link to={"/blog-page/"+index}><Button className="btn btn-sm btn-primary">view Post</Button></Link>
+                        <Link to={"/edit-page/"+index}><Button  className="btn btn-sm btn-primary">Edit Post</Button></Link>                       
                         <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button>
                         <ToastContainer />
                       </div>
