@@ -2,14 +2,14 @@ import { Editor } from "@tinymce/tinymce-react";
 import React from "react";
 
 
-const TextEditor = ({ editorRef }) => {
+const TextEditor = ({ editorRef,value }) => {
   return (
     <>
       <Editor
         apiKey="nf8059vixet2rh0lc7lr3ai2zdb6qajnd86hhi0bemxatspp"
         id="editor"
         onInit={(evt, editor) => editorRef.current = editor}
-        initialValue=""
+        initialValue={value}
         init={{
           height: 500,
           menubar: 'file edit view insert format tools tc',

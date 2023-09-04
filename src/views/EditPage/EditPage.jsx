@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import LeftNav from '../../components/Left_Pannel/LeftNav'
 import Header from '../../components/Header/Header'
-import { useContext } from 'react'
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import TextEditor from "../../components/TextEditor/TextEditor";
 import { BsCardImage } from "react-icons/bs"
@@ -14,20 +13,20 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import "../../components/Right_Pannel/RightNav.css"
 import "../../components/Left_Pannel/LeftNav.css"
-import parse from "html-react-parser"
 import "./EditPage.css"
+import parse from "html-react-parser"
 
 const EditPage = () => {
-    let editblog = useRef([])
-    editblog = JSON.parse(localStorage.getItem("blogList"));
     const { id } = useParams()
-    let [value, setValue] = useState(editblog[id].dropdownValue);
+    let editblog = useRef()
     const editorRef = useRef();
-    let editor = useRef(editblog[id].editor)
-    let [tags, setTags] = useState([editblog[id].key]);
-    // here storeing the image 
-    let [imageToShow, setImageToShow] = useState(editblog[id].mainImage)
-    const [imageToShowSecond, setImageToShowSecond] = useState([editblog[id].image]);
+
+    editblog.current = JSON.parse(localStorage.getItem("blogList"));
+    let editor = useRef(editblog?.current[id]?.editor)
+    let [value, setValue] = useState(editblog?.current[id]?.dropdownValue);
+    let [tags, setTags] = useState(editblog?.current[id]?.key);
+    let [imageToShow, setImageToShow] = useState(editblog?.current[id]?.mainImage)
+    const [imageToShowSecond, setImageToShowSecond] = useState([editblog?.current[id]?.image]);
 
     function multiImgFunc(a) {
         if (imageToShowSecond.includes(a)) {
@@ -53,13 +52,26 @@ const EditPage = () => {
         setTags(tags.filter((tag, index) => index !== i));
     };
 
-    const handleAddition = tag => {
+    function handleAddition(tag) {
         setTags([...tags, tag]);
     };
+    const updateSubmit = () =>{
+        console.log('Update submit')
+        let updatePost ={
+            updateTitle: document.getElementById("title").value,
+            updateDescription: document.getElementById("description").value,
+            check1 : document.getElementById('check1').value,
+            check2 : document.getElementById('check2').value,
+            tag:document.getElementById("tag").value,
+            additionalImage: imageToShowSecond,
+            dropdownValue:value,
+            editor: editor.current
+        };
+        editblog.current=updatePost;
+        editblog.current[id]=editblog.current;
+        localStorage.setItem(" editblog",JSON.stringify(editblog.current))
+    }
 
-    console.log(editblog[id])
-
-    console.log(editblog)
     const updateHtml = () => {
         return (
             <div className={'RightNav'}>
@@ -74,7 +86,7 @@ const EditPage = () => {
                                         <Form.Control
                                             id="title"
                                             name='title'
-                                            defaultValue={editblog[id].title}
+                                            defaultValue={editblog?.current[id]?.title}
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             placeholder="Title"
@@ -86,23 +98,15 @@ const EditPage = () => {
 
                                     >
                                         <Form.Label>Summary & Description</Form.Label>
-                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={editblog[id].description} />
+                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={editblog?.current[id]?.description} />
                                     </Form.Group>
                                     {/* <Keyword /> */}
                                     <p> Keywords </p>
-                                    {
-                                        editblog[id]?.key?.map((item, index) => {
-                                            return (
-                                                <p className='keyword'>{item.text}</p>
-                                            )
-                                        })
-                                    }
                                     <ReactTags
                                         tags={tags}
                                         allowDragDrop={false}
                                         handleDelete={handleDelete}
-                                        handleAddition={handleAddition}
-                                        defaultValue={tags}
+                                        handleAddition={(tag) => { handleAddition(tag) }}
                                     />
                                     <div className="form-check">
                                         <label className="form-check-label" htmlFor="check1">
@@ -136,7 +140,7 @@ const EditPage = () => {
                                             placeholder="Tag"
                                             name="tag"
                                             id="tag"
-                                            defaultValue={editblog[id].tag}
+                                            defaultValue={editblog?.current[id]?.tag}
                                         />
                                     </InputGroup>
                                     <p>Type tag and hit enter</p>
@@ -144,7 +148,7 @@ const EditPage = () => {
 
                             </div>
                             <div className="d-flex align-items-center addImg" style={{ backgroundColor: "white" }}>
-                                <ImageGallaryModal setImagePath={(a)=>{editorImageInsert(a)}} detection={'editor'} buttonComponent={
+                                <ImageGallaryModal setImagePath={(a) => { editorImageInsert(a) }} detection={'editor'} buttonComponent={
                                     <Button className="select-btn-with-image">
                                         <span> <BsCardImage /> </span> <span> Add Image</span>
                                     </Button>} />
@@ -152,10 +156,10 @@ const EditPage = () => {
                                 <h6 className="mb-3 text-danger fw-600">
                                     ( ONLY JPEG,PNG )</h6>
                             </div>
-                            <TextEditor editorRef={editorRef} defaultValue={editor.value} />
+                            <TextEditor editorRef={editorRef} value={editor.current} />
                             <div className="Publish-btn">
                                 <p>Publish</p>
-                                <Button onClick={'handleSubmit'} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
+                                <Button onClick={updateSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}
                                 <Button variant="warning">Save as Draft</Button>{' '}
                                 <ToastContainer />
                             </div>

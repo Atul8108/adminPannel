@@ -104,7 +104,8 @@ const BlogPage = () => {
                                             ))}
                                         </ul>
                                     </div>
-                                )}
+                                )
+                            }
                         </div>
                     </div>
 
