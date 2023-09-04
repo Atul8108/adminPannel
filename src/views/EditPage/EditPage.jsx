@@ -15,29 +15,50 @@ import InputGroup from "react-bootstrap/InputGroup";
 import "../../components/Right_Pannel/RightNav.css"
 import "../../components/Left_Pannel/LeftNav.css"
 import parse from "html-react-parser"
+import "./EditPage.css"
 
 const EditPage = () => {
-    const { id } = useParams()
-    let [value, setValue] = useState(null);
-    const editorRef = useRef(null);
-    let [tags, setTags] = useState([]);
-    // here storeing the image 
-    let [imageToShow, setImageToShow] = useState(null)
-    const [imageToShowSecond, setImageToShowSecond] = useState([]);
-    let [editblog, seteditblog] = useState([])
-
-
-    useEffect(() => {
-        seteditblog(JSON.parse(localStorage.getItem("blogList")))
-    }, []);
+    let editblog = useRef([])
     editblog = JSON.parse(localStorage.getItem("blogList"));
-    console.log(editblog[id].title)
-    // localStorage.setItem('blogList', JSON.stringify(editblog)
-    const handleChange = (event, fieldName) => {
-        seteditblog({
-            ...editblog
-        })
+    const { id } = useParams()
+    let [value, setValue] = useState(editblog[id].dropdownValue);
+    const editorRef = useRef();
+    let editor = useRef(editblog[id].editor)
+    let [tags, setTags] = useState([editblog[id].key]);
+    // here storeing the image 
+    let [imageToShow, setImageToShow] = useState(editblog[id].mainImage)
+    const [imageToShowSecond, setImageToShowSecond] = useState([editblog[id].image]);
+
+    function multiImgFunc(a) {
+        if (imageToShowSecond.includes(a)) {
+            toast("Image already selected")
+        }
+        else {
+            setImageToShowSecond([...imageToShowSecond, a]);
+        }
     }
+
+    const AdditionalDelete = (i) => {
+        setImageToShowSecond(imageToShowSecond.filter((img, index) => index !== i))
+    }
+
+    function editorImageInsert(a) {
+        editorRef.current.editorCommands.commands.exec.insertimage('InsertImage', false, a);
+    }
+
+    const handleSelect = (e) => {
+        setValue(e)
+    }
+    const handleDelete = i => {
+        setTags(tags.filter((tag, index) => index !== i));
+    };
+
+    const handleAddition = tag => {
+        setTags([...tags, tag]);
+    };
+
+    console.log(editblog[id])
+
     console.log(editblog)
     const updateHtml = () => {
         return (
@@ -53,12 +74,11 @@ const EditPage = () => {
                                         <Form.Control
                                             id="title"
                                             name='title'
-                                            value={editblog[id].title}
+                                            defaultValue={editblog[id].title}
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             placeholder="Title"
                                             type="text"
-                                            onChange={((event) => handleChange(event))}
                                         />
                                     </InputGroup>
                                     <Form.Group
@@ -66,7 +86,7 @@ const EditPage = () => {
 
                                     >
                                         <Form.Label>Summary & Description</Form.Label>
-                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" value={editblog[id].description} />
+                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={editblog[id].description} />
                                     </Form.Group>
                                     {/* <Keyword /> */}
                                     <p> Keywords </p>
@@ -80,9 +100,9 @@ const EditPage = () => {
                                     <ReactTags
                                         tags={tags}
                                         allowDragDrop={false}
-                                        handleDelete={''}
-                                        handleAddition={''}
-                                        value={editblog[id].key}
+                                        handleDelete={handleDelete}
+                                        handleAddition={handleAddition}
+                                        defaultValue={tags}
                                     />
                                     <div className="form-check">
                                         <label className="form-check-label" htmlFor="check1">
@@ -116,7 +136,7 @@ const EditPage = () => {
                                             placeholder="Tag"
                                             name="tag"
                                             id="tag"
-                                            value={editblog[id].tag}
+                                            defaultValue={editblog[id].tag}
                                         />
                                     </InputGroup>
                                     <p>Type tag and hit enter</p>
@@ -124,7 +144,7 @@ const EditPage = () => {
 
                             </div>
                             <div className="d-flex align-items-center addImg" style={{ backgroundColor: "white" }}>
-                                <ImageGallaryModal setImagePath={('')} detection={'editor'} buttonComponent={
+                                <ImageGallaryModal setImagePath={(a)=>{editorImageInsert(a)}} detection={'editor'} buttonComponent={
                                     <Button className="select-btn-with-image">
                                         <span> <BsCardImage /> </span> <span> Add Image</span>
                                     </Button>} />
@@ -132,7 +152,7 @@ const EditPage = () => {
                                 <h6 className="mb-3 text-danger fw-600">
                                     ( ONLY JPEG,PNG )</h6>
                             </div>
-                            <TextEditor editorRef={editorRef} value={editblog[id].editor} />
+                            <TextEditor editorRef={editorRef} defaultValue={editor.value} />
                             <div className="Publish-btn">
                                 <p>Publish</p>
                                 <Button onClick={'handleSubmit'} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
@@ -140,64 +160,64 @@ const EditPage = () => {
                                 <ToastContainer />
                             </div>
                             {/* MODAL FOR IMAGE CARD */}
-                            <div className="col-md-3">
-                                <div className="card">
-                                    <p style={{ fontWeight: '500' }}>Image</p>
-                                    {/* calling the props setImagePath which accept the one parameter a and passing it to the setImageshow which show the image */}
-                                    <ImageGallaryModal setImagePath={(a) => { setImageToShow(a) }} detection={''} buttonComponent={
-                                        <Button className="select-btn">
-                                            Select Image
-                                        </Button>} />
 
-                                    {/* geting data from child components */}
-
-                                    {editblog[id].mainImage != null && <img id="imageShow" src={editblog[id].mainImage} alt="UplodadeImage" />}
-
-
-                                </div>
-                                {/* MODAL FOR IMAGE CARD */}
-                                <div className="card card2 ">
-                                    <span style={{ fontWeight: '500', marginBottom: 'none' }}>Additional Image</span>
-                                    <p>More main images (slider will be active)</p>
-                                    <ImageGallaryModal setImagePath={(a) => { ' multiImgFunc(a)' }} detection={''} buttonComponent={
-                                        <Button className="select-btn">
-                                            Select Image
-                                        </Button>} />
-                                    {
-                                        editblog[id].image.map((item, index) => {
-
-                                            return (
-                                                <div className="position-relative inside-card">
-                                                    <div className="position-absolute top-0 end-0">
-                                                        <button onClick={() => 'AdditionalDelete(index)'} style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
-                                                        </button>
-                                                    </div>
-                                                    <img id='AdditionalImage' key={index} src={item} alt="AdditionalImage" style={{ marginBottom: '15px' }} />
-                                                </div>
-                                            )
-                                        })
-                                    }
-
-                                </div>
-                                <div className="card mt-3">
-                                    <span style={{ fontWeight: '500', marginBottom: 'none' }}>Category</span>
-                                    <DropdownButton
-                                        alignright="true"
-                                        title={value ?? "NEWS"}
-                                        id="dropdown-menu-align-left"
-                                        value={editblog[id].dropdownValue}
-                                        onSelect={''}
-                                    >
-                                        <Dropdown.Item id="dropdown-menu-align-left" eventKey="News">News</Dropdown.Item>
-                                        <Dropdown.Item id="dropdown-menu-align-left" eventKey="Feeds">Feeds</Dropdown.Item>
-                                        <Dropdown.Item id="dropdown-menu-align-left" eventKey="Headline">Headline</Dropdown.Item>
-                                    </DropdownButton>
-                                </div>
-                            </div>
 
 
                         </div>
+                        <div className="col-md-3">
+                            <div className="card">
+                                <p style={{ fontWeight: '500' }}>Image</p>
+                                {/* calling the props setImagePath which accept the one parameter a and passing it to the setImageshow which show the image */}
+                                <ImageGallaryModal setImagePath={(a) => { multiImgFunc(a) }} detection={'multiImage'} buttonComponent={
+                                    <Button className="select-btn">
+                                        Select Image
+                                    </Button>} />
 
+                                {/* geting data from child components */}
+
+                                {imageToShow != null && <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
+
+
+                            </div>
+                            {/* MODAL FOR IMAGE CARD */}
+                            <div className="card card2 ">
+                                <span style={{ fontWeight: '500', marginBottom: 'none' }}>Additional Image</span>
+                                <p>More main images (slider will be active)</p>
+                                <ImageGallaryModal setImagePath={(a) => { multiImgFunc(a) }} detection={''} buttonComponent={
+                                    <Button className="select-btn">
+                                        Select Image
+                                    </Button>} />
+                                {
+                                    imageToShowSecond.map((item, index) => {
+
+                                        return (
+                                            <div className="position-relative inside-card">
+                                                <div className="position-absolute top-0 end-0">
+                                                    <button onClick={() => AdditionalDelete(index)} style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <img id='AdditionalImage' key={index} src={item} alt="AdditionalImage" style={{ marginBottom: '15px' }} />
+                                            </div>
+                                        )
+                                    })
+                                }
+
+                            </div>
+                            <div className="card mt-3">
+                                <span style={{ fontWeight: '500', marginBottom: 'none' }}>Category</span>
+                                <DropdownButton
+                                    alignright="true"
+                                    title={value ?? "NEWS"}
+                                    id="dropdown-menu-align-left"
+                                    defaultValue={value}
+                                    onSelect={handleSelect}
+                                >
+                                    <Dropdown.Item id="dropdown-menu-align-left" eventKey="News">News</Dropdown.Item>
+                                    <Dropdown.Item id="dropdown-menu-align-left" eventKey="Feeds">Feeds</Dropdown.Item>
+                                    <Dropdown.Item id="dropdown-menu-align-left" eventKey="Headline">Headline</Dropdown.Item>
+                                </DropdownButton>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -214,7 +234,6 @@ const EditPage = () => {
                     <Header />
                     <div>
                         {updateHtml()}
-                        {id}
                     </div>
                 </div>
             </div>

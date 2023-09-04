@@ -244,6 +244,7 @@ const RightNav = ({ title }) => {
                   </Button>} />
                 {imageToShowSecond.length > 0 &&
                   imageToShowSecond.map((item, index) => {
+                    console.log(imageToShowSecond)
                     return (
                       <div className="position-relative inside-card">
                         <div className="position-absolute top-0 end-0">
