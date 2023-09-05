@@ -45,3 +45,12 @@
     width: 100%;
     justify-content: space-between;
 }
+.dropdown-menu{
+    width: 100px !important;
+}
+
+.dropdown .dropdown-toggle{
+    margin-left: 15px !important;
+    margin-top: 10px !important;
+    width: 150px !important;
+}

@@ -1,3 +1,10 @@
 .container-fluid{
     padding-left: 1px;
 }
+.navbar-toggler{
+    border: none;
+}
+.main-content .closeRightNav{
+    width:  98.70vw;
+    padding: 0;
+}

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import "./ViewBlog.css"
 import LeftNav from '../../components/Left_Pannel/LeftNav'
 import Header from '../../components/Header/Header'
-import { Button } from 'react-bootstrap'
+import { Button, Dropdown, DropdownButton } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import { Link } from 'react-router-dom'
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
+  let [value, setValue] = useState(null);
  
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
@@ -20,15 +21,36 @@ const ViewBlog = () => {
     localStorage.setItem('blogList', JSON.stringify(newArr))
     toast("Your Blog is Delete");
   }
-  console.log(bloglist)
+
+  function  handleSelect (e){
+    setValue(e)
+    if(e === 'ALL'){
+      setbloglist(JSON.parse(localStorage.getItem("blogList")));
+    }
+    else{
+      setbloglist(JSON.parse(localStorage.getItem("blogList")).filter((blog) => blog.status === e));
+    }
+
+  }
+
   return (
     <>
       <div className='Blog-post-container'>
         <LeftNav />
         <div className="container-fluid">
           <Header />
+          <DropdownButton
+                  alignright="true"
+                  title={value ?? "Publish"}
+                  id="dropdown-menu-align-left"
+                  onSelect={(e)=>{handleSelect(e)}}
+                >
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="ALL">All</Dropdown.Item>
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="PUBLISH">Publish</Dropdown.Item>
+                  <Dropdown.Item id="dropdown-menu-align-left" eventKey="DRAFT">Draft</Dropdown.Item>
+                </DropdownButton>
           <div className="row">
-            {
+            { bloglist?.length>0 &&
               bloglist?.map((data, index) => {
                 return (
                   <div className="card col-md-3 p-3 m-4">
@@ -46,23 +68,22 @@ const ViewBlog = () => {
                           })
                         }
                       </div>
-
                       <p className='card-feeds'>Category: {data.dropdownValue}</p>
+                      <p>{data?.status}</p>
                       <p>{data.createDateTime}</p>
+                    </div>
+                    </Link>
                       <div className="button">
                         <Link to={"/blog-page/"+index}><Button className="btn btn-sm btn-primary">view Post</Button></Link>
                         <Link to={"/edit-page/"+index}><Button  className="btn btn-sm btn-primary">Edit Post</Button></Link>                       
                         <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button>
                         <ToastContainer />
                       </div>
-                    </div>
-                    </Link>
                   </div>
                 )
               })
             }
           </div>
-         
         </div>
       </div>
 

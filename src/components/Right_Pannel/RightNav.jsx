@@ -17,8 +17,6 @@ import "react-toastify/dist/ReactToastify.css"
 const RightNav = ({ title }) => {
 
   let tempArr = [];
-
-
   let [value, setValue] = useState(null);
   const editorRef = useRef(null);
   let [tags, setTags] = useState([]);
@@ -48,7 +46,7 @@ const RightNav = ({ title }) => {
     setValue(e)
   }
 
-  const handleSubmit = async () => {
+  async function handleSubmit (status) {
     const title = document.getElementById("title")
     const desCription = document.getElementById("description")
     let check1 = document.getElementById('check1')
@@ -91,12 +89,20 @@ const RightNav = ({ title }) => {
         "tag": tag.value,
         "image": imageToShowSecond,
         "dropdownValue": value,
-        "createDateTime": new Date().toLocaleString()
+        "createDateTime": new Date().toLocaleString(),
+        "status": status
       }
       tempArr = [...blog, blogData]
       setBlog(tempArr);
       localStorage.setItem('blogList', JSON.stringify(tempArr))
-      toast("Your Blog is Posted");
+      if(status === "PUBLISH"){
+        toast("Your Blog is Posted");
+      }
+      else{
+        toast("Save as Draft");
+
+      }
+      
 
       title.value = null;
       desCription.value = null;
@@ -200,7 +206,7 @@ const RightNav = ({ title }) => {
                 </form>
 
               </div>
-              <div className="d-flex align-items-center addImg" style={{backgroundColor:"white"}}>
+              <div className="d-flex align-items-center addImg" style={{ backgroundColor: "white" }}>
                 <ImageGallaryModal setImagePath={(a) => { editorImageInsert(a) }} detection={'editor'} buttonComponent={
                   <Button className="select-btn-with-image">
                     <span> <BsCardImage /> </span> <span> Add Image</span>
@@ -212,8 +218,8 @@ const RightNav = ({ title }) => {
               <TextEditor editorRef={editorRef} />
               <div className="Publish-btn">
                 <p>Publish</p>
-                <Button onClick={handleSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
-                <Button variant="warning">Save as Draft</Button>{' '}
+                <Button onClick={()=>handleSubmit("PUBLISH")} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
+                <Button onClick={()=>handleSubmit("DRAFT")}  variant="warning">Save as Draft</Button>{' '}
                 <ToastContainer />
               </div>
             </div>

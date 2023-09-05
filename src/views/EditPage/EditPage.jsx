@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import LeftNav from '../../components/Left_Pannel/LeftNav'
 import Header from '../../components/Header/Header'
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
@@ -14,7 +14,7 @@ import InputGroup from "react-bootstrap/InputGroup";
 import "../../components/Right_Pannel/RightNav.css"
 import "../../components/Left_Pannel/LeftNav.css"
 import "./EditPage.css"
-import parse from "html-react-parser"
+import $ from "jquery"
 
 const EditPage = () => {
     const { id } = useParams()
@@ -55,26 +55,66 @@ const EditPage = () => {
     function handleAddition(tag) {
         setTags([...tags, tag]);
     };
-    const updateSubmit = () =>{
-        console.log('Update submit')
-        let updatePost ={
-            updateTitle: document.getElementById("title").value,
-            updateDescription: document.getElementById("description").value,
-            check1 : document.getElementById('check1').value,
-            check2 : document.getElementById('check2').value,
-            tag:document.getElementById("tag").value,
-            additionalImage: imageToShowSecond,
-            dropdownValue:value,
-            editor: editor.current
-        };
-        editblog.current=updatePost;
-        editblog.current[id]=editblog.current;
-        localStorage.setItem(" editblog",JSON.stringify(editblog.current))
-    }
+    const updateSubmit = () => {
+        const title = document.getElementById("title")
+        const desCription = document.getElementById("description")
+        let check1 = document.getElementById('check1')
+        const check2 = document.getElementById('check2')
+        const tag = document.getElementById("tag")
+        if (!title.value) {
+            toast("title is empty")
+        }
+        else if (!imageToShow) {
+            toast('Upload the Image')
+        }
+        else if (!desCription.value) {
+            toast('description is empty')
+        }
+        else if (!tags) {
+            toast("Please Enter the Keyword")
+        }
+        else if (!check1.value) {
+            toast('Please Check The box')
+        }
+        else if (!check2.value) {
+            toast('Please Check The box')
+        }
+        else if (!imageToShowSecond) {
+            toast('Please add the second Image')
+        }
+        else if (!value) {
+            toast('Please select category')
+        }
 
+        else {
+            let blogData = {
+                "title": title.value,
+                "mainImage": imageToShow,
+                "description": desCription.value,
+                "key": tags,
+                "check1": check1.value,
+                "check2": check2.value,
+                "editor": editorRef.current.getContent(),
+                "tag": tag.value,
+                "image": imageToShowSecond,
+                "dropdownValue": value,
+                "createDateTime": new Date().toLocaleString()
+            }
+            editblog.current[id] = blogData;
+            localStorage.setItem("blogList", JSON.stringify(editblog.current))
+        }
+    }
+    const [isOpen, setIsOpen] = useState(true);
+
+    useEffect(() => {
+      $(".navbar-toggler").click(() => {
+        setIsOpen(!isOpen);
+      })
+    }, [isOpen])
+  
     const updateHtml = () => {
         return (
-            <div className={'RightNav'}>
+            <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                 <div className="container-fluid">
                     <h4>Update Blog</h4>
                     <div className="row m-0">
@@ -159,7 +199,7 @@ const EditPage = () => {
                             <TextEditor editorRef={editorRef} value={editor.current} />
                             <div className="Publish-btn">
                                 <p>Publish</p>
-                                <Button onClick={updateSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}
+                                <Link to={"/view-blog"}><Button onClick={updateSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}</Link>
                                 <Button variant="warning">Save as Draft</Button>{' '}
                                 <ToastContainer />
                             </div>
@@ -172,7 +212,7 @@ const EditPage = () => {
                             <div className="card">
                                 <p style={{ fontWeight: '500' }}>Image</p>
                                 {/* calling the props setImagePath which accept the one parameter a and passing it to the setImageshow which show the image */}
-                                <ImageGallaryModal setImagePath={(a) => { multiImgFunc(a) }} detection={'multiImage'} buttonComponent={
+                                <ImageGallaryModal setImagePath={(a) => { setImageToShow(a) }} detection={'multiImage'} buttonComponent={
                                     <Button className="select-btn">
                                         Select Image
                                     </Button>} />
