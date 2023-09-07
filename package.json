@@ -9,7 +9,6 @@
     "@tinymce/tinymce-react": "^4.3.0",
     "html-react-parser": "^4.2.1",
     "jquery": "^3.7.0",
-    "mdb-react-ui-kit": "^6.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",

@@ -53,10 +53,10 @@ const LeftNav = () => {
               <Accordion.Item eventKey="1">
                 <Accordion.Header><ImBlog />&emsp;Blog</Accordion.Header>
                 <Accordion.Body>
-                  <Link to='/view-blog' className='nav_item' style={{textDecoration:"none"}}>&emsp;View Blog</Link>
+                  <Link to='/view-blog' className='nav_item' style={{textDecoration:"none" ,color:'white'}}>&emsp;View Blog</Link>
                   <br/>
                   <br/>
-                  <Link to='/home' eventKey="link-2" className='nav_item' style={{textDecoration:"none"}}>&emsp;Create Blog</Link>
+                  <Link to='/home' eventKey="link-2" className='nav_item' style={{textDecoration:"none" , color:'white'}}>&emsp;Create Blog</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

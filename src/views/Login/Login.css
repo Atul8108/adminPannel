@@ -5,8 +5,6 @@
 .img-fluid{
     width: 600px;
 }
-
-
 .container{
     width: 100vh;
     justify-content: center;
@@ -43,3 +41,7 @@
     font-size: larger;
     color: blue;
 }
+
+@media screen and (max-width: 700px) {
+    .container {flex-direction: column;}
+  }

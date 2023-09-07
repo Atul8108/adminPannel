@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import "./BlogPage.css"
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import LeftNav from '../../components/Left_Pannel/LeftNav';
 import Header from '../../components/Header/Header';
 import parse from "html-react-parser"
@@ -38,7 +38,7 @@ const BlogPage = () => {
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
+            breakpoint: { max: 3000, min: 2000 },
             items: 5
         },
         desktop: {
@@ -56,24 +56,25 @@ const BlogPage = () => {
     };
     return (
         <>
-            <div className="Container">
+            <div className="Container1">
                 <LeftNav />
                 <div className="blog-page">
                     <Header />
                     <div className="inner-container">
-                        <h1 className='title'>{singleBlog?.current?.title}</h1>
-                        <div className="container d-flex " style={{ alignItems: "center" }}>
+                        <h1 className='title1'>{singleBlog?.current?.title}</h1>
+                        <div className="container2 d-flex " style={{ alignItems: "center" }}>
                             <p className='category mr-2'>{singleBlog.current?.dropdownValue}</p>
                             <p><BiSolidTimeFive className='mr-1' />{singleBlog.current?.createDateTime}</p>
                         </div>
-                        <div className='container'>
+                        <div className='main_content'>
+                            <div className='editor'>
+                                <p>{parse(singleBlog?.current?.editor)}</p>
+                            </div>
                             <div className='image'>
                                 <img className="MainImage" src={singleBlog.current?.mainImage} alt="MainImage" />
                                 <p className='Description'><strong>Description:</strong><br />{singleBlog?.current?.description}</p>
                             </div>
-                            <div className='editor'>
-                                <p>{parse(singleBlog?.current?.editor)}</p>
-                            </div>
+
 
                             <div className='imgcontainer row'>
                                 <div style={{ width: "800px" }}>
@@ -81,32 +82,27 @@ const BlogPage = () => {
                                         {
                                             singleBlog?.current?.image?.map((images, i) => {
                                                 return (
-
                                                     <div className='addi-img'>
                                                         <img className='additionalImage' src={images} alt='' />
                                                     </div>
-
                                                 )
                                             })
                                         }
-
                                     </Carousel>
                                 </div>
                             </div>
                             <div className='keywords'>
                                 <p className='keywords-item'><strong>Keywords:&nbsp;</strong>
                                     {
-
                                         singleBlog?.current?.key.map((keys, index) => {
                                             return (
-                                                <div className="tags"><p>{keys.text},&nbsp;</p></div>
+                                                <Link to='/view-blog' style={{textDecoration:"none"}}><div className="tags"><p>{keys.text}&nbsp;</p></div></Link>
                                             )
                                         })
                                     }
                                 </p>
-
                             </div>
-                            <p>{singleBlog?.current?.tag}</p>
+                          <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{textDecoration:"none"}}>{singleBlog?.current?.tag}</Link></p>
 
                         </div>
                         {/* comment section */}
@@ -142,10 +138,8 @@ const BlogPage = () => {
                             }
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </>
     )
 }
