@@ -12,13 +12,13 @@
 
 .leftnav{
     transition: all 0.1s ease;
-    background-color: rgb(31, 28, 28) ;
+    background-color: #33383E;
     width: 15vw;
     min-height: 100vh;
 }
 .leftnav>h4{
     color: white;
-    padding-left: 64px;
+    padding-left: 40px;
     padding-top: 10px;
     padding-bottom: 20px;
 }
@@ -43,7 +43,8 @@
     margin-left: 30px;
 }
 .List{
-    margin-top: 20px;
+    margin-left: 5px;
+    margin-top: 50px;
     color: white;
 }
 .accordion{
@@ -58,7 +59,8 @@
 }
 
 .accordion-button{
-    background-color: rgb(31, 28, 28);
+    width: 100%;
+    background-color: #33383E;
     color: white;
     border: 0;
 }
@@ -81,4 +83,8 @@
 
 .nav-link{
     color: white;
+}
+
+.nav_item{
+    margin-left: 20px;
 }

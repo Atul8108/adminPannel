@@ -86,7 +86,6 @@ const ViewBlog = () => {
           </div>
         </div>
       </div>
-
     </>
 
   )

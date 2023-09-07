@@ -114,7 +114,7 @@ const EditPage = () => {
   
     const updateHtml = () => {
         return (
-            <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
+            <div className="RightNav">
                 <div className="container-fluid">
                     <h4>Update Blog</h4>
                     <div className="row m-0">

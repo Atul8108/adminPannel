@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 const LeftNav = () => {
 
   const [isOpen, setIsOpen] = useState(true);
-
   useEffect(() => {
   $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
@@ -24,7 +23,7 @@ const LeftNav = () => {
   return (
     <>
       <div className={`leftnav ${isOpen ? "open" : "close"}`}>
-        <h4>Admin Panel</h4>
+        <h4 className='Admin_panel'>Admin Panel</h4>
         <div className="Admin">
           <img
             className="profile_image"
@@ -38,15 +37,15 @@ const LeftNav = () => {
             </p>
           </div>
         </div>
-        <div className="List">
-          <Nav defaultActiveKey="/home" className="flex-column">
-            <Link to="/home" style={{textDecoration:"none"}}>&emsp;<AiFillHome />&emsp;Home</Link>
+        <div className="List ">
+          <Nav defaultActiveKey="/home" className="flex-column" style={{marginBottom: '20px'}}>
+            <Link to="/home" style={{textDecoration:"none", color:'white' }}>&emsp;<AiFillHome />&emsp;Home</Link>
             <Accordion>
               <Accordion.Item eventKey="1">
                 <Accordion.Header><MdOutlineForum />&emsp;Forum</Accordion.Header>
                 <Accordion.Body>
-                  <Nav.Link eventKey="link-2">Blog</Nav.Link>
-                  <Nav.Link eventKey="link-2">Support</Nav.Link>
+                  <Nav.Link eventKey="link-2" className='nav_item'>Blog</Nav.Link>
+                  <Nav.Link eventKey="link-2" className='nav_item'>Support</Nav.Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
@@ -54,10 +53,10 @@ const LeftNav = () => {
               <Accordion.Item eventKey="1">
                 <Accordion.Header><ImBlog />&emsp;Blog</Accordion.Header>
                 <Accordion.Body>
-                  <Link to='/view-blog' style={{textDecoration:"none"}}>&emsp;View Blog</Link>
+                  <Link to='/view-blog' className='nav_item' style={{textDecoration:"none"}}>&emsp;View Blog</Link>
                   <br/>
                   <br/>
-                  <Link to='/home' eventKey="link-2" style={{textDecoration:"none"}}>&emsp;Create Blog</Link>
+                  <Link to='/home' eventKey="link-2" className='nav_item' style={{textDecoration:"none"}}>&emsp;Create Blog</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
@@ -66,8 +65,8 @@ const LeftNav = () => {
               <Accordion.Item eventKey="1">
                 <Accordion.Header><FaUserFriends />&emsp;User</Accordion.Header>
                 <Accordion.Body>
-                  <Nav.Link eventKey="link-2">Blog</Nav.Link>
-                  <Nav.Link eventKey="link-2">Support</Nav.Link>
+                  <Nav.Link eventKey="link-2" className='nav_item'>Blog</Nav.Link>
+                  <Nav.Link eventKey="link-2" className='nav_item'>Support</Nav.Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

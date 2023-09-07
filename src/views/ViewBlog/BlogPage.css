@@ -6,10 +6,24 @@
 :root {
     --title-color :#1c99ff;
 }
+.blog-page{
+    width: 100%;
+}
 
+.Container{
+    display: flex;
+    overflow-x: hidden;
+    background-color: aliceblue;
+}
+.inner-container{
+    text-align: left;
+    border: 2px solid rgb(155, 155, 155);
+    margin: 50px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
 .title{
-    background-color: var(--title-color);
-    text-align: center;
+    text-align: left;
     width: 100%;
     height: 100px;
     padding-top: 20px;
@@ -17,28 +31,13 @@
     font-family:'Courier New', Courier, monospace;
     text-transform: capitalize; 
 }
-.Container{
-    display: flex;
-    overflow-x: hidden;
-    background-color: aliceblue;
-}
-.blog-page{
-    width: 100%;
-}
-.inner-container{
-    text-align: center;
-    border: 2px solid rgb(155, 155, 155);
-    margin: 50px;
-    border-radius: 5px;
-    background-color: rgb(255, 255, 255);
-}
 .MainImage{
     width: 400px;
 }
 .category{
     border: 1px solid rgb(129, 129, 129);
     border-radius: 5px;
-    width: 200px;
+    width: 68px;
     height: 40px;
     padding-top: 7px;
     margin-left: 5px;

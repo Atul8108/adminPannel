@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import LeftNav from '../../components/Left_Pannel/LeftNav';
 import Header from '../../components/Header/Header';
 import parse from "html-react-parser"
+import { BiSolidTimeFive } from 'react-icons/bi';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const BlogPage = () => {
 
@@ -32,7 +35,25 @@ const BlogPage = () => {
         document.getElementById("userName").value = null;
         document.getElementById("comment").value = null;
     };
-
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
     return (
         <>
             <div className="Container">
@@ -41,39 +62,53 @@ const BlogPage = () => {
                     <Header />
                     <div className="inner-container">
                         <h1 className='title'>{singleBlog?.current?.title}</h1>
-                        <p className='category'>{singleBlog.current?.dropdownValue}</p>
-                        <div className='image'>
-                            <img className="MainImage" src={singleBlog.current?.mainImage} alt="MainImage" />
-                            <p className='Description'><strong>Description:</strong><br />{singleBlog?.current?.description}</p>
+                        <div className="container d-flex " style={{ alignItems: "center" }}>
+                            <p className='category mr-2'>{singleBlog.current?.dropdownValue}</p>
+                            <p><BiSolidTimeFive className='mr-1' />{singleBlog.current?.createDateTime}</p>
                         </div>
-                        <div className='editor'>{parse(singleBlog?.current?.editor)}</div>
-                        <div className='imgcontainer row'>
-                            {
-                                singleBlog?.current?.image?.map((images, i) => {
-                                    return (
-                                        <div className='addi-img'>
-                                            <img className='additionalImage' src={images} alt='' />
-                                        </div>
-                                    )
-                                })
-                            }
+                        <div className='container'>
+                            <div className='image'>
+                                <img className="MainImage" src={singleBlog.current?.mainImage} alt="MainImage" />
+                                <p className='Description'><strong>Description:</strong><br />{singleBlog?.current?.description}</p>
+                            </div>
+                            <div className='editor'>
+                                <p>{parse(singleBlog?.current?.editor)}</p>
+                            </div>
+
+                            <div className='imgcontainer row'>
+                                <div style={{ width: "800px" }}>
+                                    <Carousel responsive={responsive}>
+                                        {
+                                            singleBlog?.current?.image?.map((images, i) => {
+                                                return (
+
+                                                    <div className='addi-img'>
+                                                        <img className='additionalImage' src={images} alt='' />
+                                                    </div>
+
+                                                )
+                                            })
+                                        }
+
+                                    </Carousel>
+                                </div>
+                            </div>
+                            <div className='keywords'>
+                                <p className='keywords-item'><strong>Keywords:&nbsp;</strong>
+                                    {
+
+                                        singleBlog?.current?.key.map((keys, index) => {
+                                            return (
+                                                <div className="tags"><p>{keys.text},&nbsp;</p></div>
+                                            )
+                                        })
+                                    }
+                                </p>
+
+                            </div>
+                            <p>{singleBlog?.current?.tag}</p>
+
                         </div>
-
-                        <div className='keywords'>
-                            <p className='keywords-item'><strong>Keywords:&nbsp;</strong>
-                                {
-
-                                    singleBlog?.current?.key.map((keys, index) => {
-                                        return (
-                                            <div className="tags"><p>{keys.text},&nbsp;</p></div>
-                                        )
-                                    })
-                                }
-                            </p>
-
-                        </div>
-
-                        <p>{singleBlog?.current?.tag}</p>
                         {/* comment section */}
                         <div className="comment-box">
                             <h4>Comment Box</h4>
@@ -91,7 +126,6 @@ const BlogPage = () => {
                                 id='comment'
                             />
                             <button type='submit' onClick={() => handleSubmit()}>Submit</button>
-
                             {
                                 singleBlog?.current?.comments?.length > 0 && (
                                     <div className='commentbox'>
