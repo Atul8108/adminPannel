@@ -15,11 +15,19 @@ const LeftNav = () => {
 
   const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
-  $(".navbar-toggler").click(() => {
+    $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
     })
   }, [isOpen])
 
+  $(function () {
+    $(".Link").on({
+      click: function () {
+        $(".Link").removeClass("Link2")
+        $(this).addClass("Link2");
+      }
+    });
+  });
   return (
     <>
       <div className={`leftnav ${isOpen ? "open" : "close"}`}>
@@ -38,35 +46,33 @@ const LeftNav = () => {
           </div>
         </div>
         <div className="List ">
-          <Nav defaultActiveKey="/home" className="flex-column" style={{marginBottom: '20px'}}>
-            <Link to="/home" style={{textDecoration:"none", color:'white' }}>&emsp;<AiFillHome />&emsp;Home</Link>
+          <Nav defaultActiveKey="/home" className="flex-column" style={{ marginBottom: '20px' }}>
+            <Link to="/home-page" className="Link" style={{ textDecoration: "none", color: 'white' , marginLeft: '5px' }}>&emsp;<AiFillHome />&emsp;Home</Link>
             <Accordion>
-              <Accordion.Item eventKey="1">
+              <Accordion.Item eventKey="0">
                 <Accordion.Header><MdOutlineForum />&emsp;Forum</Accordion.Header>
                 <Accordion.Body>
-                  <Nav.Link eventKey="link-2" className='nav_item'>Blog</Nav.Link>
-                  <Nav.Link eventKey="link-2" className='nav_item'>Support</Nav.Link>
+                  <Link eventKey="link-1" className='nav_item Link'>Blog</Link>
+                  <Link eventKey="link-2" className='nav_item Link'>Support</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-            <Accordion>
+            <Accordion defaultActiveKey={['1']} alwaysOpen>
               <Accordion.Item eventKey="1">
-                <Accordion.Header><ImBlog />&emsp;Blog</Accordion.Header>
-                <Accordion.Body>
-                  <Link to='/view-blog' className='nav_item' style={{textDecoration:"none" ,color:'white'}}>&emsp;View Blog</Link>
-                  <br/>
-                  <br/>
-                  <Link to='/home' eventKey="link-2" className='nav_item' style={{textDecoration:"none" , color:'white'}}>&emsp;Create Blog</Link>
+                <Accordion.Header ><ImBlog/>&emsp;Blog</Accordion.Header>
+                <Accordion.Body >
+                  <Link to='/view-blog' eventKey="link-3" className='nav_item Link'>View Blog</Link>
+                  <Link to='/home' eventKey="link-4" className='nav_item Link'>Create Blog</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-            <Nav.Link eventKey="link-2"><BiSupport />&emsp;Support</Nav.Link>
+            <Link eventKey="link-7" className='nav_Support Link'><BiSupport/>&emsp;Support</Link>
             <Accordion>
-              <Accordion.Item eventKey="1">
-                <Accordion.Header><FaUserFriends />&emsp;User</Accordion.Header>
+              <Accordion.Item eventKey="2">
+                <Accordion.Header><FaUserFriends/>&emsp;User</Accordion.Header>
                 <Accordion.Body>
-                  <Nav.Link eventKey="link-2" className='nav_item'>Blog</Nav.Link>
-                  <Nav.Link eventKey="link-2" className='nav_item'>Support</Nav.Link>
+                  <Link eventKey="link-5" className='nav_item Link'>Blog</Link>
+                  <Link eventKey="link-6" className='nav_item Link'>Support</Link>
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>

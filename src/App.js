@@ -4,12 +4,14 @@ import Login from "./views/Login/Login";
 import ViewBlog from "./views/ViewBlog/ViewBlog";
 import BlogPage from "./views/ViewBlog/BlogPage";
 import EditPage from "./views/EditPage/EditPage";
+import HomePage from "./components/HomePage/HomePage";
 
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
+      <Route path="/home-page" element={<HomePage />} />
       <Route path="/home" element={<HomeView />} />
       <Route path="/view-blog" element={<ViewBlog/>} />
       <Route path="/blog-page/:id" element={<BlogPage/>} />

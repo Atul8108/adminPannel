@@ -1,0 +1,20 @@
+
+.total_post{
+    margin: 20px;
+    width: 200px;
+    height: 200px;
+    border: 2px double grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 10px 10px rgb(255, 149, 50);
+}
+.post{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+.item{
+    font-weight: 800 ;
+    font-size: 80px;
+}

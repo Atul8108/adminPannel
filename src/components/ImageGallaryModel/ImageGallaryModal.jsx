@@ -66,7 +66,7 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
               <div className="col-md-3 " style={{ border: '1px solid c3c1c1' }}>
                 <div className="row">
                   <div className="col-12">
-                    <section className="container">
+                    <section className="container1">
                       <div {...getRootProps({ className: 'dropzone' })}>
                         <div className="card-modal border-right" style={{ backgroundColor: "#f9f9f9" }}>
                           <div id="drop-area" className="py-5">

@@ -25,7 +25,7 @@ const Login = () => {
               <input className="input" type='password' placeholder='Password' />
               <p className='para'><label>Password </label>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<a href='/'>Forget Password?</a></p>
               <br/>
-              <Link to={"/home"} style={{textDecoration:"none"}}>
+              <Link to={"/home-page"} style={{textDecoration:"none"}}>
                 <button type="button" class="btn btn-primary btn-lg btn-block ">Login</button>
               </Link>
             </div>

@@ -51,20 +51,27 @@
     --bs-accordion-border-color: none !important;
 }
 .accordion-body{
-    display: inline;
+    display: flex;
+    flex-direction: column;
     padding: 0 !important;
 }
 .accordion-body:hover{
     text-decoration: none !important;
 }
 
+.accordion-item:last-of-type .accordion-button.collapsed{
+    border-radius: 0 !important;
+}
+
+.accordion-item:first-of-type .accordion-button{
+    border-radius: 0 !important;
+}
 .accordion-button{
     width: 100%;
     background-color: #33383E;
     color: white;
-    border: 0;
+    border: none;
 }
-
 .accordion-item {
     border: none;
     background-color: transparent !important;
@@ -80,11 +87,35 @@
     border: none;
     color: white;
 }
-
 .nav-link{
     color: white;
 }
-
 .nav_item{
     margin-left: 20px;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.nav_Support{
+    margin-left: 10px;
+    text-decoration: none;
+    color: white;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+.nav_Support:hover{
+    text-decoration: none;
+    color: white;
+}
+.nav_item:hover{
+    text-decoration: none;
+    color: white;
+}
+.Link2{
+    padding-top: 10px;
+    background-color: blue !important ;
+    height: 50px;
+    border-top-right-radius: 40px;
+    border-bottom-right-radius: 40px;
 }
