@@ -6,6 +6,7 @@ import { Button, Dropdown, DropdownButton } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import { Link } from 'react-router-dom'
+import $ from "jquery"
 
 const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
@@ -32,13 +33,20 @@ const ViewBlog = () => {
     }
 
   }
+  const [isOpen, setIsOpen] = useState(true);
+    useEffect(() => {
+        $(".navbar-toggler").click(() => {
+            setIsOpen(!isOpen);
+        })
+    }, [isOpen])
 
   return (
     <>
-      <div className='Blog-post-container'>
+      <div className='w-100 main d-flex global-layout'>
         <LeftNav />
         <div className="container-fluid">
           <Header />
+          <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
           <DropdownButton
                   alignright="true"
                   title={value ?? "Publish"}
@@ -83,6 +91,7 @@ const ViewBlog = () => {
                 )
               })
             }
+          </div>
           </div>
         </div>
       </div>

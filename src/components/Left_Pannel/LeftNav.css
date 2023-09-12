@@ -112,7 +112,9 @@
     text-decoration: none;
     color: white;
 }
-.Link2{
+nav a.active{
+    text-decoration: none;
+    font-weight: bold;
     padding-top: 10px;
     background-color: blue !important ;
     height: 50px;
