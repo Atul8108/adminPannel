@@ -3,16 +3,13 @@ import "./LeftNav.css";
 import "../../../src/index.css";
 import { Accordion } from "react-bootstrap";
 import { AiFillHome } from 'react-icons/ai'
-import { MdOutlineForum } from 'react-icons/md'
 import { ImBlog } from 'react-icons/im'
 import { BiSupport } from 'react-icons/bi'
-import { FaUserFriends } from 'react-icons/fa';
+import {TbPageBreak} from 'react-icons/tb'
 import $ from "jquery"
 import { NavLink } from 'react-router-dom';
 
-
 const LeftNav = () => {
-
   const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
@@ -24,7 +21,7 @@ const LeftNav = () => {
       <div className={`leftnav ${isOpen ? "open" : "close"}`}>
         <h4 className='Admin_panel'>Admin Panel</h4>
         <div className="Admin">
-          <img
+          <imgAdmi
             className="profile_image"
             src="https://freesvg.org/img/abstract-user-flat-4.png"
             alt="Profile_Image"
@@ -38,16 +35,7 @@ const LeftNav = () => {
         </div>
         <div className="List ">
           <nav defaultActiveKey="/home" className="flex-column" style={{ marginBottom: '20px' }}>
-            <NavLink to="/home-page" style={{ display:'block', textDecoration: "none", color: 'white' , marginLeft: '5px', height:'45px'}}>&emsp;<AiFillHome />&emsp;Home</NavLink>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header><MdOutlineForum />&emsp;Forum</Accordion.Header>
-                <Accordion.Body>
-                  <NavLink to="/" eventKey="link-1" className='nav_item '>Blog</NavLink>
-                  <NavLink to="/" eventKey="link-2" className='nav_item '>Support</NavLink>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <NavLink to="/home-page" style={{ display:'block', textDecoration: "none", color: 'white'}}>&emsp;<AiFillHome />&emsp;Home</NavLink>
             <Accordion defaultActiveKey={['1']} alwaysOpen>
               <Accordion.Item eventKey="1">
                 <Accordion.Header ><ImBlog/>&emsp;Blog</Accordion.Header>
@@ -57,16 +45,8 @@ const LeftNav = () => {
                 </Accordion.Body>
               </Accordion.Item>
             </Accordion>
-            <NavLink to="/" eventKey="link-7" className='nav_Support'><BiSupport/>&emsp;Support</NavLink>
-            <Accordion>
-              <Accordion.Item eventKey="2">
-                <Accordion.Header><FaUserFriends/>&emsp;User</Accordion.Header>
-                <Accordion.Body>
-                  <NavLink to="/" eventKey="link-5" className='nav_item'>Blog</NavLink>
-                  <NavLink  to="/" eventKey="link-6" className='nav_item'>Support</NavLink>
-                </Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <NavLink to="/support-page" eventKey="link-7" className='nav_Support'><BiSupport/>&emsp;Support</NavLink>
+            <NavLink to="/test-page" eventKey="link-8" className='nav_Support mt-3' style={{ display:'block'}} ><TbPageBreak/>&emsp;Test Page</NavLink>
           </nav>
         </div>
       </div>
