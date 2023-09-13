@@ -5,13 +5,12 @@
 
 .RightNav{
     width:85vw;
-    overflow-x: hidden;
 }
 .RightNav .container-fluid{
     background-color: rgb(223, 237, 250);
 }
 .main-content .closeRightNav{
-    width:  98.70vw;
+    width:  100vw;
     padding: 0;
 }
 

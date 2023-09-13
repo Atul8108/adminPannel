@@ -5,7 +5,13 @@
 *, ::after, ::before {
     box-sizing: border-box;
 }
+.accordion{
+    --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
+}
+.accordion{
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
 
+}
 .global-layout .close{
     width: 0vw !important;
 }
@@ -13,19 +19,22 @@
 .leftnav{
     transition: all 0.1s ease;
     background-color: #33383E;
-    width: 15vw;
+    max-width: 15vw;
+    overflow-y: hidden;
     min-height: 100vh;
 }
-.leftnav>h4{
+
+.Admin_panel{
+    text-align: center;
     color: white;
-    padding-left: 40px;
-    padding-top: 10px;
+    padding: 20px;
     padding-bottom: 20px;
 }
 
 .Admin{
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 .admin_online{
     margin-left: 10px;
@@ -34,7 +43,7 @@
 .admin_online>p{
     color: white;
     margin-bottom: 0px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .profile_image{
@@ -45,6 +54,7 @@
 .List{
     margin-top: 20px;
     color: white;
+    max-width: 100%;
 }
 .accordion{
     --bs-accordion-border-color: none !important;
@@ -90,11 +100,13 @@
     color: white;
 }
 .nav_item{
-    margin-left: 20px;
+    max-width: 100%;
     text-decoration: none;
     color: white;
-    padding-left: 10px;
-    padding-bottom: 10px;
+    padding: 10px 25px;
+}
+.accordion .accordion-item .accordion-header .accordion-button{
+    padding: 0.75rem !important;
 }
 .nav_Support{
     text-decoration: none;
@@ -111,23 +123,15 @@
     color: white;
 }
 nav a.active{
-    display: block;
+    max-width: 100%;
+    display: flex;
+    padding: 10px 25px;
+    align-items: center;
     text-decoration: none;
     font-weight: bold;
-    padding-top: 10px;
     background-color: blue !important ;
-    height: 50px;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
-}
-
-.accordion-button:not(.collapsed)::after{
-    background-color: white;
-    border-radius: 5px;
-}
-.accordion-button::after{
-    background-color: white;
-    border-radius: 5px;
 }
 .accordion-button>img{
     color: red;
@@ -137,6 +141,7 @@ nav a.active{
     .Admin {
     display: flex;
     flex-direction: column;
+    margin: 20px;
     }
     .admin_online{
         margin-left: 20px;

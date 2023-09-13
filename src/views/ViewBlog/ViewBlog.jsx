@@ -42,12 +42,11 @@ const ViewBlog = () => {
       setIsOpen(!isOpen);
     })
   }, [isOpen])
-  console.log(bloglist.length)
   return (
     <>
       <div className='w-100 main d-flex global-layout'>
         <LeftNav />
-        <div className="container-fluid">
+        <div className="main-content">
           <Header />
           <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
             <DropdownButton

@@ -10,22 +10,23 @@ import { PiGlobeStandFill } from 'react-icons/pi'
 
 const HomePage = () => {
     let view = JSON.parse(localStorage.getItem("blogList"))
-    console.log(view)
     let totalComments = 0;
     let totalPublish = 0;
     let totalDraft = 0;
-    for (const item of view) {
-        totalComments = totalComments + item?.comments?.length
-        if (item.status === 'DRAFT') {
-            totalDraft = totalDraft + 1
+    if (view?.length > 0) {
+        for (const item of view) {
+            if (item?.comments) {
+                totalComments = totalComments + item?.comments?.length
+            }
+            if (item?.status === 'DRAFT') {
+                totalDraft = totalDraft + 1
+            }
+            else {
+                totalPublish = totalPublish + 1
+            }
         }
-        else {
-            totalPublish = totalPublish + 1
-        }
-
     }
-    const element = view.slice(0, 5);
-    console.log(element)
+    const element = view?.slice(0, 5);
     const [isOpen, setIsOpen] = useState(true);
     useEffect(() => {
         $(".navbar-toggler").click(() => {
@@ -40,29 +41,34 @@ const HomePage = () => {
                     <Header />
                     <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                         <div className='container-fluid'>
-                            <div className="row " style={{ padding: '30px', display: 'flex', justifyContent: 'space-between' }}>
+                            <div className="row" style={{ padding: '30px', display: 'flex', justifyContent: 'space-between' }}>
                                 <div className='col'>
                                     <div className="total_post">
-                                        <p className='post'>Total Number of Post:</p>
-                                        <p className='item'>{view?.length}</p>
+                                        <p className='post'>Total Post:</p>
+                                        {
+                                            view?.length > 0 ? <p className='item mt-4'>{view?.length}</p> : <p className='item mt-4'>0</p>
+                                        }
                                     </div>
                                 </div>
                                 <div className='col'>
                                     <div className="total_post">
-                                        <p className='post'>Total Number of comments:</p>
+                                        <p className='post'>Total comments:</p>
+                                        {/* {
+                                            totalComments=== 0 ? <p className='item'>{totalComments}</p>: <p className='item'>0</p>
+                                        } */}
                                         <p className='item'>{totalComments}</p>
                                     </div>
                                 </div>
                                 <div className='col'>
                                     <div className="total_post">
                                         <p className='post'>Total PUBLISH:</p>
-                                        <p className='item'>{totalPublish}</p>
+                                        <p className='item mt-4'>{totalPublish}</p>
                                     </div>
                                 </div>
                                 <div className='col'>
                                     <div className="total_post">
                                         <p className='post'>Total Draft:</p>
-                                        <p className='item'>{totalDraft}</p>
+                                        <p className='item mt-4'>{totalDraft}</p>
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +79,6 @@ const HomePage = () => {
                         </div>
                         <div className='Table'>
                             <table style={{ border: '1px solid black' }}>
-
                                 <tr >
                                     <th>S.no</th>
                                     <th>Post Name</th>
@@ -84,8 +89,8 @@ const HomePage = () => {
                                     <th>Tag</th>
                                     <th>View Blog</th>
                                 </tr>
-                                {
-                                    element.map((data, index) => {
+                                {element?.length === undefined ? <tr><td colspan='8' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
+                                    element?.map((data, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
@@ -102,7 +107,12 @@ const HomePage = () => {
                                                         })
                                                     }
                                                 </td>
-                                                <td>{data.tag}</td>
+                                                <td>
+                                                    {
+                                                        data.tag === '' ? <p>-----</p> : <p>{data.tag}</p>
+                                                    }
+                                                </td>
+                                                {/* <td>{data.tag}</td> */}
                                                 <td><Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link></td>
                                             </tr>
                                         )
