@@ -62,6 +62,7 @@ const BlogPage = () => {
                     <Header />
                     <div className="inner-container">
                         <h1 className='title1'>{singleBlog?.current?.title}</h1>
+                        <p className='title1'>Author Name: {singleBlog?.current?.userName} {singleBlog?.current?.lastName}</p>
                         <div className="container2 d-flex " style={{ alignItems: "center" }}>
                             <p className='category mr-2'>{singleBlog.current?.dropdownValue}</p>
                             <p><BiSolidTimeFive className='mr-1' />{singleBlog.current?.createDateTime}</p>
@@ -102,7 +103,9 @@ const BlogPage = () => {
                                     }
                                 </p>
                             </div>
-                          <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{textDecoration:"none"}}>{singleBlog?.current?.tag}</Link></p>
+                            {
+                                singleBlog?.current?.tag.length == 0 ? <p></p> : <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{textDecoration:"none"}}>{singleBlog?.current?.tag}</Link></p>
+                            }
 
                         </div>
                         {/* comment section */}

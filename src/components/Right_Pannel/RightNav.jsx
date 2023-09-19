@@ -11,11 +11,12 @@ import { WithContext as ReactTags } from 'react-tag-input';
 import $ from "jquery"
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
+import { USERINFO } from "../../api/locaStorage.data";
+import UserDetailsPopUp from "../UserDetailsPopUp/UserDetailsPopUp";
 
 
 // this is parent component
 const RightNav = ({ title }) => {
-
   let tempArr = [];
   let [value, setValue] = useState(null);
   const editorRef = useRef(null);
@@ -46,78 +47,80 @@ const RightNav = ({ title }) => {
     setValue(e)
   }
 
-  async function handleSubmit (status) {
-    const title = document.getElementById("title")
-    const desCription = document.getElementById("description")
-    let check1 = document.getElementById('check1')
-    const check2 = document.getElementById('check2')
-    const tag = document.getElementById("tag")
-    if (!title.value) {
-      toast("title is empty")
-    }
-    else if (!imageToShow) {
-      toast('Upload the Image')
-    }
-    else if (!desCription.value) {
-      toast('description is empty')
-    }
-    else if (!tags) {
-      toast("Please Enter the Keyword")
-    }
-    else if (!check1.value) {
-      toast('Please Check The box')
-    }
-    else if (!check2.value) {
-      toast('Please Check The box')
-    }
-    else if (!imageToShowSecond) {
-      toast('Please add the second Image')
-    }
-    else if (!value) {
-      toast('Please select category')
-    }
+  async function handleSubmit(status) {
+    if (JSON.parse(USERINFO())?.isComplete) {
+      const title = document.getElementById("title")
+      const desCription = document.getElementById("description")
+      let check1 = document.getElementById('check1')
+      const check2 = document.getElementById('check2')
+      const tag = document.getElementById("tag")
+      if (!title?.value) {
+        toast.warning("title is empty")
+      }
+      else if (!imageToShow) {
+        toast.warning('Upload the Image')
+      }
+      else if (!desCription?.value) {
+        toast.warning('description is empty')
+      }
+      else if (!tags) {
+        toast.warning("Please Enter the Keyword")
+      }
+      else if (!check1?.value) {
+        toast.warning('Please Check The box')
+      }
+      else if (!check2?.value) {
+        toast.warning('Please Check The box')
+      }
+      else if (!imageToShowSecond) {
+        toast.warning('Please add the second Image')
+      }
+      else if (!value) {
+        toast.warning('Please select category')
+      }
+      else {
+        let blogData = {
+          "title": title?.value,
+          "mainImage": imageToShow,
+          "description": desCription?.value,
+          "key": tags,
+          "check1": check1?.value,
+          "check2": check2?.value,
+          "editor": editorRef?.current?.getContent(),
+          "tag": tag?.value,
+          "image": imageToShowSecond,
+          "dropdownValue": value,
+          "createDateTime": new Date()?.toLocaleString(),
+          "status": status,
+          "userName": JSON.parse(USERINFO())?.userName + " " + JSON.parse(USERINFO())?.lastName,
+        }
+        tempArr = [...blog, blogData]
+        setBlog(tempArr);
+        localStorage.setItem('blogList', JSON.stringify(tempArr))
 
+        if (status === "PUBLISH") {
+          toast.success("Your Blog is Posted");
+        }
+        else {
+          toast.info("Save as Draft");
+        }
+        title.value = null;
+        desCription.value = null;
+        tag.value = null;
+        check1.checked = false;
+        check2.checked = false;
+        setTags([]);
+        setImageToShow(null);
+        setImageToShowSecond([]);
+        editorRef.current.getContent()
+        editorRef.current.setContent('')
+      }
+    }
     else {
-      let blogData = {
-        "title": title.value,
-        "mainImage": imageToShow,
-        "description": desCription.value,
-        "key": tags,
-        "check1": check1.value,
-        "check2": check2.value,
-        "editor": editorRef.current.getContent(),
-        "tag": tag.value,
-        "image": imageToShowSecond,
-        "dropdownValue": value,
-        "createDateTime": new Date().toLocaleString(),
-        "status": status
-      }
-      tempArr = [...blog, blogData]
-      setBlog(tempArr);
-      localStorage.setItem('blogList', JSON.stringify(tempArr))
-      if(status === "PUBLISH"){
-        toast("Your Blog is Posted");
-      }
-      else{
-        toast("Save as Draft");
-
-      }
-      
-
-      title.value = null;
-      desCription.value = null;
-      tag.value = null;
-      check1.checked = false;
-      check2.checked = false;
-      setTags([]);
-      setImageToShow(null);
-      setImageToShowSecond([]);
-      editorRef.current.getContent()
-      editorRef.current.setContent('')
+      toast.warning("Please Fill the User Details Form")
     }
+
   }
-
-
   const handleDelete = i => {
     setTags(tags.filter((tag, index) => index !== i));
   };
@@ -218,8 +221,13 @@ const RightNav = ({ title }) => {
               <TextEditor editorRef={editorRef} />
               <div className="Publish-btn">
                 <p>Publish</p>
-                <Button onClick={()=>handleSubmit("PUBLISH")} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button>{' '}
-                <Button onClick={()=>handleSubmit("DRAFT")}  variant="warning">Save as Draft</Button>{' '}
+                <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                  {
+                    JSON.parse(USERINFO())?.isComplete ? <Button onClick={() => handleSubmit("PUBLISH")} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>SUBMIT</Button> : <UserDetailsPopUp />
+                  }
+                  <Button onClick={() => handleSubmit("DRAFT")} size="sm" variant="warning">Save as Draft</Button>{' '}
+                </div>
+
                 <ToastContainer />
               </div>
             </div>
@@ -250,7 +258,6 @@ const RightNav = ({ title }) => {
                   </Button>} />
                 {imageToShowSecond.length > 0 &&
                   imageToShowSecond.map((item, index) => {
-                    console.log(imageToShowSecond)
                     return (
                       <div className="position-relative inside-card">
                         <div className="position-absolute top-0 end-0">
@@ -282,6 +289,7 @@ const RightNav = ({ title }) => {
         </div>
 
       </div>
+
     </>
   );
 };

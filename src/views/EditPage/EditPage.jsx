@@ -114,7 +114,7 @@ const EditPage = () => {
   
     const updateHtml = () => {
         return (
-            <div className="RightNav">
+            <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                 <div className="container-fluid">
                     <h4>Update Blog</h4>
                     <div className="row m-0">
@@ -262,17 +262,14 @@ const EditPage = () => {
                                 </DropdownButton>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
-
         )
     }
     return (
         <>
-            <div className='Blog-post-container'>
+            <div className='Blog-post-container d-flex'>
                 <LeftNav />
                 <div className="container-fluid" >
                     <Header />

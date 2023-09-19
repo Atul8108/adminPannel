@@ -1,151 +1,185 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
-*, ::after, ::before {
+
+*,
+::after,
+::before {
     box-sizing: border-box;
 }
-.accordion{
+
+.accordion {
     --bs-accordion-btn-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
 }
-.accordion{
-    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
 
+.accordion {
+    --bs-accordion-btn-active-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='white'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")
 }
-.global-layout .close{
+
+.global-layout .close {
     width: 0vw !important;
 }
 
-.leftnav{
+.leftnav {
     transition: all 0.1s ease;
     background-color: #33383E;
     max-width: 15vw;
     overflow-y: hidden;
     min-height: 100vh;
+
 }
 
-.Admin_panel{
+.Admin_panel {
     text-align: center;
     color: white;
     padding: 20px;
     padding-bottom: 20px;
 }
 
-.Admin{
+.Admin {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.admin_online{
-    margin-left: 10px;
+    text-align: center;
 }
 
-.admin_online>p{
+.admin_online>p {
     color: white;
     margin-bottom: 0px;
-    margin-left: 10px;
 }
 
-.profile_image{
+.profile_image {
     width: 50px;
     height: 50px;
-    margin-left: 30px;
+    margin-right: 15px;
 }
-.List{
+.List {
     margin-top: 20px;
     color: white;
     max-width: 100%;
 }
-.accordion{
+
+.List-styling{
+    display: flex; 
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    padding: 10px; 
+}
+.List-styling:hover{
+    text-decoration: none;
+    color: white;
+}
+.accordion {
     --bs-accordion-border-color: none !important;
 }
-.accordion-body{
+
+.accordion-body {
     display: flex;
     flex-direction: column;
     padding: 0 !important;
 }
-.accordion-body:hover{
+
+.accordion-body:hover {
     text-decoration: none !important;
 }
 
-.accordion-item:last-of-type .accordion-button.collapsed{
+.accordion-item:last-of-type .accordion-button.collapsed {
     border-radius: 0 !important;
 }
 
-.accordion-item:first-of-type .accordion-button{
+.accordion-item:first-of-type .accordion-button {
     border-radius: 0 !important;
 }
-.accordion-button{
+
+.accordion-button {
     width: 100%;
     background-color: #33383E;
     color: white;
     border: none;
 }
+
 .accordion-item {
     border: none;
     background-color: transparent !important;
 }
-.accordion-button::after{
+
+.accordion-button::after {
     border: none;
 }
-.accordion-button:focus{
+
+.accordion-button:focus {
     box-shadow: none;
 }
+
 .accordion-button:not(.collapsed) {
     background-color: transparent !important;
     border: none;
     color: white;
 }
-.nav-link{
+
+.nav-link {
     color: white;
 }
-.nav_item{
+
+.nav_item {
     max-width: 100%;
     text-decoration: none;
     color: white;
     padding: 10px 25px;
 }
-.accordion .accordion-item .accordion-header .accordion-button{
+
+.accordion .accordion-item .accordion-header .accordion-button {
     padding: 0.75rem !important;
 }
-.nav_Support{
+
+.nav_Support {
     text-decoration: none;
     color: white;
     padding-left: 10px;
     padding-bottom: 10px;
 }
-.nav_Support:hover{
+
+.nav_Support:hover {
     text-decoration: none;
     color: white;
 }
-.nav_item:hover{
+
+.nav_item:hover {
     text-decoration: none;
     color: white;
 }
-nav a.active{
+
+nav a.active {
     max-width: 100%;
     display: flex;
     padding: 10px 25px;
     align-items: center;
     text-decoration: none;
     font-weight: bold;
-    background-color: blue !important ;
+    background-color: blue !important;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
 }
-.accordion-button>img{
+.accordion-button>img {
     color: red;
 }
-
 @media screen and (max-width: 1200px) {
     .Admin {
-    display: flex;
-    flex-direction: column;
-    margin: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    .admin_online{
-        margin-left: 20px;
-        margin-top: 10px;
+    .profile_image{
+        margin-right: 0px;
     }
-  }
 
+    .admin_online {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

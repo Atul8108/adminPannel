@@ -1,8 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
-const DeleteBtn = ({ deletefunction }) => {
+const UserDetailsPopUp = () => {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -10,28 +11,29 @@ const DeleteBtn = ({ deletefunction }) => {
 
     return (
         <>
-
-            <>
-                <Button className='btn btn-sm btn-primary w-100' variant="danger" onClick={handleShow}>
-                    Delete
+            <div>
+            <Button variant="danger" onClick={handleShow}>
+                    Goto Form
                 </Button>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Are You Sure?</Modal.Title>
+                        <Modal.Title>Please Fill the Form to Post Your Blog</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Post will be deleted , please Confirm</Modal.Body>
+                    <Modal.Body>Click The Button to fill the Form</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="danger" onClick={() => deletefunction()}>
-                            Delete Post
+                        <Link to='/user-details'>
+                        <Button variant="danger">
+                            User Details Form
                         </Button>
+                        </Link>
                     </Modal.Footer>
                 </Modal>
-            </>
+            </div>
         </>
     )
 }
 
-export default DeleteBtn
+export default UserDetailsPopUp

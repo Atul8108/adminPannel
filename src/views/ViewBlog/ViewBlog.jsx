@@ -60,39 +60,45 @@ const ViewBlog = () => {
               <Dropdown.Item id="dropdown-menu-align-left" eventKey="DRAFT">Draft</Dropdown.Item>
             </DropdownButton>
             <div className="row">
-              {bloglist?.length > 0 &&
+              {bloglist?.length > 0 ?
                 bloglist?.map((data, index) => {
                   return (
-                    <div className="card col-md-3 p-3 m-4">
-                      <Link to={'/blog-page/' + index} style={{ textDecoration: "none", color: 'none' }}>
-                        <img className="card-img-top" src={data.mainImage} alt="Cardimagecap" />
-                        <div className="card-body">
-                          <h5 className="card-title">Title: {data.title}</h5>
-                          <p className="card-description">Description: {data.description}</p>
-                          <div className="keyword-container">
-                            {
-                              data?.key?.map((item, index) => {
-                                return (
-                                  <p className='keyword'>{item.text}</p>
-                                )
-                              })
-                            }
+                    <div className="col-md-3 p-3 m-4">
+                      <div className="shadow blog-card">
+                        <Link to={'/blog-page/' + index} style={{ textDecoration: "none", color: 'black' }}>
+                          <img className="card-img-top shadow-sm" src={data?.mainImage} alt="Cardimagecap" />
+                          <div className="text-body" >
+                          <div className="title-and-status">
+                            <h5 className="title">{data?.title}</h5>
+                          <p className={`${data.status == "PUBLISH"?"published":"draft"}`}>{data?.status}</p>
                           </div>
-                          <p className='card-feeds'>Category: {data.dropdownValue}</p>
-                          <p>{data?.status}</p>
-                          <p>{data.createDateTime}</p>
+                            <p className='author-by' >By - <span className='author'> {data?.userName}</span></p>
+                            <p className='date-time'>{data?.createDateTime}</p>
+                            <p className="description">{data?.description}</p>
+                            <div className="keyword-container">
+                              {
+                                data?.key?.map((item, index) => {
+                                  return (
+                                    <p className='keyword shadow-sm'>{item?.text}</p>
+                                  )
+                                })
+                              }
+                            </div>
+                            <p className='card-feeds'> In {data?.dropdownValue} Category</p>
+                          </div>
+                        </Link>
+                        <div className="button">
+                          {/* <Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link> */}
+                          <Link className='w-100' to={"/edit-page/" + index}><Button className="btn btn-sm btn-info w-100">Edit</Button></Link>
+                          {/* <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button> */}
+                          <DeleteBtn deletefunction={() => { deletePost(index) }} />
+                          <ToastContainer />
                         </div>
-                      </Link>
-                      <div className="button">
-                        <Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link>
-                        <Link to={"/edit-page/" + index}><Button className="btn btn-sm btn-primary">Edit Post</Button></Link>
-                        {/* <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button> */}
-                        <DeleteBtn deletefunction={() => { deletePost(index) }} />
-                        <ToastContainer />
                       </div>
                     </div>
                   )
                 })
+                : <div><p style={{ marginLeft: "50%", color: 'red' }}>No data found</p></div>
               }
             </div>
           </div>

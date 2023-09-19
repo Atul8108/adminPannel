@@ -87,9 +87,10 @@ const HomePage = () => {
                                     <th>Description</th>
                                     <th>keyword</th>
                                     <th>Tag</th>
+                                    <th>Author Name</th>
                                     <th>View Blog</th>
                                 </tr>
-                                {element?.length === undefined ? <tr><td colspan='8' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
+                                {element?.length === undefined ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
                                     element?.map((data, index) => {
                                         return (
                                             <tr>
@@ -113,6 +114,7 @@ const HomePage = () => {
                                                     }
                                                 </td>
                                                 {/* <td>{data.tag}</td> */}
+                                                <td>{data.userName} {data.lastName}</td>
                                                 <td><Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link></td>
                                             </tr>
                                         )
