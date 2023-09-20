@@ -228,7 +228,6 @@ const RightNav = ({ title }) => {
                   <Button onClick={() => handleSubmit("DRAFT")} size="sm" variant="warning">Save as Draft</Button>{' '}
                 </div>
 
-                <ToastContainer />
               </div>
             </div>
 

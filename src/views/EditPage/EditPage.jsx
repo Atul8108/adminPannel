@@ -15,6 +15,7 @@ import "../../components/Right_Pannel/RightNav.css"
 import "../../components/Left_Pannel/LeftNav.css"
 import "./EditPage.css"
 import $ from "jquery"
+import { USERINFO } from '../../api/locaStorage.data';
 
 const EditPage = () => {
     const { id } = useParams()
@@ -55,7 +56,7 @@ const EditPage = () => {
     function handleAddition(tag) {
         setTags([...tags, tag]);
     };
-    const updateSubmit = () => {
+    async function updateSubmit(status){
         const title = document.getElementById("title")
         const desCription = document.getElementById("description")
         let check1 = document.getElementById('check1')
@@ -98,10 +99,19 @@ const EditPage = () => {
                 "tag": tag.value,
                 "image": imageToShowSecond,
                 "dropdownValue": value,
-                "createDateTime": new Date().toLocaleString()
+                "createDateTime": new Date().toLocaleString(),
+                "status": status,
+                "userName": JSON.parse(USERINFO())?.userName + " " + JSON.parse(USERINFO())?.lastName,
             }
             editblog.current[id] = blogData;
+
             localStorage.setItem("blogList", JSON.stringify(editblog.current))
+            if (status === "PUBLISH") {
+                toast.success("Your Blog is Posted");
+              }
+              else {
+                toast.info("Save as Draft");
+              }
         }
     }
     const [isOpen, setIsOpen] = useState(true);
@@ -199,9 +209,9 @@ const EditPage = () => {
                             <TextEditor editorRef={editorRef} value={editor.current} />
                             <div className="Publish-btn">
                                 <p>Publish</p>
-                                <Link to={"/view-blog"}><Button onClick={updateSubmit} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}</Link>
-                                <Button variant="warning">Save as Draft</Button>{' '}
-                                <ToastContainer />
+                                <Link to={"/view-blog"}><Button onClick={() => updateSubmit("PUBLISH")} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}</Link>
+                                <Link to={"/view-blog"}><Button variant="warning" onClick={() => updateSubmit("DRAFT")}>Save as Draft</Button>{' '}</Link>
+                                
                             </div>
                             {/* MODAL FOR IMAGE CARD */}
 
@@ -269,13 +279,11 @@ const EditPage = () => {
     }
     return (
         <>
-            <div className='Blog-post-container d-flex'>
+            <div className='Blog-post-container d-flex global-layout w-100'>
                 <LeftNav />
-                <div className="container-fluid" >
+                <div className="container-fluid main-content" >
                     <Header />
-                    <div>
                         {updateHtml()}
-                    </div>
                 </div>
             </div>
 

@@ -9,6 +9,7 @@ import { TbPageBreak } from 'react-icons/tb'
 import { LuLogOut } from 'react-icons/lu'
 import $ from "jquery"
 import { NavLink, useNavigate } from 'react-router-dom';
+import { USERINFO } from '../../api/locaStorage.data';
 
 const LeftNav = () => {
   const navigate = useNavigate()
@@ -23,8 +24,9 @@ const LeftNav = () => {
   const logout = () => {
     localStorage.setItem('LogInNumber', "NODATA");
     localStorage.setItem('LogInPassword', "NODATA");
-    navigate("/",{replace:true})
+    navigate("/", { replace: true })
   };
+
 
   return (
     <>
@@ -33,14 +35,18 @@ const LeftNav = () => {
         <div className="Admin">
           <img
             className="profile_image"
-            src="https://freesvg.org/img/abstract-user-flat-4.png"
+            src={JSON.parse(USERINFO())?.profileImg}
             alt="Profile_Image"
           />
+          {/* <ProfileImage/> */}
           <div className="admin_online">
-            <p>Admin</p>
-            <p>
-              ● Online
-            </p>
+            {
+              <div style={{ color: 'white' }}><p className='mb-0'>{(JSON.parse(USERINFO())?.userName) == "" ? "Admin" : JSON.parse(USERINFO())?.userName}</p>
+                <p className='m-0' style={{fontSize:"small"}}>
+                  <span className="text-success">●</span> Online
+                </p></div>
+            }
+
           </div>
         </div>
         <div className="List ">
@@ -57,7 +63,7 @@ const LeftNav = () => {
             </Accordion>
             <NavLink to="/support-page" eventKey="link-7" className='nav_Support List-styling'><BiSupport />&emsp;Support</NavLink>
             <NavLink to="/test-page" eventKey="link-8" className='nav_Support List-styling'><TbPageBreak />&emsp;Test Page</NavLink>
-            <button className="nav_Support List-styling" onClick={logout} style={{backgroundColor:'red', border:'none',width:'100%' , alignItems:'center',paddingLeft:'12px'}}><LuLogOut />&emsp;LogOut</button>
+            <button className="nav_Support List-styling" onClick={logout} style={{ backgroundColor: '#DA2F4C', border: 'none', width: '100%', alignItems: 'center', paddingLeft: '12px' }}><LuLogOut />&emsp;LogOut</button>
           </nav>
         </div>
       </div>

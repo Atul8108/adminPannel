@@ -7,12 +7,9 @@ module.exports = {
   },
   USERINFO:()=>{
     return localStorage.getItem("userInfo")
+  },
+  BLOGLIST:()=>{
+    return localStorage.getItem("blogList")
   }
-  // SIGNUPNUMBER:()=>{
-  //   return localStorage.getItem("signUpNumber")
-  // },
-  // SIGNUPPASSWORD:()=>{
-  //   return localStorage.getItem("signUpPassword")
-  // }
 
 };

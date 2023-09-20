@@ -33,6 +33,7 @@ const HomePage = () => {
             setIsOpen(!isOpen);
         })
     }, [isOpen])
+    
     return (
         <>
             <div className="w-100 main d-flex global-layout">
@@ -97,7 +98,7 @@ const HomePage = () => {
                                                 <td>{index + 1}</td>
                                                 <td>{data.title}</td>
                                                 <td>{data.createDateTime}</td>
-                                                <td><img style={{ width: '50px' }} src={data.image} alt='' /></td>
+                                                <td><img style={{ width: '50px' }} src={data.mainImage} alt='' /></td>
                                                 <td>{data.description}</td>
                                                 <td>
                                                     {

@@ -3,16 +3,23 @@ import './UserDetail.css'
 import { FaWpforms } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { USERINFO } from '../../api/locaStorage.data'
+import { BsCamera2 } from 'react-icons/bs'
 
 const UserDetail = () => {
-    const navigate = useNavigate()
-    async function handleSubmit() {
+    const navigate = useNavigate();
+
+    function onFileSelect(e) {
+        document.getElementById("pic-preview").src = URL.createObjectURL(e.target.files[0])
+    }
+
+    async function handleSubmit(e) {
         const firstname = document.getElementById("firstname")
         const lastname = document.getElementById("lastname")
         const email = document.getElementById('inputEmail')
         const addressOne = document.getElementById('inputAddress1')
         const city = document.getElementById('inputCity')
         const states = document.getElementById("inputState")
+        const profile_img = document.getElementById("pic-preview").src
 
         let userData = {
             "userName": firstname?.value,
@@ -20,12 +27,11 @@ const UserDetail = () => {
             "email": email?.value,
             "addressOne": addressOne?.value,
             "city": city?.value,
-            "states": states?.value
+            "states": states?.value,
+            "profileImg": profile_img
         }
-
         userData.isComplete = Object.keys(userData).every((k) => !userData[k] == "");
-
-        localStorage.setItem('userInfo', JSON.stringify(userData))
+        localStorage.setItem('userInfo', JSON.stringify(userData));
 
         navigate("/Dashbord", { replace: true })
 
@@ -41,9 +47,10 @@ const UserDetail = () => {
         <>
             <div className='form-container'>
                 <div className='inside-content'>
-                    <img src='https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80' alt='form-info' />
+                    <img className='hero-img' src='https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1935&q=80' alt='form-info' />
+
                     <div className='form-data'>
-                        <h4><FaWpforms />&nbsp;Fill Your Personal Details</h4>
+                        <h4 className='text-center'><FaWpforms />&nbsp;Fill Your Personal Details</h4>
                         <div className="container-fluid">
                             <div className="row">
                                 <div className="form-group col-md-6">
@@ -53,6 +60,17 @@ const UserDetail = () => {
                                 <div className="form-group col-md-6">
                                     <label for="inputName">Last Name</label>
                                     <input defaultValue={userData?.lastName} type="last name" className="form-control" id="lastname" placeholder="last name" />
+                                </div>
+                                <div className="form-group col-md-12">
+                                    <div className="App d-flex ">
+
+                                        <label for="profile_Image" className="custom_upload">
+                                            <i class="fa fa-2x fa-camera"></i><h5 className='m-0'>Upload Pic</h5>
+                                            <input className='file' onChange={(e) => onFileSelect(e)} type="file" id='profile_Image' style={{ Color: "blue" }} />
+                                        </label>
+
+                                        <img id='pic-preview' src={userData?.profileImg} alt="" style={{ height: '76px', width: '70px', borderRadius: '100%', objectFit: 'cover', marginLeft: '250px' }} />
+                                    </div>
                                 </div>
                                 <div className="form-group col-md-12">
                                     <label for="inputEmail">Email</label>
@@ -69,7 +87,7 @@ const UserDetail = () => {
                                 <div className="form-group col-md-6">
                                     <label for="inputState">State</label>
                                     <select defaultValue={userData?.states} id="inputState" className="form-control">
-                                        <option selected>Choose...</option>
+                                        <option selected disabled>Choose...</option>
                                         <option value="Andra Pradesh">Andra Pradesh</option>
                                         <option value="Arunachal Pradesh">Arunachal Pradesh</option>
                                         <option value="Assam">Assam</option>
@@ -114,9 +132,9 @@ const UserDetail = () => {
                         <div className="container-fluid">
                             <div className='row'>
                                 <div className="col-md-6 ms-auto">
-                                <div className="d-flex justify-content-between" style={{gap:'10px'}}>
-                                    <button className="btn btn-primary w-100" onClick={() => handleSubmit()}>Submit</button>
-                                    <Link to='/create-blog' className='w-100'><button className="w-100 btn btn-warning small">Skip</button></Link>
+                                    <div className="d-flex justify-content-between" style={{ gap: '10px' }}>
+                                        <button className="btn btn-primary w-100" onClick={() => handleSubmit()}>Submit</button>
+                                        <Link to='/create-blog' className='w-100'><button className="w-100 btn btn-warning small">Skip</button></Link>
                                     </div>
                                 </div>
                             </div>

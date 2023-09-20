@@ -12,8 +12,8 @@ const UserDetailsPopUp = () => {
     return (
         <>
             <div>
-            <Button variant="danger" onClick={handleShow}>
-                    Goto Form
+            <Button variant="primary" onClick={handleShow}>
+                    Submit
                 </Button>
                 <Modal show={show} onHide={handleClose}>
                     <Modal.Header closeButton>

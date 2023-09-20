@@ -55,7 +55,7 @@ const SignUp = () => {
             <p className='para'><label>Already have Account? </label>&nbsp;<Link to='/'>Log In</Link></p>
             <br />
             <button class="btn btn-primary btn-lg btn-block " onClick={handleSubmit}>Sign Up</button>
-            <ToastContainer />
+            
           </div>
         </div>
       </div>
