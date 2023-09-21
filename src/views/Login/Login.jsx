@@ -73,17 +73,20 @@ const Login = () => {
   }
   return (
     <>
-      <div className='container  d-flex' style={{ height: '100vh' }}>
+      <div className='d-flex' style={{ height: '100vh' ,justifyContent:'center',alignItems:"center" }}>
         <div className="left_container">
           <img src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg?w=826&t=st=1694841557~exp=1694842157~hmac=ba76d72df8d067238481e0c3e072329ee356d554f03eaba8d2ded2ef425728c9" className="img-fluid" alt="Sampleimage" />
         </div>
         <div className="right-container">
+          <div className='d-flex' style={{justifyContent:'center',alignItems:'center',gap:"20px"}}>
+            <p className='m-0'>Sign in with:</p>
           <div className='icon'>
-            <p>Sign in with:</p>
             <i class="fa-brands fa-facebook"></i>
             <i class="fa-brands fa-twitter"></i>
             <i class="fa-brands fa-linkedin"></i>
           </div>
+          </div>
+          
           <hr />
           <div className='d-flex flex-column'>
             <input className="input" type='tel' id='phoneNumber' placeholder='Phone Number' maxlength="10" required />

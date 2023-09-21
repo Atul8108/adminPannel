@@ -38,11 +38,11 @@ const HomePage = () => {
         <>
             <div className="w-100 main d-flex global-layout">
                 <LeftNav />
-                <div className="main-content">
+                <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
-                    <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
-                        <div className='container-fluid'>
-                            <div className="row" style={{ padding: '30px', display: 'flex', justifyContent: 'space-between' }}>
+                    <div className={`RightNav`}>
+                        <div className='container-fluid' style={{backgroundColor:"antiquewhite"}}>
+                            <div className="row" style={{margin:'20px',display:'flex',justifyContent:'space-between'}}>
                                 <div className='col'>
                                     <div className="total_post">
                                         <p className='post'>Total Post:</p>
@@ -98,11 +98,11 @@ const HomePage = () => {
                                                 <td>{index + 1}</td>
                                                 <td>{data.title}</td>
                                                 <td>{data.createDateTime}</td>
-                                                <td><img style={{ width: '50px' }} src={data.mainImage} alt='' /></td>
+                                                <td><img className='mainImage' style={{ width: '50px' }} src={data.mainImage} alt='' onClick={()=>window.open(data.mainImage,"_blank")}/></td>
                                                 <td>{data.description}</td>
                                                 <td>
                                                     {
-                                                        data?.key?.map((keywords, index) => {
+                                                        data?.key?.slice(0, 5).map((keywords, index) => {
                                                             return (
                                                                 <td><p>{keywords.text}</p></td>
                                                             )

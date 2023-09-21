@@ -15,9 +15,9 @@ const SupportPage = () => {
     <>
         <div className="w-100 d-flex global-layout">
         <LeftNav />
-        <div className="main-content">
+        <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
           <Header />
-          <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
+          <div className={`RightNav`}>
 
           <p>Support Page</p>
           </div>

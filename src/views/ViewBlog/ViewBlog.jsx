@@ -46,9 +46,9 @@ const ViewBlog = () => {
     <>
       <div className='w-100 main d-flex global-layout'>
         <LeftNav />
-        <div className="main-content">
+        <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
           <Header />
-          <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
+          <div className={`RightNav`}>
             <DropdownButton
               alignright="true"
               title={value ?? "Publish"}
@@ -59,11 +59,12 @@ const ViewBlog = () => {
               <Dropdown.Item id="dropdown-menu-align-left" eventKey="PUBLISH">Publish</Dropdown.Item>
               <Dropdown.Item id="dropdown-menu-align-left" eventKey="DRAFT">Draft</Dropdown.Item>
             </DropdownButton>
-            <div className="row">
+            <div className="container-fluid">
+            <div className="row mx-0 gx-0">
               {bloglist?.length > 0 ?
                 bloglist?.map((data, index) => {
                   return (
-                    <div className="col-md-3 p-3 m-4">
+                    <div className="col-md-3 p-3">
                       <div className="shadow blog-card">
                         <Link to={'/blog-page/' + index} style={{ textDecoration: "none", color: 'black' }}>
                           <img className="card-img-top shadow-sm" src={data?.mainImage} alt="Cardimagecap" />
@@ -77,7 +78,7 @@ const ViewBlog = () => {
                             <p className="description">{data?.description}</p>
                             <div className="keyword-container">
                               {
-                                data?.key?.map((item, index) => {
+                                data?.key?.slice(0, 5).map((item, index) => {
                                   return (
                                     <p className='keyword shadow-sm'>{item?.text}</p>
                                   )
@@ -100,7 +101,7 @@ const ViewBlog = () => {
                 })
                 : <div><p style={{ marginLeft: "50%", color: 'red' }}>No data found</p></div>
               }
-            </div>
+            </div></div>
           </div>
         </div>
       </div>

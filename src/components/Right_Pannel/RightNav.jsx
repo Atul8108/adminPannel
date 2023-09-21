@@ -8,8 +8,7 @@ import ImageGallaryModal from "../ImageGallaryModel/ImageGallaryModal";
 import TextEditor from "../TextEditor/TextEditor";
 import { BsCardImage } from "react-icons/bs"
 import { WithContext as ReactTags } from 'react-tag-input';
-import $ from "jquery"
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import { USERINFO } from "../../api/locaStorage.data";
 import UserDetailsPopUp from "../UserDetailsPopUp/UserDetailsPopUp";
@@ -25,6 +24,10 @@ const RightNav = ({ title }) => {
   let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
   const [blog, setBlog] = useState([])
+
+  useEffect(() => {
+    setBlog(JSON.parse(localStorage.getItem("blogList")))
+  }, []);
 
   function multiImgFunc(a) {
     if (imageToShowSecond.includes(a)) {
@@ -129,18 +132,12 @@ const RightNav = ({ title }) => {
     setTags([...tags, tag]);
   };
 
-  const [isOpen, setIsOpen] = useState(true);
 
-  useEffect(() => {
-    $(".navbar-toggler").click(() => {
-      setIsOpen(!isOpen);
-    })
-  }, [isOpen])
 
   return (
     <>
-      <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
-        <div className="container-fluid">
+      {/* <div className={`RightNav`}>/ */}
+        <div className="container-fluid bgColor">
           <h4>Create Blog</h4>
           <div className="row m-0">
             <div className="col-md-9">
@@ -287,7 +284,7 @@ const RightNav = ({ title }) => {
           </div>
         </div>
 
-      </div>
+      {/* </div> */}
 
     </>
   );

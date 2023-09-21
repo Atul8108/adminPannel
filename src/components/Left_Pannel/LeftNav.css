@@ -5,12 +5,15 @@
 
 .global-layout .close {
     width: 0vw !important;
+    min-width: 0vw !important;
 }
 
 .leftnav {
     transition: all 0.1s ease;
     background-color: #33383E;
     max-width: 15vw;
+    width: 15vw;
+    min-width: 15vw;
     overflow-y: hidden;
     min-height: 100vh;
 
@@ -25,7 +28,7 @@
 
 .Admin {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     text-align: center;
     gap: 15px;
@@ -47,19 +50,6 @@
     margin-top: 20px;
     color: white;
     max-width: 100%;
-}
-
-.List-styling {
-    display: flex;
-    text-decoration: none;
-    color: white;
-    align-items: center;
-    padding: 10px;
-}
-
-.List-styling:hover {
-    text-decoration: none;
-    color: white;
 }
 
 .accordion {
@@ -114,27 +104,23 @@
     color: white;
 }
 
-.nav_item {
-    max-width: 100%;
-    text-decoration: none;
-    color: white;
+.accordion .accordion-item .accordion-body .nav-item{
     padding: 10px 25px;
 }
 
+.nav_item {
+    text-decoration: none;
+    color: white;
+    padding: 10px 25px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .accordion .accordion-item .accordion-header .accordion-button {
-    padding: 0.75rem !important;
-}
-
-.nav_Support {
-    text-decoration: none;
-    color: white;
-    padding-left: 10px;
-    padding-bottom: 10px;
-}
-
-.nav_Support:hover {
-    text-decoration: none;
-    color: white;
+    padding: 0.75rem 1.75rem !important;
 }
 
 .nav_item:hover {
@@ -142,20 +128,10 @@
     color: white;
 }
 
-nav a.active {
-    max-width: 100%;
-    display: flex;
-    padding: 10px 25px;
-    align-items: center;
-    text-decoration: none;
-    font-weight: bold;
-    background-color: blue !important;
+.List a.active {
+    background-color: rgb(55, 55, 216) !important;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
-}
-
-.accordion-button>img {
-    color: red;
 }
 
 @media screen and (max-width: 1200px) {

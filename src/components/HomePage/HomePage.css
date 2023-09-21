@@ -51,3 +51,9 @@ th {
     font-size:20px;
     margin-left: 10px;
 }
+
+.mainImage:hover{
+    margin-bottom: 80px;
+    height: 30px;
+    transform: scaleX(6.5) scaleY(6.5);
+}

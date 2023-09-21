@@ -1,12 +1,16 @@
 
 .RightNav{
-    width:85vw;
+    width:100%;
 }
-.RightNav .container-fluid{
+.bgColor{
     background-color: rgb(223, 237, 250);
 }
-.main-content .closeRightNav{
-    width:  100vw;
+.global-layout .closeRightNav{
+    width: 100vw !important;
+    padding: 0;
+}
+.global-layout .openRightNav{
+    width: 100% !important;
     padding: 0;
 }
 

@@ -3,7 +3,6 @@ import './UserDetail.css'
 import { FaWpforms } from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { USERINFO } from '../../api/locaStorage.data'
-import { BsCamera2 } from 'react-icons/bs'
 
 const UserDetail = () => {
     const navigate = useNavigate();
@@ -69,7 +68,7 @@ const UserDetail = () => {
                                             <input className='file' onChange={(e) => onFileSelect(e)} type="file" id='profile_Image' style={{ Color: "blue" }} />
                                         </label>
 
-                                        <img id='pic-preview' src={userData?.profileImg} alt="" style={{ height: '76px', width: '70px', borderRadius: '100%', objectFit: 'cover', marginLeft: '250px' }} />
+                                        <img defaultValue={userData?.profileImg} id='pic-preview' src={userData?.profileImg} alt="" style={{ height: '76px', width: '70px', borderRadius: '100%', objectFit: 'cover', marginLeft: '250px' }} />
                                     </div>
                                 </div>
                                 <div className="form-group col-md-12">

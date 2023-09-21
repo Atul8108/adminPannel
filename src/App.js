@@ -14,38 +14,43 @@ import Loading from "./components/Loader/Loading";
 import { useState } from "react";
 import { useEffect } from "react";
 
-
 function App() {
   const [isFetching, setIsFetching] = useState(true);
-    useEffect(() => {
-        setTimeout(function () {
-            console.log("Delayed for 5 second.");
-            setIsFetching(false);
-        }, 2000);
-    }, []);
-    if (isFetching) {
-        return (
-            <div className="d-flex" style={{justifyContent:"center ",alignItems:'center' ,height:'100vh'}}>
-                <Loading />
-            </div>
-        );
-    }
-  
+  useEffect(() => {
+    setTimeout(function () {
+      setIsFetching(false);
+    }, 2000);
+  }, []);
+  if (isFetching) {
+    return (
+      <div
+        className="d-flex"
+        style={{
+          justifyContent: "center ",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Loading />
+      </div>
+    );
+  }
+
   return (
     <>
-    <ToastContainer />
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/Dashbord" element={<HomePage />} />
-      <Route path="/create-blog" element={<HomeView />} />
-      <Route path="/view-blog" element={<ViewBlog/>} />
-      <Route path="/blog-page/:id" element={<BlogPage/>} />
-      <Route path="/edit-page/:id" element={<EditPage/>}/>
-      <Route path="/test-page" element={<TestPage />} />
-      <Route path="/support-page" element={<SupportPage />} />
-      <Route path="/user-details" element={<UserDetail/>}/>
-      <Route path="/signUp" element={<SignUp/>}/>
-    </Routes>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/Dashbord" element={<HomePage />} />
+        <Route path="/create-blog" element={<HomeView />} />
+        <Route path="/view-blog" element={<ViewBlog />} />
+        <Route path="/blog-page/:id" element={<BlogPage />} />
+        <Route path="/edit-page/:id" element={<EditPage />} />
+        <Route path="/test-page" element={<TestPage />} />
+        <Route path="/support-page" element={<SupportPage />} />
+        <Route path="/user-details" element={<UserDetail />} />
+        <Route path="/signUp" element={<SignUp />} />
+      </Routes>
     </>
   );
 }

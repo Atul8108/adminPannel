@@ -34,7 +34,7 @@ const SignUp = () => {
   }
   return (
     <>
-      <div className='container  d-flex' style={{ height: '100vh' }}>
+      <div className='d-flex' style={{ height: '100vh' ,justifyContent:'center',alignItems:"center" }}>
         <div className="left_container">
           <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=826&t=st=1694842112~exp=1694842712~hmac=81f1e8375aa2a057d1944c60aff185c16920314db5174783d81949ae55cfa3b0" className="img-fluid" alt="Sampleimage" />
         </div>
