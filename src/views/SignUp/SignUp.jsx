@@ -1,21 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import phoneicon from "../../assets/phone.svg"
+import eyeclose from "../../assets/eye-closed.svg"
+import eyeopen from "../../assets/eye.svg"
 
 const SignUp = () => {
   const navigate = useNavigate()
-  function showPassword() {
-    var x = document.getElementById("Password");
-    if (x.type === "password") {
-      x.type = "text";
-    } else {
-      x.type = "password";
-    }
-  }
+  const [eye, setEye] = useState(false)
+ 
 
   const handleSubmit = () => {
     const phoneNumber = document.getElementById('phoneNumber');
-    const password = document.getElementById('Password');
+    const password = document.getElementById('password');
     if (phoneNumber.value.length != 10) {
       toast.warning("phone Number Should Be 10 Digits Only !!!")
     }
@@ -39,22 +36,31 @@ const SignUp = () => {
           <img src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?w=826&t=st=1694842112~exp=1694842712~hmac=81f1e8375aa2a057d1944c60aff185c16920314db5174783d81949ae55cfa3b0" className="img-fluid" alt="Sampleimage" />
         </div>
         <div className="right-container">
+        <div className='d-flex' style={{justifyContent:'center',alignItems:'center',gap:"20px"}}>
+            <p className='m-0'>Sign up with:</p>
           <div className='icon'>
-            <p>Sign Up with:</p>
             <i class="fa-brands fa-facebook"></i>
             <i class="fa-brands fa-twitter"></i>
             <i class="fa-brands fa-linkedin"></i>
           </div>
-          <hr />
+          </div>
+          <hr/>
           <div className='d-flex flex-column'>
-            <input className="input" type='tel' id='phoneNumber' placeholder='Phone Number' maxlength="10" required />
-            <lable>Phone Number</lable>
+          <div className="group">
+              <img className="password-icon" src={phoneicon} alt='..'/>
+              <input className="input" type='tel' id='phoneNumber' placeholder="Phone Number" maxlength="10" required />
+            </div>
             <br />
-            <input className="input" type='password' id='Password' placeholder='Password' required />
-            <p><input type="checkbox" onClick={() => { showPassword() }} />&emsp;Show Password</p>
+            <div className="group">
+              <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="password-icon">
+                <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linejoin="round" stroke-linecap="round"></path>
+              </svg>
+              <img className="eye-icon" src={eye ? eyeopen : eyeclose } alt='..' onClick={() => { setEye(!eye) }}/> 
+              <input className="input" id='password' type={eye ? "text" : "password"} placeholder="password" />
+            </div>
             <p className='para'><label>Already have Account? </label>&nbsp;<Link to='/'>Log In</Link></p>
             <br />
-            <button class="btn btn-primary btn-lg btn-block " onClick={handleSubmit}>Sign Up</button>
+            <button class="btn btn-primary btn-lg btn-block " onClick={handleSubmit} style={{width:"250px"}}>Sign Up</button>
             
           </div>
         </div>

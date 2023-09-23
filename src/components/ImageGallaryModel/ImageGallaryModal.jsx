@@ -18,8 +18,12 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
     "https://img.freepik.com/premium-photo/image-colorful-galaxy-sky-generative-ai_791316-9864.jpg?w=2000",
     "https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk=",
     "https://i0.wp.com/www.flutterbeads.com/wp-content/uploads/2021/11/set-background-image-flutter-hero.jpeg?fit=1920%2C1280&ssl=1",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBLORxmuwMNWRDP-AHNGnLl9fO-vaHpr1iA&usqp=CAU"
-
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlBLORxmuwMNWRDP-AHNGnLl9fO-vaHpr1iA&usqp=CAU",
+    "https://cdn.dribbble.com/users/105429/screenshots/8935955/media/3dbc5aa06098bb3071adaffc155514bf.gif",
+    "https://cdn.dribbble.com/users/1967053/screenshots/4541633/___-1.gif",
+    "https://cdn.dribbble.com/users/4678/screenshots/2582023/media/81bafd9e758bbbccc053c2d3de36af39.gif",
+    "https://cdn.dribbble.com/users/2118466/screenshots/5921293/sequence_03_1.png?resize=450x338&vertical=center",
+    "https://cdn.dribbble.com/userupload/9993654/file/original-f8922f86301738803c3d2a82e29d6bec.gif"
   ])
 
   const [selectedImg, setSelectedImg] = useState(null);

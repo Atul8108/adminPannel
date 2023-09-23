@@ -53,7 +53,15 @@ th {
 }
 
 .mainImage:hover{
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     height: 30px;
     transform: scaleX(6.5) scaleY(6.5);
+}
+
+.table-description{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

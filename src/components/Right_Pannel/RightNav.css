@@ -159,11 +159,13 @@
     margin-left: 0px;
     margin-bottom: 10px;
 }
-p{
+/* p{
     margin: 0;
     margin-bottom: 5px;
-}
+} */
 .tag-wrapper{
+    display: inline-flex;
+    margin-bottom: 18px;
     border-radius: 5px;;
     background-color: rgb(223, 221, 221);
     padding: 10px;

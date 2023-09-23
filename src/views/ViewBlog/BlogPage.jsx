@@ -7,6 +7,9 @@ import parse from "html-react-parser"
 import { BiSolidTimeFive } from 'react-icons/bi';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import { useEffect } from 'react';
+import $ from "jquery"
+
 
 const BlogPage = () => {
 
@@ -17,7 +20,7 @@ const BlogPage = () => {
     let commentList = [];
 
     blog.current = JSON.parse(localStorage.getItem("blogList"));
-    singleBlog.current = blog.current[id];
+    singleBlog.current = blog?.current[id];
 
 
     function handleSubmit() {
@@ -54,12 +57,19 @@ const BlogPage = () => {
             items: 1
         }
     };
+    const [isOpen, setIsOpen] = useState(true);
+  useEffect(() => {
+    $(".navbar-toggler").click(() => {
+      setIsOpen(!isOpen);
+    })
+  }, [isOpen])
     return (
         <>
-            <div className="Container1">
+            <div className="w-100 d-flex global-layout">
                 <LeftNav />
-                <div className="blog-page">
+                <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
+                    <div className="blog-page">
                     <div className="inner-container">
                         <h1 className='title1'>{singleBlog?.current?.title}</h1>
                         <p className='title1'>Author Name: {singleBlog?.current?.userName} {singleBlog?.current?.lastName}</p>
@@ -97,14 +107,14 @@ const BlogPage = () => {
                                     {
                                         singleBlog?.current?.key.map((keys, index) => {
                                             return (
-                                                <Link to='/view-blog' style={{textDecoration:"none"}}><div className="tags"><p>{keys.text}&nbsp;</p></div></Link>
+                                                <Link to='/view-blog' style={{ textDecoration: "none" }}><div className="tags"><p>{keys.text}&nbsp;</p></div></Link>
                                             )
                                         })
                                     }
                                 </p>
                             </div>
                             {
-                                singleBlog?.current?.tag.length == 0 ? <p></p> : <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{textDecoration:"none"}}>{singleBlog?.current?.tag}</Link></p>
+                                singleBlog?.current?.tag.length == 0 ? <p></p> : <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{ textDecoration: "none" }}>{singleBlog?.current?.tag}</Link></p>
                             }
 
                         </div>
@@ -127,21 +137,22 @@ const BlogPage = () => {
                             <button type='submit' onClick={() => handleSubmit()}>Submit</button>
                             {
                                 singleBlog?.current?.comments?.length > 0 && (
-                                    <div className='commentbox'>
-                                        <h2>Comments</h2>
-                                        <ul>
-                                            {singleBlog?.current?.comments?.map((c, index) => (
-                                                <li key={index}>
-                                                    <p><strong>{c.userName}:</strong>&emsp;{c.comment}</p>
-                                                </li>
-                                            ))}
-                                        </ul>
+                                    <div class="task" >
+                                        <div class="tags">
+                                            <span class="tag">Comments</span>
+                                        </div>
+                                        
+                                        {singleBlog?.current?.comments?.map((c, index) => (
+                                        <p><strong>{c.userName}:</strong>&emsp;{c.comment}</p>
+                                        ))}
                                     </div>
                                 )
                             }
                         </div>
                     </div>
                 </div>
+                </div>
+                
             </div>
         </>
     )

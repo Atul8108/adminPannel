@@ -1,6 +1,7 @@
 
 .img-fluid{
     width: 600px;
+    max-width: none !important;
 }
 
 .input{
@@ -8,7 +9,8 @@
     height: 40px;
     margin-bottom: 10px;
     padding: 20px;
-
+    border-radius: 10px;
+    border: 1px solid grey;
 }
 .para>a{
     margin-left: 10px; 
@@ -25,6 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    width: 90px;
 }
 .icon>p{
     font-size:large;
@@ -32,8 +35,68 @@
 }
 .icon>i{
     font-size: larger;
-    color: blue;
+    color: #0062D0;
 }
+
+.group {
+    display: flex;
+    line-height: 30px;
+    align-items: center;
+    position: relative;
+    max-width: 200px;
+  }
+  
+  .input {
+    width: 250px;
+    height: 45px;
+    line-height: 30px;
+    padding: 0 5rem;
+    padding-left: 3rem;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f8fafc;
+    color: #0d0c22;
+    transition: .5s ease;
+  }
+  
+  .input::placeholder {
+    color: #94a3b8;
+  }
+  
+  .login-input-group input:focus ,.login-input-group input:hover {
+    outline: none;
+    border-color: rgba(129, 140, 248);
+    background-color: #fff;
+    box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+  }
+  
+  .password_icon {
+    position: absolute;
+    left: 1rem;
+    bottom: 24px;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+
+  }
+  .eye-icon{
+    position: absolute;
+    right: -1rem;
+    bottom: 24px;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+  }
+  .eye-open{
+    background-image: url('../../assets/eye.svg'); 
+    position: absolute;
+    right: -1rem;
+    bottom: 24px;
+    fill: none;
+    width: 1rem;
+    height: 1rem;
+  }
 @media screen and (max-width: 700px) {
     .container {flex-direction: column;}
   }

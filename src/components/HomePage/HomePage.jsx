@@ -33,7 +33,6 @@ const HomePage = () => {
             setIsOpen(!isOpen);
         })
     }, [isOpen])
-    
     return (
         <>
             <div className="w-100 main d-flex global-layout">
@@ -41,7 +40,7 @@ const HomePage = () => {
                 <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
                     <div className={`RightNav`}>
-                        <div className='container-fluid' style={{backgroundColor:"antiquewhite"}}>
+                        <div className='container-fluid' style={{backgroundColor:"antiquewhite", padding:'10px'}}>
                             <div className="row" style={{margin:'20px',display:'flex',justifyContent:'space-between'}}>
                                 <div className='col'>
                                     <div className="total_post">
@@ -78,8 +77,10 @@ const HomePage = () => {
                             <h1 className='Top_post'><PiGlobeStandFill />Todays First Five Blog (<span>{new Date().toLocaleString()}</span>)</h1>
                             <p></p>
                         </div>
-                        <div className='Table'>
-                            <table style={{ border: '1px solid black' }}>
+                        
+
+                        <div className='Table mb-5'>
+                            <table style={{ border: '1px solid black' ,maxWidth: "70vw" }}>
                                 <tr >
                                     <th>S.no</th>
                                     <th>Post Name</th>
@@ -89,25 +90,30 @@ const HomePage = () => {
                                     <th>keyword</th>
                                     <th>Tag</th>
                                     <th>Author Name</th>
-                                    <th>View Blog</th>
+                                    <th >View Blog</th>
                                 </tr>
                                 {element?.length === undefined ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
                                     element?.map((data, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
-                                                <td>{data.title}</td>
+                                                <td><p className='table-description mb-0'>{data.title}</p></td>
                                                 <td>{data.createDateTime}</td>
                                                 <td><img className='mainImage' style={{ width: '50px' }} src={data.mainImage} alt='' onClick={()=>window.open(data.mainImage,"_blank")}/></td>
-                                                <td>{data.description}</td>
                                                 <td>
-                                                    {
+                                                <p className='table-description mb-0'>
+                                                {data.description}</p></td>
+                                                <td>
+                                                    <p>
+                                                     {
                                                         data?.key?.slice(0, 5).map((keywords, index) => {
                                                             return (
-                                                                <td><p>{keywords.text}</p></td>
+                                                                <td><p className='m-0'>{keywords.text}</p></td>
                                                             )
                                                         })
-                                                    }
+                                                    }   
+                                                    </p>
+                                                    
                                                 </td>
                                                 <td>
                                                     {

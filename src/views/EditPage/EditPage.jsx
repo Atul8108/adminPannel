@@ -125,7 +125,7 @@ const EditPage = () => {
     const updateHtml = () => {
         return (
             <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
-                <div className="container-fluid">
+                <div className="container-fluid bgColor">
                     <h4>Update Blog</h4>
                     <div className="row m-0">
                         <div className="col-md-9">
@@ -281,9 +281,11 @@ const EditPage = () => {
         <>
             <div className='Blog-post-container d-flex global-layout w-100'>
                 <LeftNav />
-                <div className="container-fluid main-content" >
+                <div className="main-content" >
+                <div className={`container-fluid ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
                         {updateHtml()}
+                </div>
                 </div>
             </div>
 
