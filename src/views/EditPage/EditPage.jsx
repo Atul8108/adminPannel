@@ -23,11 +23,18 @@ const EditPage = () => {
     const editorRef = useRef();
 
     editblog.current = JSON.parse(localStorage.getItem("blogList"));
-    let editor = useRef(editblog?.current[id]?.editor)
-    let [value, setValue] = useState(editblog?.current[id]?.dropdownValue);
-    let [tags, setTags] = useState(editblog?.current[id]?.key);
-    let [imageToShow, setImageToShow] = useState(editblog?.current[id]?.mainImage)
-    const [imageToShowSecond, setImageToShowSecond] = useState([editblog?.current[id]?.image]);
+    let newList = {}
+    //  blog?.current?.filter(item=> item.id == id );
+    for (const item of editblog.current) {
+        if (item.id == id)
+            newList = item
+    };
+    console.log(newList)
+    let editor = useRef(newList?.editor)
+    let [value, setValue] = useState(newList?.dropdownValue);
+    let [tags, setTags] = useState(newList?.key);
+    let [imageToShow, setImageToShow] = useState(newList?.mainImage)
+    const [imageToShowSecond, setImageToShowSecond] = useState([newList?.image]);
 
     function multiImgFunc(a) {
         if (imageToShowSecond.includes(a)) {
@@ -103,9 +110,10 @@ const EditPage = () => {
                 "status": status,
                 "userName": JSON.parse(USERINFO())?.userName + " " + JSON.parse(USERINFO())?.lastName,
             }
-            editblog.current[id] = blogData;
 
-            localStorage.setItem("blogList", JSON.stringify(editblog.current))
+            newList[id] = blogData;
+            console.log(newList)
+            localStorage.setItem("blogList", JSON.stringify(newList))
             if (status === "PUBLISH") {
                 toast.success("Your Blog is Posted");
               }
@@ -136,7 +144,7 @@ const EditPage = () => {
                                         <Form.Control
                                             id="title"
                                             name='title'
-                                            defaultValue={editblog?.current[id]?.title}
+                                            defaultValue={newList?.title}
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             placeholder="Title"
@@ -148,7 +156,7 @@ const EditPage = () => {
 
                                     >
                                         <Form.Label>Summary & Description</Form.Label>
-                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={editblog?.current[id]?.description} />
+                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={newList?.description} />
                                     </Form.Group>
                                     {/* <Keyword /> */}
                                     <p> Keywords </p>
@@ -190,7 +198,7 @@ const EditPage = () => {
                                             placeholder="Tag"
                                             name="tag"
                                             id="tag"
-                                            defaultValue={editblog?.current[id]?.tag}
+                                            defaultValue={newList?.tag}
                                         />
                                     </InputGroup>
                                     <p>Type tag and hit enter</p>

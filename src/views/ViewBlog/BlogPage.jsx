@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import "./BlogPage.css"
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import LeftNav from '../../components/Left_Pannel/LeftNav';
 import Header from '../../components/Header/Header';
 import parse from "html-react-parser"
@@ -13,6 +13,9 @@ import $ from "jquery"
 
 const BlogPage = () => {
 
+    const {state} = useLocation();
+    console.log(state);
+
     let { id } = useParams();
     const blog = useRef();
     let singleBlog = useRef();
@@ -20,7 +23,14 @@ const BlogPage = () => {
     let commentList = [];
 
     blog.current = JSON.parse(localStorage.getItem("blogList"));
-    singleBlog.current = blog?.current[id];
+
+    singleBlog.current = blog?.current
+    let newList = {}
+    //  blog?.current?.filter(item=> item.id == id );
+    for (const item of blog.current) {
+        if (item.id == id)
+            newList = item
+    };
 
 
     function handleSubmit() {
@@ -28,12 +38,10 @@ const BlogPage = () => {
             userName: document.getElementById("userName").value,
             comment: document.getElementById("comment").value,
         };
-
         commentList = [...commentsList, newComment];
         setCommentsList(commentList);
         singleBlog.current.comments = commentList;
         blog.current[id] = singleBlog.current;
-        console.log(blog.current[0]);
         localStorage.setItem("blogList", JSON.stringify(blog.current));
         document.getElementById("userName").value = null;
         document.getElementById("comment").value = null;
@@ -57,12 +65,13 @@ const BlogPage = () => {
             items: 1
         }
     };
+
     const [isOpen, setIsOpen] = useState(true);
-  useEffect(() => {
-    $(".navbar-toggler").click(() => {
-      setIsOpen(!isOpen);
-    })
-  }, [isOpen])
+    useEffect(() => {
+        $(".navbar-toggler").click(() => {
+            setIsOpen(!isOpen);
+        })
+    }, [isOpen])
     return (
         <>
             <div className="w-100 d-flex global-layout">
@@ -70,28 +79,25 @@ const BlogPage = () => {
                 <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
                     <div className="blog-page">
-                    <div className="inner-container">
-                        <h1 className='title1'>{singleBlog?.current?.title}</h1>
-                        <p className='title1'>Author Name: {singleBlog?.current?.userName} {singleBlog?.current?.lastName}</p>
-                        <div className="container2 d-flex " style={{ alignItems: "center" }}>
-                            <p className='category mr-2'>{singleBlog.current?.dropdownValue}</p>
-                            <p><BiSolidTimeFive className='mr-1' />{singleBlog.current?.createDateTime}</p>
+                        <div className="inner-container">
+                            <h1 className='title1'>{newList?.title}</h1>
+                            <div className="container2 d-flex " style={{ alignItems: "center" }}>
+                            <p className='category mr-2'>{newList?.dropdownValue}</p>
+                            <p><BiSolidTimeFive className='mr-1' />{newList?.createDateTime}</p>
                         </div>
+                        <div className='image'>
+                                <img className="MainImage" src={newList?.mainImage} alt="MainImage" />
+                                <p className='Description'><strong>Description:</strong><br />{newList?.description}</p>
+                            </div>
                         <div className='main_content'>
                             <div className='editor'>
-                                <p>{parse(singleBlog?.current?.editor)}</p>
+                                <p>{parse(newList?.editor)}</p>
                             </div>
-                            <div className='image'>
-                                <img className="MainImage" src={singleBlog.current?.mainImage} alt="MainImage" />
-                                <p className='Description'><strong>Description:</strong><br />{singleBlog?.current?.description}</p>
-                            </div>
-
-
                             <div className='imgcontainer row'>
                                 <div style={{ width: "800px" }}>
                                     <Carousel responsive={responsive}>
                                         {
-                                            singleBlog?.current?.image?.map((images, i) => {
+                                            newList?.image?.map((images, i) => {
                                                 return (
                                                     <div className='addi-img'>
                                                         <img className='additionalImage' src={images} alt='' />
@@ -105,7 +111,7 @@ const BlogPage = () => {
                             <div className='keywords'>
                                 <p className='keywords-item'><strong>Keywords:&nbsp;</strong>
                                     {
-                                        singleBlog?.current?.key.map((keys, index) => {
+                                        newList?.key.map((keys, index) => {
                                             return (
                                                 <Link to='/view-blog' style={{ textDecoration: "none" }}><div className="tags"><p>{keys.text}&nbsp;</p></div></Link>
                                             )
@@ -114,11 +120,10 @@ const BlogPage = () => {
                                 </p>
                             </div>
                             {
-                                singleBlog?.current?.tag.length == 0 ? <p></p> : <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{ textDecoration: "none" }}>{singleBlog?.current?.tag}</Link></p>
+                                newList?.tag?.length == 0 ? <p></p> : <p ><strong>Tag:</strong>&emsp; <Link to='/view-blog' className='Tag' style={{ textDecoration: "none" }}>{newList?.tag}</Link></p>
                             }
 
                         </div>
-                        {/* comment section */}
                         <div className="comment-box">
                             <h4>Comment Box</h4>
                             <hr style={{ color: "black" }} />
@@ -136,23 +141,23 @@ const BlogPage = () => {
                             />
                             <button type='submit' onClick={() => handleSubmit()}>Submit</button>
                             {
-                                singleBlog?.current?.comments?.length > 0 && (
+                                newList?.comments?.length > 0 && (
                                     <div class="task" >
                                         <div class="tags">
                                             <span class="tag">Comments</span>
                                         </div>
                                         
-                                        {singleBlog?.current?.comments?.map((c, index) => (
+                                        {newList?.comments?.map((c, index) => (
                                         <p><strong>{c.userName}:</strong>&emsp;{c.comment}</p>
                                         ))}
                                     </div>
                                 )
                             }
                         </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-                
+
             </div>
         </>
     )

@@ -15,12 +15,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 function App() {
-  const [isFetching, setIsFetching] = useState(true);
-  useEffect(() => {
-    setTimeout(function () {
-      setIsFetching(false);
-    }, 2000);
-  }, []);
+  const [isFetching, setIsFetching] = useState(false);
+  // useEffect(() => {
+  //   setTimeout(function () {
+  //     setIsFetching(false);
+  //   }, 2000);
+  // }, []);
   if (isFetching) {
     return (
       <div
@@ -44,7 +44,7 @@ function App() {
         <Route path="/Dashbord" element={<HomePage />} />
         <Route path="/create-blog" element={<HomeView />} />
         <Route path="/view-blog" element={<ViewBlog />} />
-        <Route path="/blog-page/:id" element={<BlogPage />} />
+        <Route path="//:id" element={<BlogPage />} />
         <Route path="/edit-page/:id" element={<EditPage />} />
         <Route path="/test-page" element={<TestPage />} />
         <Route path="/support-page" element={<SupportPage />} />

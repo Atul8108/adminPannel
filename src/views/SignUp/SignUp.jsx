@@ -47,12 +47,12 @@ const SignUp = () => {
           <hr/>
           <div className='d-flex flex-column'>
           <div className="group">
-              <img className="password-icon" src={phoneicon} alt='..'/>
+              <img className="password_icon" src={phoneicon} alt='..'/>
               <input className="input" type='tel' id='phoneNumber' placeholder="Phone Number" maxlength="10" required />
             </div>
             <br />
             <div className="group">
-              <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="password-icon">
+              <svg stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" className="password_icon">
                 <path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linejoin="round" stroke-linecap="round"></path>
               </svg>
               <img className="eye-icon" src={eye ? eyeopen : eyeclose } alt='..' onClick={() => { setEye(!eye) }}/> 

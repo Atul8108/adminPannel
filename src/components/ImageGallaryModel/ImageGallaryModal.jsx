@@ -23,7 +23,12 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
     "https://cdn.dribbble.com/users/1967053/screenshots/4541633/___-1.gif",
     "https://cdn.dribbble.com/users/4678/screenshots/2582023/media/81bafd9e758bbbccc053c2d3de36af39.gif",
     "https://cdn.dribbble.com/users/2118466/screenshots/5921293/sequence_03_1.png?resize=450x338&vertical=center",
-    "https://cdn.dribbble.com/userupload/9993654/file/original-f8922f86301738803c3d2a82e29d6bec.gif"
+    "https://cdn.dribbble.com/userupload/9993654/file/original-f8922f86301738803c3d2a82e29d6bec.gif",
+    "https://cdn.dribbble.com/users/1181466/screenshots/15487444/media/067cd70b27153ce88d0d802528d48497.gif",
+    "https://cdn.dribbble.com/users/5096751/screenshots/16488920/media/1455f8990a83880d42bedb9e1cc09ad1.jpg?resize=800x600&vertical=center",
+    "https://cdn.dribbble.com/users/2254381/screenshots/18926938/media/48130c9b0447987995801e66e1a48946.png?resize=1000x750&vertical=center",
+    "https://cdn.dribbble.com/users/513479/screenshots/5927823/media/70aefdb8ab32d719bf29a58656c2ed53.jpg?resize=800x600&vertical=center",
+    "https://cdn.dribbble.com/users/6578953/screenshots/16141825/media/a6712f701f6343975947df54ff0df91b.png?resize=1000x750&vertical=center"
   ])
 
   const [selectedImg, setSelectedImg] = useState(null);

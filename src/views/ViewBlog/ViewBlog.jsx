@@ -14,7 +14,7 @@ const ViewBlog = () => {
   const [bloglist, setbloglist] = useState([]);
   let [value, setValue] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(8)
+  const [postPerPage, setPostPerPage] = useState(4)
 
   useEffect(() => {
     setbloglist(JSON.parse(localStorage.getItem("blogList")))
@@ -23,9 +23,8 @@ const ViewBlog = () => {
   const lastPostIndex = currentPage * postPerPage
   const firstPostIndex = lastPostIndex - postPerPage
   
-  const currentPost = bloglist.slice(firstPostIndex , lastPostIndex)
-  // console.log(currentPost)
-
+  const currentPost = bloglist?.slice(firstPostIndex , lastPostIndex)
+  
   function deletePost(index) {
     let newArr = bloglist.filter((card, currindex) => currindex !== index)
     setbloglist(newArr);
@@ -76,7 +75,7 @@ const ViewBlog = () => {
                     return (
                       <div className="col-md-3 p-3">
                         <div className="shadow blog-card">
-                          <Link to={'/blog-page/' + index} style={{ textDecoration: "none", color: 'black' }}>
+                          <Link to={`/blog-page/`+ data?.id} state={data} style={{ textDecoration: "none", color: 'black' }}>
                             <img className="card-img-top shadow-sm" src={data?.mainImage} alt="Cardimagecap" />
                             <div className="text-body" >
                               <div className="title-and-status">
@@ -100,7 +99,7 @@ const ViewBlog = () => {
                           </Link>
                           <div className="button">
                             {/* <Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link> */}
-                            <Link className='w-100' to={"/edit-page/" + index}><Button className="btn btn-sm btn-info w-100">Edit</Button></Link>
+                            <Link className='w-100' to={"/edit-page/" + data?.id}><Button className="btn btn-sm btn-info w-100">Edit</Button></Link>
                             {/* <Button className="btn btn-sm btn-danger" onClick={() => deletePost(index)}>Delete Post</Button> */}
                             <DeleteBtn deletefunction={() => { deletePost(index) }} />
 
@@ -112,7 +111,7 @@ const ViewBlog = () => {
                   : <div><p style={{ marginLeft: "50%", color: 'red' }}>No data found</p></div>
                 }
               </div>
-                <Pagination totalPost={bloglist.length} postsPerPage={postPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
+                <Pagination totalPost={bloglist?.length} postsPerPage={postPerPage} setCurrentPage={setCurrentPage} currentPage={currentPage}/>
             </div>
           </div>
         </div>

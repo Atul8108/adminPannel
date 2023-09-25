@@ -82,6 +82,7 @@ const RightNav = ({ title }) => {
       }
       else {
         let blogData = {
+          "id": new Date().valueOf(),
           "title": title?.value,
           "mainImage": imageToShow,
           "description": desCription?.value,
@@ -98,6 +99,7 @@ const RightNav = ({ title }) => {
         }
         tempArr = [...blog, blogData]
         console.log(blog)
+
         setBlog(tempArr);
         localStorage.setItem('blogList', JSON.stringify(tempArr))
 
