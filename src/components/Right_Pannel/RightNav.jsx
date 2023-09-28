@@ -23,10 +23,11 @@ const RightNav = ({ title }) => {
   let [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
   const [blog, setBlog] = useState([])
+  
   let tempArr = [];
 
   useEffect(() => {
-    setBlog(JSON.parse(localStorage.getItem("blogList")) ?? [])
+    setBlog(JSON.parse(localStorage.getItem("blogList")) || [])
   }, []);
 
   function multiImgFunc(a) {
@@ -54,7 +55,7 @@ const RightNav = ({ title }) => {
       const title = document.getElementById("title")
       const desCription = document.getElementById("description")
       let check1 = document.getElementById('check1')
-      const check2 = document.getElementById('check2')
+      let check2 = document.getElementById('check2')
       const tag = document.getElementById("tag")
       if (!title?.value) {
         toast.warning("title is empty")
@@ -87,8 +88,8 @@ const RightNav = ({ title }) => {
           "mainImage": imageToShow,
           "description": desCription?.value,
           "key": tags,
-          "check1": check1?.value,
-          "check2": check2?.value,
+          "check1": check1?.checked,
+          "check2": check2?.checked,
           "editor": editorRef?.current?.getContent(),
           "tag": tag?.value,
           "image": imageToShowSecond,
@@ -98,7 +99,7 @@ const RightNav = ({ title }) => {
           "userName": JSON.parse(USERINFO())?.userName + " " + JSON.parse(USERINFO())?.lastName,
         }
         tempArr = [...blog, blogData]
-        console.log(blog)
+        console.log(tempArr)
 
         setBlog(tempArr);
         localStorage.setItem('blogList', JSON.stringify(tempArr))
@@ -282,9 +283,6 @@ const RightNav = ({ title }) => {
           </div>
         </div>
       </div>
-
-      {/* </div> */}
-
     </>
   );
 };

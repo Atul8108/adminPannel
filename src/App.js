@@ -44,8 +44,8 @@ function App() {
         <Route path="/Dashbord" element={<HomePage />} />
         <Route path="/create-blog" element={<HomeView />} />
         <Route path="/view-blog" element={<ViewBlog />} />
-        <Route path="//:id" element={<BlogPage />} />
-        <Route path="/edit-page/:id" element={<EditPage />} />
+        <Route path="/blog-page" element={<BlogPage />} />
+        <Route path="/edit-page" element={<EditPage />} />
         <Route path="/test-page" element={<TestPage />} />
         <Route path="/support-page" element={<SupportPage />} />
         <Route path="/user-details" element={<UserDetail />} />

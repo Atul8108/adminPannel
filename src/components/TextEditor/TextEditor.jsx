@@ -12,17 +12,10 @@ const TextEditor = ({ editorRef,value }) => {
         initialValue={value}
         init={{
           height: 500,
-          menubar: 'file edit view insert format tools tc',
-          plugins: [
-            "advlist autolink lists link image charmap print preview anchor",
-            "searchreplace visualblocks code fullscreen",
-            "insertdatetime media table paste code help wordcount link ",
-          ],
+          menubar: 'file edit view insert format tools tc table help',
+          plugins: "powerpaste casechange searchreplace autolink directionality advcode visualblocks visualchars image link media mediaembed codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists checklist wordcount tinymcespellchecker help formatpainter permanentpen charmap linkchecker emoticons advtable export print autosave",
           toolbar:
-            "undo redo | formatselect | " +
-            "bold italic backcolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | h1 h2 h3 h4 h5 h6 | forecolor formatselect copy cut | backcolor language lineheight newdocument redo | strikethrough styleselect subscript superscript underline visualaid | ltr rtl " +
-            "removeformat | help| " ,
+           "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image addcomment showcomments  | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
           

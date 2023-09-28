@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import LeftNav from '../../components/Left_Pannel/LeftNav'
 import Header from '../../components/Header/Header'
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import TextEditor from "../../components/TextEditor/TextEditor";
 import { BsCardImage } from "react-icons/bs"
 import { WithContext as ReactTags } from 'react-tag-input';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import ImageGallaryModal from "../../components/ImageGallaryModel/ImageGallaryModal";
 import Form from "react-bootstrap/Form";
@@ -15,26 +15,25 @@ import "../../components/Right_Pannel/RightNav.css"
 import "../../components/Left_Pannel/LeftNav.css"
 import "./EditPage.css"
 import $ from "jquery"
-import { USERINFO } from '../../api/locaStorage.data';
+import { BLOGLIST, USERINFO } from '../../api/locaStorage.data';
+
+let allBlog = [];
 
 const EditPage = () => {
-    const { id } = useParams()
-    let editblog = useRef()
-    const editorRef = useRef();
+    
+    useEffect(() => {
+        allBlog = JSON.parse(BLOGLIST());
+    }, [])
 
-    editblog.current = JSON.parse(localStorage.getItem("blogList"));
-    let newList = {}
-    //  blog?.current?.filter(item=> item.id == id );
-    for (const item of editblog.current) {
-        if (item.id == id)
-            newList = item
-    };
-    console.log(newList)
-    let editor = useRef(newList?.editor)
-    let [value, setValue] = useState(newList?.dropdownValue);
-    let [tags, setTags] = useState(newList?.key);
-    let [imageToShow, setImageToShow] = useState(newList?.mainImage)
-    const [imageToShowSecond, setImageToShowSecond] = useState([newList?.image]);
+    const editorRef = useRef();
+    const { state } = useLocation()
+
+    let editor = useRef(state?.editor)
+    let [value, setValue] = useState(state?.dropdownValue);
+    let [tags, setTags] = useState(state?.key);
+    let [imageToShow, setImageToShow] = useState(state?.mainImage)
+    const [imageToShowSecond, setImageToShowSecond] = useState([state?.image]);
+    console.log(imageToShowSecond)
 
     function multiImgFunc(a) {
         if (imageToShowSecond.includes(a)) {
@@ -63,7 +62,8 @@ const EditPage = () => {
     function handleAddition(tag) {
         setTags([...tags, tag]);
     };
-    async function updateSubmit(status){
+    async function updateSubmit(status) {
+        // allBlog = JSON.parse(BLOGLIST());
         const title = document.getElementById("title")
         const desCription = document.getElementById("description")
         let check1 = document.getElementById('check1')
@@ -96,6 +96,7 @@ const EditPage = () => {
 
         else {
             let blogData = {
+                "id": new Date().valueOf(),
                 "title": title.value,
                 "mainImage": imageToShow,
                 "description": desCription.value,
@@ -110,26 +111,30 @@ const EditPage = () => {
                 "status": status,
                 "userName": JSON.parse(USERINFO())?.userName + " " + JSON.parse(USERINFO())?.lastName,
             }
+            const updatedList = allBlog.map((data, item) => {
+                if (data.id == state.id) {
+                    return { ...data, ...blogData };
+                } else return data;
+            })
 
-            newList[id] = blogData;
-            console.log(newList)
-            localStorage.setItem("blogList", JSON.stringify(newList))
+            localStorage.setItem("blogList", JSON.stringify(updatedList));
+
             if (status === "PUBLISH") {
-                toast.success("Your Blog is Posted");
-              }
-              else {
-                toast.info("Save as Draft");
-              }
+                toast.success("Your Blog is Updated");
+            }
+            else {
+                toast.info("Saved as Draft");
+            }
         }
     }
     const [isOpen, setIsOpen] = useState(true);
 
     useEffect(() => {
-      $(".navbar-toggler").click(() => {
-        setIsOpen(!isOpen);
-      })
+        $(".navbar-toggler").click(() => {
+            setIsOpen(!isOpen);
+        })
     }, [isOpen])
-  
+
     const updateHtml = () => {
         return (
             <div className={`RightNav ${isOpen ? "openRightNav" : "closeRightNav"}`}>
@@ -144,7 +149,7 @@ const EditPage = () => {
                                         <Form.Control
                                             id="title"
                                             name='title'
-                                            defaultValue={newList?.title}
+                                            defaultValue={state?.title}
                                             aria-label="Default"
                                             aria-describedby="inputGroup-sizing-default"
                                             placeholder="Title"
@@ -156,7 +161,7 @@ const EditPage = () => {
 
                                     >
                                         <Form.Label>Summary & Description</Form.Label>
-                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={newList?.description} />
+                                        <Form.Control as="textarea" rows={3} placeholder="Summary & Description" name="description" id="description" defaultValue={state?.description} />
                                     </Form.Group>
                                     {/* <Keyword /> */}
                                     <p> Keywords </p>
@@ -175,7 +180,7 @@ const EditPage = () => {
                                             className="form-check-input"
                                             id="check1"
                                             name="option1"
-                                            defaultValue="Add to Slider"
+                                            defaultChecked={state.check1}
                                         />
                                     </div>
                                     <div className="form-check">
@@ -187,7 +192,8 @@ const EditPage = () => {
                                             className="form-check-input"
                                             id="check2"
                                             name="option2"
-                                            defaultValue="Add to Popular Post"
+                                            defaultChecked={state.check2}
+                                        // checked={state.check2.length >0 ?? "checked"}
                                         />
                                     </div>
                                     <p>Tag</p>
@@ -198,7 +204,7 @@ const EditPage = () => {
                                             placeholder="Tag"
                                             name="tag"
                                             id="tag"
-                                            defaultValue={newList?.tag}
+                                            defaultValue={state?.tag}
                                         />
                                     </InputGroup>
                                     <p>Type tag and hit enter</p>
@@ -219,47 +225,37 @@ const EditPage = () => {
                                 <p>Publish</p>
                                 <Link to={"/view-blog"}><Button onClick={() => updateSubmit("PUBLISH")} type="submit" variant="primary" style={{ marginRight: '78px', marginLeft: '12px' }}>Update Blog</Button>{' '}</Link>
                                 <Link to={"/view-blog"}><Button variant="warning" onClick={() => updateSubmit("DRAFT")}>Save as Draft</Button>{' '}</Link>
-                                
                             </div>
-                            {/* MODAL FOR IMAGE CARD */}
-
-
-
                         </div>
                         <div className="col-md-3">
                             <div className="card">
                                 <p style={{ fontWeight: '500' }}>Image</p>
-                                {/* calling the props setImagePath which accept the one parameter a and passing it to the setImageshow which show the image */}
-                                <ImageGallaryModal setImagePath={(a) => { setImageToShow(a) }} detection={'multiImage'} buttonComponent={
+                                <ImageGallaryModal setImagePath={(a) => { setImageToShow(a) }} detection={'singleImage'} buttonComponent={
                                     <Button className="select-btn">
                                         Select Image
                                     </Button>} />
-
-                                {/* geting data from child components */}
-
                                 {imageToShow != null && <img id="imageShow" src={imageToShow} alt="UplodadeImage" />}
-
 
                             </div>
                             {/* MODAL FOR IMAGE CARD */}
                             <div className="card card2 ">
                                 <span style={{ fontWeight: '500', marginBottom: 'none' }}>Additional Image</span>
                                 <p>More main images (slider will be active)</p>
-                                <ImageGallaryModal setImagePath={(a) => { multiImgFunc(a) }} detection={''} buttonComponent={
+                                <ImageGallaryModal setImagePath={(a) => { multiImgFunc(a) }} detection={'multiImage'} buttonComponent={
                                     <Button className="select-btn">
                                         Select Image
                                     </Button>} />
                                 {
                                     imageToShowSecond.map((item, index) => {
-
                                         return (
-                                            <div className="position-relative inside-card">
+                                            item.length > 0 ? <div className="position-relative inside-card">
                                                 <div className="position-absolute top-0 end-0">
                                                     <button onClick={() => AdditionalDelete(index)} style={{ backgroundColor: 'red' }} type="button" class="btn-close" aria-label="Close">
                                                     </button>
                                                 </div>
                                                 <img id='AdditionalImage' key={index} src={item} alt="AdditionalImage" style={{ marginBottom: '15px' }} />
-                                            </div>
+                                            </div> : ""
+
                                         )
                                     })
                                 }
@@ -290,10 +286,10 @@ const EditPage = () => {
             <div className='Blog-post-container d-flex global-layout w-100'>
                 <LeftNav />
                 <div className="main-content" >
-                <div className={`container-fluid ${isOpen ? "openRightNav" : "closeRightNav"}`}>
-                    <Header />
+                    <div className={`container-fluid ${isOpen ? "openRightNav" : "closeRightNav"}`}>
+                        <Header />
                         {updateHtml()}
-                </div>
+                    </div>
                 </div>
             </div>
 

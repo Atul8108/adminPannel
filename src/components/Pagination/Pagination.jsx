@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, NavLink } from 'react-bootstrap'
 import { toast } from 'react-toastify'
+import './Pagination.css'
 
 const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) => {
     let pages = []

@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom'
 import { PiGlobeStandFill } from 'react-icons/pi'
 
 const HomePage = () => {
-    let view = JSON.parse(localStorage.getItem("blogList"))
+    let view = JSON.parse(localStorage.getItem("blogList"));
+    console.log(view);
     let totalComments = 0;
     let totalPublish = 0;
     let totalDraft = 0;
@@ -26,7 +27,8 @@ const HomePage = () => {
             }
         }
     }
-    const element = view?.slice(0, 5);
+    let element = [];
+    element = view?.slice(0, 5);
     const [isOpen, setIsOpen] = useState(true);
     useEffect(() => {
         $(".navbar-toggler").click(() => {
@@ -40,8 +42,8 @@ const HomePage = () => {
                 <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
                     <div className={`RightNav`}>
-                        <div className='container-fluid' style={{backgroundColor:"antiquewhite", padding:'10px'}}>
-                            <div className="row" style={{margin:'20px',display:'flex',justifyContent:'space-between'}}>
+                        <div className='container-fluid' style={{ backgroundColor: "antiquewhite", padding: '10px' }}>
+                            <div className="row" style={{ margin: '20px', display: 'flex', justifyContent: 'space-between' }}>
                                 <div className='col'>
                                     <div className="total_post">
                                         <p className='post'>Total Post:</p>
@@ -77,10 +79,10 @@ const HomePage = () => {
                             <h1 className='Top_post'><PiGlobeStandFill />Todays First Five Blog (<span>{new Date().toLocaleString()}</span>)</h1>
                             <p></p>
                         </div>
-                        
+
 
                         <div className='Table mb-5'>
-                            <table style={{ border: '1px solid black' ,maxWidth: "70vw" }}>
+                            <table style={{ border: '1px solid black', maxWidth: "70vw" }}>
                                 <tr >
                                     <th>S.no</th>
                                     <th>Post Name</th>
@@ -92,28 +94,28 @@ const HomePage = () => {
                                     <th>Author Name</th>
                                     <th >View Blog</th>
                                 </tr>
-                                {element?.length === undefined ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
+                                {element?.length < 0 ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
                                     element?.map((data, index) => {
                                         return (
                                             <tr>
                                                 <td>{index + 1}</td>
                                                 <td><p className='table-description mb-0'>{data.title}</p></td>
                                                 <td>{data.createDateTime}</td>
-                                                <td><img className='mainImage' style={{ width: '50px' }} src={data.mainImage} alt='' onClick={()=>window.open(data.mainImage,"_blank")}/></td>
+                                                <td><img className='mainImage' style={{ width: '50px' }} src={data.mainImage} alt='' onClick={() => window.open(data.mainImage, "_blank")} /></td>
                                                 <td>
-                                                <p className='table-description mb-0'>
-                                                {data.description}</p></td>
+                                                    <p className='table-description mb-0'>
+                                                        {data.description}</p></td>
                                                 <td>
                                                     <p>
-                                                     {
-                                                        data?.key?.slice(0, 5).map((keywords, index) => {
-                                                            return (
-                                                                <td><p className='m-0'>{keywords.text}</p></td>
-                                                            )
-                                                        })
-                                                    }   
+                                                        {
+                                                            data?.key?.slice(0, 5).map((keywords, index) => {
+                                                                return (
+                                                                    <td><p className='m-0'>{keywords.text}</p></td>
+                                                                )
+                                                            })
+                                                        }
                                                     </p>
-                                                    
+
                                                 </td>
                                                 <td>
                                                     {
@@ -122,7 +124,7 @@ const HomePage = () => {
                                                 </td>
                                                 {/* <td>{data.tag}</td> */}
                                                 <td>{data.userName} {data.lastName}</td>
-                                                <td><Link to={"/blog-page/" + index}><Button className="btn btn-sm btn-primary">view Post</Button></Link></td>
+                                                <td><Link to={"/blog-page"} state={data} ><Button className="btn btn-sm btn-primary">view Post</Button></Link></td>
                                             </tr>
                                         )
                                     })

@@ -28,5 +28,7 @@ const SupportPage = () => {
     </>
   )
 }
-
+// const filteredBlogList = bloglist.filter((blog) => blog.status === e);
+// setbloglist(filteredBlogList);
+// setCurrentPost(filteredBlogList.slice(firstPostIndex, lastPostIndex));
 export default SupportPage
