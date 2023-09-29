@@ -4,8 +4,9 @@ import { toast } from 'react-toastify'
 import './Pagination.css'
 
 const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) => {
-    let pages = []
+    // const [currentid, setCurrentid] = useState()
 
+    let pages = []
     for (let i = 1; i <= Math.ceil(totalPost / postsPerPage); i++) {
         pages.push(i)
     }
@@ -36,7 +37,7 @@ const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) =>
                 {
                     pages.map((page, index) => {
                         return (
-                            <Button className="btn btn-info" onClick={() => setCurrentPage(page)}>{page}</Button>
+                            page==currentPage ? <Button className="btn btn-dark" onClick={() => setCurrentPage(page)}>{page}</Button>: <Button className="btn btn-info" onClick={() => setCurrentPage(page)}>{page}</Button> 
                         )
                     })
                 }
@@ -44,7 +45,6 @@ const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) =>
                     currentPage< pages.length ?<Button className="btn btn-info" onClick={() => { nextPage() }}>Next Page</Button>:
                     <Button className="btn btn-secondary" onClick={() => { nextPage() }}  disabled>Next Page</Button>
                 }
-                
             </NavLink>
         </>
     )

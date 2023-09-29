@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import "./BlogPage.css";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LeftNav from "../../components/Left_Pannel/LeftNav";
 import Header from "../../components/Header/Header";
 import parse from "html-react-parser";
@@ -17,22 +17,22 @@ let lastpost = [];
 let blogDetails = {};
 let commentList = [];
 const BlogPage = () => {
+  const [isOpen, setIsOpen] = useState(true);
   const { state } = useLocation();
-
   blogDetails = state;
-  console.log(blogDetails);
   const [commentsList, setCommentsList] = useState([]);
-
   useEffect(() => {
     setCommentsList(blogDetails?.commentList || []);
     allBlog = JSON.parse(BLOGLIST());
-    lastpost = allBlog.slice(0, 5);
+    lastpost = JSON.parse(BLOGLIST()).reverse().slice(0,5);
   }, []);
+  console.log(allBlog);
+  // console.log(lastpost);
 
   function handleSubmit() {
     let newComment = {
       userName: document.getElementById("userName").value,
-      comment: document.getElementById("comment").value,
+      comment: document.getElementById("comment").value
     };
     commentList = [...commentsList, newComment];
     setCommentsList(commentList);
@@ -45,9 +45,7 @@ const BlogPage = () => {
         return item;
       }
     });
-
     localStorage.setItem("blogList", JSON.stringify(updatedList));
-
     document.getElementById("userName").value = null;
     document.getElementById("comment").value = null;
   }
@@ -71,21 +69,18 @@ const BlogPage = () => {
     },
   };
 
-  const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
     });
   }, [isOpen]);
-  console.log(blogDetails);
   return (
     <>
       <div className="w-100 d-flex global-layout">
         <LeftNav />
         <div
-          className={`main-content ${
-            isOpen ? "openRightNav" : "closeRightNav"
-          }`}
+          className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"
+            }`}
         >
           <Header />
           <div className="blog-page">
@@ -168,10 +163,11 @@ const BlogPage = () => {
                   )}
                 </div>
               </div>
+
               <div className="aside_container">
                 <div className="col">
                   <div className="row">
-                    {lastpost.reverse().map((post, index) => {
+                    {lastpost.map((post, index) => {
                       return (
                         <div className="last_post">
                           <img src={post?.mainImage} alt="" />
@@ -184,7 +180,6 @@ const BlogPage = () => {
                 </div>
               </div>
             </div>
-
             <div className="comment-box">
               <div className="commentbox-input-fields">
                 <h4>Comment Box</h4>
@@ -222,6 +217,17 @@ const BlogPage = () => {
                   </div>
                 )}
               </div>
+            </div>
+            <div className="footer">
+              <div className="footer-item">
+                <a>home</a>
+                <a>Blog</a>
+                <a>create</a>
+                <a>view blog</a>
+                <a>support</a>
+                <a>test</a>
+              </div>
+
             </div>
           </div>
         </div>

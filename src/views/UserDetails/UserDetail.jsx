@@ -50,8 +50,8 @@ const UserDetail = () => {
 
                     <div className='form-data'>
                         <h4 className='text-center'><FaWpforms />&nbsp;Fill Your Personal Details</h4>
-                        <div className="container-fluid">
-                            <div className="row">
+                        <div className="container-fluid ">
+                            <div className="row form_details_mb">
                                 <div className="form-group col-md-6">
                                     <label for="inputName">Name</label>
                                     <input defaultValue={userData?.userName} type="first name" className="form-control" id="firstname" placeholder="first name" />
@@ -62,7 +62,6 @@ const UserDetail = () => {
                                 </div>
                                 <div className="form-group col-md-12">
                                     <div className="App d-flex ">
-
                                         <label for="profile_Image" className="custom_upload">
                                             <i class="fa fa-2x fa-camera"></i><h5 className='m-0'>Upload Pic</h5>
                                             <input className='file' onChange={(e) => onFileSelect(e)} type="file" id='profile_Image' style={{ Color: "blue" }} />

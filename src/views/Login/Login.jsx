@@ -65,7 +65,7 @@ const Login = () => {
   }
   return (
     <>
-      <div className='d-flex' style={{ height: '100vh', justifyContent: 'center', alignItems: "center" }}>
+      <div className='d-flex' style={{ height: '100vh', justifyContent: 'center', alignItems: "center",flexWrap:'wrap' }}>
         <div className="left_container">
           <img src="https://img.freepik.com/free-vector/tablet-login-concept-illustration_114360-7963.jpg?w=826&t=st=1694841557~exp=1694842157~hmac=ba76d72df8d067238481e0c3e072329ee356d554f03eaba8d2ded2ef425728c9" className="img-fluid" alt="Sampleimage" />
         </div>

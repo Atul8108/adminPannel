@@ -111,7 +111,7 @@ const ImageGallaryModal = ({ buttonComponent, setImagePath, detection }) => {
                       return (
                         <div key={index} className="col" style={{ paddingTop: '20px' }} onClick={() => setSelectedImg(index)}>
                           <img src={item} alt="gaming"
-                            style={{ width: '200px', height: '200px', objectFit: 'cover', border: selectedImg === index ? "2px solid green" : 'none' }} />
+                            style={{ width: '200px', height: '200px', objectFit: 'cover', border: selectedImg === index ? "2px solid green" : 'none' }} onDoubleClick={() =>  handleUpload() } />
                         </div>
                       )
                     })

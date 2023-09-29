@@ -100,3 +100,9 @@
 @media screen and (max-width: 700px) {
     .container {flex-direction: column;}
   }
+
+  @media only screen and (max-width: 600px){
+    .img-fluid{
+      display: none;
+    }
+  }

@@ -240,8 +240,15 @@ h3 {
   height: 340px;
   border-left: 10px solid rgb(223 217 217);
   border-radius: 16px 0px 0px 16px;
+}
+
+.comments{
+  padding: 10px;
+  height: 100%;
+  border-radius: 20px;
   background-color: wheat;
 }
+
 .comments-h {
   width: 100%;
   display: flex;
@@ -252,4 +259,21 @@ h3 {
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 10px;
+}
+
+.footer{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.footer-item{
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  gap: 20px;
+  font-size: 18px;
+  font-weight: 600;
 }
