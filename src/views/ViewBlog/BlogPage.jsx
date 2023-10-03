@@ -17,7 +17,7 @@ let lastpost = [];
 let blogDetails = {};
 let commentList = [];
 const BlogPage = () => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth >=600);
   const { state } = useLocation();
   blogDetails = state;
   const [commentsList, setCommentsList] = useState([]);

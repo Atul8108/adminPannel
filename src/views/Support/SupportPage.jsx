@@ -5,7 +5,7 @@ import $ from "jquery"
 
 const SupportPage = () => {
 
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth >=600);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
@@ -19,8 +19,8 @@ const SupportPage = () => {
           <Header />
           <div className={`RightNav`}>
             <p>Support Page</p>
-            <div className='d-flex' style={{justifyContent:'center', alignItems:'center'}}>
-              <img  src='https://cdn.dribbble.com/userupload/8726278/file/original-ab1bde6f9c74de5c8961f7fe84990cd4.gif' alt='404' style={{width:'900px'}} />
+            <div className='d-flex error-404' style={{justifyContent:'center', alignItems:'center'}}>
+              <img  src='https://cdn.dribbble.com/userupload/8726278/file/original-ab1bde6f9c74de5c8961f7fe84990cd4.gif' alt='404' style={{width:'100%'}} />
             </div>
           </div>
         </div>

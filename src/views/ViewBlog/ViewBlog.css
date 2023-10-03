@@ -120,9 +120,8 @@
 }
 
 .dropdown .dropdown-toggle{
-    margin-left: 13px !important;
     margin-top: 3px !important;
-    width: 150px !important;
+    width: 100% !important;
 }
 /* search field */
 .searchBox {
@@ -171,3 +170,11 @@
   padding: 6px 46px 9px 39px;
 }
 
+
+@media only screen and (max-width: 600px) {
+    .view-blog-filter-tab{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

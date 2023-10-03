@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from "react";
-import { useState } from "react";
-import "./RightNav.css";
+import React, { useEffect, useRef, useState } from "react";
+import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
-import ImageGallaryModal from "../ImageGallaryModel/ImageGallaryModal";
-import TextEditor from "../TextEditor/TextEditor";
-import { BsCardImage } from "react-icons/bs"
+import { BsCardImage } from "react-icons/bs";
 import { WithContext as ReactTags } from 'react-tag-input';
 import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css"
+import "react-toastify/dist/ReactToastify.css";
 import { USERINFO } from "../../api/locaStorage.data";
+import ImageGallaryModal from "../ImageGallaryModel/ImageGallaryModal";
+import TextEditor from "../TextEditor/TextEditor";
 import UserDetailsPopUp from "../UserDetailsPopUp/UserDetailsPopUp";
+import "./RightNav.css";
 
 
 // this is parent component
@@ -137,7 +136,7 @@ const RightNav = ({ title }) => {
   return (
     <>
       {/* <div className={`RightNav`}>/ */}
-      <div className="container-fluid bgColor">
+      <div className="container-fluid bgColor" >
         <h4>Create Blog</h4>
         <div className="row m-0">
           <div className="col-md-9">
@@ -162,12 +161,16 @@ const RightNav = ({ title }) => {
                 </Form.Group>
                 {/* <Keyword /> */}
                 <p> Keywords </p>
-                <ReactTags
+                <form>
+                  <ReactTags
                   tags={tags}
                   allowDragDrop={false}
                   handleDelete={handleDelete}
                   handleAddition={handleAddition}
+                  autofocus={false}
                 />
+                </form>
+                
                 <div className="form-check">
                   <label className="form-check-label" htmlFor="check1">
                     Add to Slider

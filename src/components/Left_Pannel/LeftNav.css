@@ -1,154 +1,161 @@
 .accordion .accordion-button:not(.collapsed)::after,
 .accordion .accordion-button::after {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 .global-layout .close {
-    width: 0vw !important;
-    min-width: 0vw !important;
+  width: 0vw !important;
+  min-width: 0vw !important;
 }
 
 .leftnav {
-    transition: all 0.1s ease;
-    background-color: #33383E;
-    max-width: 15vw;
-    width: 15vw;
-    min-width: 15vw;
-    overflow-y: hidden;
-    min-height: 100vh;
-
+  transition: all 0.1s ease;
+  background-color: #33383e;
+  max-width: 15vw;
+  width: 15vw;
+  min-width: 15vw;
+  overflow-y: hidden;
+  min-height: 100vh;
 }
 
 .Admin_panel {
-    text-align: center;
-    color: white;
-    padding: 20px;
-    padding-bottom: 20px;
+  text-align: center;
+  color: white;
+  padding: 20px;
+  padding-bottom: 20px;
 }
 
 .Admin {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
 }
 
-.admin_online>p {
-    color: white;
-    margin-bottom: 0px;
+.admin_online > p {
+  color: white;
+  margin-bottom: 0px;
 }
 
 .profile_image {
-    width: 50px;
-    height: 50px;
-    border-radius: 100%;
-    object-fit: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  object-fit: cover;
 }
 
 .List {
-    margin-top: 20px;
-    color: white;
-    max-width: 100%;
+  margin-top: 20px;
+  color: white;
+  max-width: 100%;
 }
 
 .accordion {
-    --bs-accordion-border-color: none !important;
+  --bs-accordion-border-color: none !important;
 }
 
 .accordion-body {
-    display: flex;
-    flex-direction: column;
-    padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  padding: 0 !important;
 }
 
 .accordion-body:hover {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .accordion-item:last-of-type .accordion-button.collapsed {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 .accordion-item:first-of-type .accordion-button {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
 
 .accordion-button {
-    width: 100%;
-    background-color: #33383E;
-    color: white;
-    border: none;
+  width: 100%;
+  background-color: #33383e;
+  color: white;
+  border: none;
 }
 
 .accordion-item {
-    border: none;
-    background-color: transparent !important;
+  border: none;
+  background-color: transparent !important;
 }
 
 .accordion-button::after {
-    border: none;
+  border: none;
 }
 
 .accordion-button:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .accordion-button:not(.collapsed) {
-    background-color: transparent !important;
-    border: none;
-    color: white;
+  background-color: transparent !important;
+  border: none;
+  color: white;
 }
 
 .nav-link {
-    color: white;
+  color: white;
 }
 
-.accordion .accordion-item .accordion-body .nav-item{
-    padding: 10px 25px;
+.accordion .accordion-item .accordion-body .nav-item {
+  padding: 10px 25px;
 }
 
 .nav_item {
-    text-decoration: none;
-    color: white;
-    padding: 10px 25px;
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: white;
+  padding: 10px 25px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .accordion .accordion-item .accordion-header .accordion-button {
-    padding: 0.75rem 1.75rem !important;
+  padding: 0.75rem 1.75rem !important;
 }
 
 .nav_item:hover {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }
 
 .List a.active {
-    background-color: rgb(55, 55, 216) !important;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+  background-color: rgb(55, 55, 216) !important;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
 @media screen and (max-width: 1200px) {
-    .Admin {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .Admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 
-    .profile_image {
-        margin-right: 0px;
-    }
+  .profile_image {
+    margin-right: 0px;
+  }
 
-    .admin_online {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .admin_online {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .leftnav {
+    max-width: 25vw !important;
+    width: 15vw;
+    min-width: 60vw !important;
+  }
 }

@@ -1,18 +1,18 @@
+import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import EditUser from "./components/Edit-User-Profile/EditUser";
+import HomePage from "./components/HomePage/HomePage";
+import Loading from "./components/Loader/Loading";
+import EditPage from "./views/EditPage/EditPage";
 import HomeView from "./views/Home/HomeView";
 import Login from "./views/Login/Login";
-import ViewBlog from "./views/ViewBlog/ViewBlog";
-import BlogPage from "./views/ViewBlog/BlogPage";
-import EditPage from "./views/EditPage/EditPage";
-import HomePage from "./components/HomePage/HomePage";
-import TestPage from "./views/TestPage/TestPage";
-import SupportPage from "./views/Support/SupportPage";
-import UserDetail from "./views/UserDetails/UserDetail";
 import SignUp from "./views/SignUp/SignUp";
-import { ToastContainer } from "react-toastify";
-import Loading from "./components/Loader/Loading";
-import { useState } from "react";
-import { useEffect } from "react";
+import SupportPage from "./views/Support/SupportPage";
+import TestPage from "./views/TestPage/TestPage";
+import UserDetail from "./views/UserDetails/UserDetail";
+import BlogPage from "./views/ViewBlog/BlogPage";
+import ViewBlog from "./views/ViewBlog/ViewBlog";
 
 function App() {
   const [isFetching, setIsFetching] = useState(false);
@@ -50,6 +50,7 @@ function App() {
         <Route path="/support-page" element={<SupportPage />} />
         <Route path="/user-details" element={<UserDetail />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/edit-user" element={<EditUser/>} />
       </Routes>
     </>
   );

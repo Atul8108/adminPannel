@@ -18,7 +18,7 @@ const ViewBlog = () => {
   const [postPerPage, setPostPerPage] = useState(4)
 
   useEffect(() => {
-    setbloglist(JSON.parse(localStorage.getItem("blogList")).reverse())
+    setbloglist(JSON.parse(localStorage.getItem("blogList"))?.reverse())
   }, []);
 
   const lastPostIndex = currentPage * postPerPage
@@ -31,6 +31,7 @@ const ViewBlog = () => {
     setbloglist(newArr);
     localStorage.setItem('blogList', JSON.stringify(newArr))
     toast("Your Blog is Delete");
+
   }
 
   function handleSelect(e) {
@@ -56,10 +57,10 @@ const ViewBlog = () => {
   }
 
   function search(){
-    let searchValue = document.getElementById("searchInput").value
-    setbloglist(JSON.parse(localStorage.getItem("blogList")).filter((blog) => blog?.title == searchValue))
+    let searchValue = document.getElementById("searchInput")?.value
+    setbloglist(JSON.parse(localStorage.getItem("blogList"))?.filter((blog) => blog?.title == searchValue))
   }
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(window.innerWidth >=600);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
       setIsOpen(!isOpen);
@@ -72,7 +73,7 @@ const ViewBlog = () => {
         <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
           <Header />
           <div className={`RightNav`}>
-            <div className='d-flex' style={{ gap: "20px", margin: '10px' }}>
+            <div className='d-flex view-blog-filter-tab' style={{ gap: "20px", margin: '10px' }}>
               <div className="searchBox"  >
                 <input className="searchInput" type="text" name="" placeholder="Enter Blog Title" id='searchInput' />
                 <button className="searchButton" href="#" style={{height:"44px"}} onClick={() => {search()}}>
@@ -99,6 +100,7 @@ const ViewBlog = () => {
                     </defs>
                   </svg>
                 </button>
+                
               </div>
               <DropdownButton
                 alignright="true"
@@ -123,7 +125,6 @@ const ViewBlog = () => {
               </DropdownButton>
             </div>
             <div className="container-fluid">
-
               <div className="row mx-0 gx-0">
                 {currentPost?.length > 0 ?
                   currentPost?.map((data, index) => {

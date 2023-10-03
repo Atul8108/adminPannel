@@ -35,6 +35,7 @@ const HomePage = () => {
             setIsOpen(!isOpen);
         })
     }, [isOpen])
+    console.log(element?.length)
     return (
         <>
             <div className="w-100 main d-flex global-layout">
@@ -43,8 +44,8 @@ const HomePage = () => {
                     <Header />
                     <div className={`RightNav`}>
                         <div className='container-fluid' style={{ backgroundColor: "antiquewhite", padding: '10px' }}>
-                            <div className="row" style={{ margin: '20px', display: 'flex', justifyContent: 'space-between' }}>
-                                <div className='col'>
+                            <div className="row" style={{ padding:'20px',display: 'flex', justifyContent: 'space-between' }}>
+                                <div className='col-sm-3 col-6 '>
                                     <div className="total_post">
                                         <p className='post'>Total Post:</p>
                                         {
@@ -52,7 +53,7 @@ const HomePage = () => {
                                         }
                                     </div>
                                 </div>
-                                <div className='col'>
+                                <div className='col-sm-3 col-6 '>
                                     <div className="total_post">
                                         <p className='post'>Total comments:</p>
                                         {/* {
@@ -61,13 +62,13 @@ const HomePage = () => {
                                         <p className='item'>{totalComments}</p>
                                     </div>
                                 </div>
-                                <div className='col'>
+                                <div className='col-sm-3 col-6 '>
                                     <div className="total_post">
                                         <p className='post'>Total PUBLISH:</p>
                                         <p className='item mt-4'>{totalPublish}</p>
                                     </div>
                                 </div>
-                                <div className='col'>
+                                <div className='col-sm-3 col-6 '>
                                     <div className="total_post">
                                         <p className='post'>Total Draft:</p>
                                         <p className='item mt-4'>{totalDraft}</p>
@@ -81,7 +82,7 @@ const HomePage = () => {
                         </div>
 
 
-                        <div className='Table mb-5'>
+                        <div className='table mb-5'>
                             <table style={{ border: '1px solid black', maxWidth: "70vw" }}>
                                 <tr >
                                     <th>S.no</th>
@@ -94,6 +95,7 @@ const HomePage = () => {
                                     <th>Author Name</th>
                                     <th >View Blog</th>
                                 </tr>
+                                
                                 {element?.length < 0 ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
                                     element?.map((data, index) => {
                                         return (

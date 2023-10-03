@@ -28,9 +28,8 @@
     font-size: 35px;
 }
 
-.Table {
-    margin-top: 30px;
-    margin-left: 50px;
+.table {
+    padding: 20px;
 }
 td,
 th {
@@ -39,8 +38,8 @@ th {
     padding: 8px;
 }
 .Top_post{
-    margin-left: 50px;
-    margin-top: 20px;
+    margin: 0px;
+    padding: 20px;
     font-weight: 800;
     font-size: 20px;
     text-decoration: underline;
@@ -64,4 +63,21 @@ th {
     -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+
+@media only screen and (max-width: 600px){
+    .container-box{
+        display: flex;
+    }
+    .table{
+        overflow-x: scroll;
+    }
+    .total_post{
+        width: 125px;
+    }
+    .item{
+        margin-top: 0px !important;
+        font-size: 30px;
+    }
 }

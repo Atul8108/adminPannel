@@ -170,7 +170,6 @@
     background-color: rgb(223, 221, 221);
     padding: 10px;
     margin-right: 5px;
-
 }
 .ReactTags__remove{
     background-color: white;
@@ -186,3 +185,23 @@
 .border-right {
     border-right: 3px dashed #c3c1c1 !important;
 }
+
+@media only screen and (max-width: 600px){
+    .main-content{
+        width: 100vw;
+    }
+    .ReactTags__tagInputField {
+        width: 100% !important;
+    }
+    .addImg{
+        width: 100%;
+    }
+    .Publish-btn{
+        width: 100%;
+    }
+    .bgColor{
+        padding: 4px;
+    }
+
+  }
+  
