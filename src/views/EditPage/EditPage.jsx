@@ -1,21 +1,21 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Link, useLocation, useParams } from 'react-router-dom'
-import LeftNav from '../../components/Left_Pannel/LeftNav'
-import Header from '../../components/Header/Header'
+import $ from "jquery";
+import React, { useEffect, useRef, useState } from 'react';
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
-import TextEditor from "../../components/TextEditor/TextEditor";
-import { BsCardImage } from "react-icons/bs"
-import { WithContext as ReactTags } from 'react-tag-input';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css"
-import ImageGallaryModal from "../../components/ImageGallaryModel/ImageGallaryModal";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import "../../components/Right_Pannel/RightNav.css"
-import "../../components/Left_Pannel/LeftNav.css"
-import "./EditPage.css"
-import $ from "jquery"
+import { BsCardImage } from "react-icons/bs";
+import { Link, useLocation } from 'react-router-dom';
+import { WithContext as ReactTags } from 'react-tag-input';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import { BLOGLIST, USERINFO } from '../../api/locaStorage.data';
+import Header from '../../components/Header/Header';
+import ImageGallaryModal from "../../components/ImageGallaryModel/ImageGallaryModal";
+import LeftNav from '../../components/Left_Pannel/LeftNav';
+import "../../components/Left_Pannel/LeftNav.css";
+import "../../components/Right_Pannel/RightNav.css";
+import TextEditor from "../../components/TextEditor/TextEditor";
+import "./EditPage.css";
 
 let allBlog = [];
 

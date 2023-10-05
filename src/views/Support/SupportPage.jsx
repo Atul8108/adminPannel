@@ -20,7 +20,7 @@ const SupportPage = () => {
           <div className={`RightNav`}>
             <p>Support Page</p>
             <div className='d-flex error-404' style={{justifyContent:'center', alignItems:'center'}}>
-              <img  src='https://cdn.dribbble.com/userupload/8726278/file/original-ab1bde6f9c74de5c8961f7fe84990cd4.gif' alt='404' style={{width:'100%'}} />
+              <img  src='https://cdn.dribbble.com/userupload/8726278/file/original-ab1bde6f9c74de5c8961f7fe84990cd4.gif' alt='404' style={{width:'60%'}} />
             </div>
           </div>
         </div>

@@ -24,7 +24,7 @@ const UserDetailsPopUp = () => {
                         <Button variant="secondary" onClick={handleClose}>
                             Close
                         </Button>
-                        <Link to='/user-details'>
+                        <Link to='/edit-user'>
                         <Button variant="danger">
                             User Details Form
                         </Button>

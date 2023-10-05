@@ -22,7 +22,7 @@ const TestPage = () => {
           <div className={`RightNav`}>
             <p>Page is Down</p>
             <div className='d-flex' style={{ justifyContent: 'center', alignItems: 'center' }}>
-              <img src='https://cdn.dribbble.com/users/37624/screenshots/3366123/media/55d0f554690037fa161d33eb69da68a4.jpg' alt='404' style={{ width: '100%' }} />
+              <img src='https://cdn.dribbble.com/users/37624/screenshots/3366123/media/55d0f554690037fa161d33eb69da68a4.jpg' alt='404' style={{ width: '60%' }} />
             </div>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { ImBlog } from "react-icons/im";
 import { BiSupport } from "react-icons/bi";
 import { TbPageBreak } from "react-icons/tb";
 import { LuLogOut } from "react-icons/lu";
+import {CgProfile} from "react-icons/cg"
 import $ from "jquery";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { USERINFO } from "../../api/locaStorage.data";
@@ -98,6 +99,10 @@ const LeftNav = () => {
           <NavLink to="/test-page" eventKey="link-8" className="nav_item">
             <TbPageBreak />
             &emsp;Test Page
+          </NavLink>
+          <NavLink to="/edit-user" eventKey="link-9" className="nav_item">
+            <CgProfile />
+            &emsp;Profile
           </NavLink>
           <button
             className="nav_item"
