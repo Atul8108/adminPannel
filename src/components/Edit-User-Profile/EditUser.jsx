@@ -45,7 +45,7 @@ const EditUser = () => {
       "states": states?.value,
       "profileImg": profile_img
     }
-
+    userUpdateInfo.isComplete = Object.keys(userUpdateInfo).every((k) => !userUpdateInfo[k] == "");
     localStorage.setItem("userInfo", JSON.stringify(userUpdateInfo))
     toast.success("Profile Updated")
   }
@@ -86,143 +86,137 @@ const EditUser = () => {
                       />
                     </label>
                   </div>
-                  <div className="user-details-info">
-                    <h4>General Details</h4>
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <label for="inputName">Name</label>
-                          <input
-                            defaultValue={userData?.userName}
-                            type="first name"
-                            className="user_details_input"
-                            id="firstname"
-                            placeholder="first name"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="inputName">Last Name</label>
-                          <input
-                            defaultValue={userData?.lastName}
-                            type="last name"
-                            className="user_details_input"
-                            id="lastname"
-                            placeholder="last name"
-                          />
-                        </div>
-                        <div className="col-md-12">
-                          <label for="inputEmail">Email</label>
-                          <input
-                            defaultValue={userData?.email}
-                            type="email"
-                            className="user_details_input"
-                            id="inputEmail"
-                            placeholder="Email"
-                          />
-                        </div>
-                        <div className="col-md-12">
-                          <label for="inputAddress">Address</label>
-                          <input
-                            defaultValue={userData?.addressOne}
-                            type="text"
-                            className="user_details_input"
-                            id="inputAddress1"
-                            placeholder="1234 Main St"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="inputCity">City</label>
-                          <input
-                            defaultValue={userData?.city}
-                            type="text"
-                            className="user_details_input"
-                            id="inputCity"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <label for="inputState">State</label>
-                          <select
-                            defaultValue={userData?.states}
-                            id="inputState"
-                            className="user_details_input"
-                          >
-                            <option selected disabled>
-                              Choose...
-                            </option>
-                            <option value="Andra Pradesh">Andra Pradesh</option>
-                            <option value="Arunachal Pradesh">
-                              Arunachal Pradesh
-                            </option>
-                            <option value="Assam">Assam</option>
-                            <option value="Bihar">Bihar</option>
-                            <option value="Chhattisgarh">Chhattisgarh</option>
-                            <option value="Goa">Goa</option>
-                            <option value="Gujarat">Gujarat</option>
-                            <option value="Haryana">Haryana</option>
-                            <option value="Himachal Pradesh">
-                              Himachal Pradesh
-                            </option>
-                            <option value="Jammu and Kashmir">
-                              Jammu and Kashmir
-                            </option>
-                            <option value="Jharkhand">Jharkhand</option>
-                            <option value="Karnataka">Karnataka</option>
-                            <option value="Kerala">Kerala</option>
-                            <option value="Madya Pradesh">Madya Pradesh</option>
-                            <option value="Maharashtra">Maharashtra</option>
-                            <option value="Manipur">Manipur</option>
-                            <option value="Meghalaya">Meghalaya</option>
-                            <option value="Mizoram">Mizoram</option>
-                            <option value="Nagaland">Nagaland</option>
-                            <option value="Orissa">Orissa</option>
-                            <option value="Punjab">Punjab</option>
-                            <option value="Rajasthan">Rajasthan</option>
-                            <option value="Sikkim">Sikkim</option>
-                            <option value="Tamil Nadu">Tamil Nadu</option>
-                            <option value="Telangana">Telangana</option>
-                            <option value="Tripura">Tripura</option>
-                            <option value="Uttaranchal">Uttaranchal</option>
-                            <option value="Uttar Pradesh">Uttar Pradesh</option>
-                            <option value="West Bengal">West Bengal</option>
-                            <option
-                              disabled
-                              style={{ backgroundColor: "#aaa", color: "#fff" }}
-                            >
-                              UNION Territories
-                            </option>
-                            <option value="Andaman and Nicobar Islands">
-                              Andaman and Nicobar Islands
-                            </option>
-                            <option value="Chandigarh">Chandigarh</option>
-                            <option value="Dadar and Nagar Haveli">
-                              Dadar and Nagar Haveli
-                            </option>
-                            <option value="Daman and Diu">Daman and Diu</option>
-                            <option value="Delhi">Delhi</option>
-                            <option value="Lakshadeep">Lakshadeep</option>
-                            <option value="Pondicherry">Pondicherry</option>
-                          </select>
-                        </div>
-                        <div className="container-fluid">
-                          <div className="row mt-4">
-                            <div className="col-md-6 ms-auto">
-                              <div
-                                className="d-flex justify-content-between"
-                                style={{ gap: "10px" }}
-                              >
-                                <button className="btn btn-primary w-100" onClick={() => { handleUpdate() }}>
-                                  Submit
-                                </button>
-                                <Link to="/create-blog" className="w-100">
-                                  <button className="w-100 btn btn-warning small">
-                                    Cancel
-                                  </button>
-                                </Link>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                </div>
+              </div>
+              <div className="user-details-info">
+                <h4>General Details</h4>
+                <div className="row">
+                  <div className="col-md-6">
+                    <label for="inputName">Name</label>
+                    <input
+                      defaultValue={userData?.userName}
+                      type="first name"
+                      className="user_details_input"
+                      id="firstname"
+                      placeholder="first name"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label for="inputName">Last Name</label>
+                    <input
+                      defaultValue={userData?.lastName}
+                      type="last name"
+                      className="user_details_input"
+                      id="lastname"
+                      placeholder="last name"
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label for="inputEmail">Email</label>
+                    <input
+                      defaultValue={userData?.email}
+                      type="email"
+                      className="user_details_input"
+                      id="inputEmail"
+                      placeholder="Email"
+                    />
+                  </div>
+                  <div className="col-md-12">
+                    <label for="inputAddress">Address</label>
+                    <input
+                      defaultValue={userData?.addressOne}
+                      type="text"
+                      className="user_details_input"
+                      id="inputAddress1"
+                      placeholder="1234 Main St"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label for="inputCity">City</label>
+                    <input
+                      defaultValue={userData?.city}
+                      type="text"
+                      className="user_details_input"
+                      id="inputCity"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label for="inputState">State</label>
+                    <select
+                      defaultValue={userData?.states}
+                      id="inputState"
+                      className="user_details_input"
+                    >
+                      <option selected disabled>
+                        Choose...
+                      </option>
+                      <option value="Andra Pradesh">Andra Pradesh</option>
+                      <option value="Arunachal Pradesh">
+                        Arunachal Pradesh
+                      </option>
+                      <option value="Assam">Assam</option>
+                      <option value="Bihar">Bihar</option>
+                      <option value="Chhattisgarh">Chhattisgarh</option>
+                      <option value="Goa">Goa</option>
+                      <option value="Gujarat">Gujarat</option>
+                      <option value="Haryana">Haryana</option>
+                      <option value="Himachal Pradesh">
+                        Himachal Pradesh
+                      </option>
+                      <option value="Jammu and Kashmir">
+                        Jammu and Kashmir
+                      </option>
+                      <option value="Jharkhand">Jharkhand</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Kerala">Kerala</option>
+                      <option value="Madya Pradesh">Madya Pradesh</option>
+                      <option value="Maharashtra">Maharashtra</option>
+                      <option value="Manipur">Manipur</option>
+                      <option value="Meghalaya">Meghalaya</option>
+                      <option value="Mizoram">Mizoram</option>
+                      <option value="Nagaland">Nagaland</option>
+                      <option value="Orissa">Orissa</option>
+                      <option value="Punjab">Punjab</option>
+                      <option value="Rajasthan">Rajasthan</option>
+                      <option value="Sikkim">Sikkim</option>
+                      <option value="Tamil Nadu">Tamil Nadu</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Tripura">Tripura</option>
+                      <option value="Uttaranchal">Uttaranchal</option>
+                      <option value="Uttar Pradesh">Uttar Pradesh</option>
+                      <option value="West Bengal">West Bengal</option>
+                      <option
+                        disabled
+                        style={{ backgroundColor: "#aaa", color: "#fff" }}
+                      >
+                        UNION Territories
+                      </option>
+                      <option value="Andaman and Nicobar Islands">
+                        Andaman and Nicobar Islands
+                      </option>
+                      <option value="Chandigarh">Chandigarh</option>
+                      <option value="Dadar and Nagar Haveli">
+                        Dadar and Nagar Haveli
+                      </option>
+                      <option value="Daman and Diu">Daman and Diu</option>
+                      <option value="Delhi">Delhi</option>
+                      <option value="Lakshadeep">Lakshadeep</option>
+                      <option value="Pondicherry">Pondicherry</option>
+                    </select>
+                  </div>
+                  <div className="col-md-6 ms-auto">
+                    <div
+                      className="d-flex justify-content-between"
+                      style={{ gap: "10px" }}
+                    >
+                      <button className="btn btn-primary w-100" onClick={() => { handleUpdate() }}>
+                        Submit
+                      </button>
+                      <Link to="/create-blog" className="w-100">
+                        <button className="w-100 btn btn-warning small">
+                          Cancel
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

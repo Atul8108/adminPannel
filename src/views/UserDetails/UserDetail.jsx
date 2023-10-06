@@ -52,7 +52,7 @@ const UserDetail = () => {
                         <h4 className='text-center'><FaWpforms />&nbsp;Fill Your Personal Details</h4>
                         <div className="container-fluid ">
                             <div className="row form_details_mb">
-                                <div className="form-group col-md-6">
+                                <div className="form-group col-md-6 mt-2">
                                     <label for="inputName">Name</label>
                                     <input defaultValue={userData?.userName} type="first name" className="form-control" id="firstname" placeholder="first name" />
                                 </div>
@@ -67,7 +67,7 @@ const UserDetail = () => {
                                             <input className='file' onChange={(e) => onFileSelect(e)} type="file" id='profile_Image' style={{ Color: "blue" }} />
                                         </label>
 
-                                        <img defaultValue={userData?.profileImg} id='pic-preview' src={userData?.profileImg} alt="" style={{ height: '76px', width: '70px', borderRadius: '100%', objectFit: 'cover', marginLeft: '250px' }} />
+                                        <img defaultValue={userData?.profileImg} className='pic-preview' id='pic-preview' src={userData?.profileImg} alt="" style={{ height: '76px', width: '70px', borderRadius: '100%', objectFit: 'cover', marginLeft: '250px' }} />
                                     </div>
                                 </div>
                                 <div className="form-group col-md-12">

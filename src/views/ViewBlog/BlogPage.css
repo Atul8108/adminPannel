@@ -277,3 +277,15 @@ h3 {
   font-size: 18px;
   font-weight: 600;
 }
+
+@media only screen and (max-width: 600px){
+  .inner-container{
+    display: flex;
+    flex-direction: column;
+  }
+  .comment-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
