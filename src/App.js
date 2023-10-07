@@ -13,14 +13,15 @@ import TestPage from "./views/TestPage/TestPage";
 import UserDetail from "./views/UserDetails/UserDetail";
 import BlogPage from "./views/ViewBlog/BlogPage";
 import ViewBlog from "./views/ViewBlog/ViewBlog";
+import { useEffect } from "react";
 
 function App() {
-  const [isFetching, setIsFetching] = useState(false);
-  // useEffect(() => {
-  //   setTimeout(function () {
-  //     setIsFetching(false);
-  //   }, 2000);
-  // }, []);
+  const [isFetching, setIsFetching] = useState(true);
+  useEffect(() => {
+    setTimeout(function () {
+      setIsFetching(false);
+    }, 2000);
+  }, []);
   if (isFetching) {
     return (
       <div

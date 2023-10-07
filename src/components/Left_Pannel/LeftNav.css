@@ -154,8 +154,7 @@
 
 @media only screen and (max-width: 600px) {
   .leftnav {
-    max-width: 25vw !important;
-    width: 15vw;
-    min-width: 60vw !important;
+    width: 50vw;
+    min-width: 50vw !important;
   }
 }
