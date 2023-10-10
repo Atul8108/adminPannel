@@ -1,30 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, NavLink } from 'react-bootstrap'
-import { toast } from 'react-toastify'
 import './Pagination.css'
 
 const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) => {
-    // const [currentid, setCurrentid] = useState()
+    const [pageNumberLimit, setpageNumberLimit] = useState(3)
+    const [maxpageNumberLimit, setmaxpageNumberLimit] = useState(3)
+    const [minpageNumberLimit, setminpageNumberLimit] = useState(0)
 
     let pages = []
     for (let i = 1; i <= Math.ceil(totalPost / postsPerPage); i++) {
         pages.push(i)
     }
     function previousPage() {
-        if(currentPage>1){
-            setCurrentPage(currentPage - 1)
-        }
-        else{
-             toast.warning("Minimum Page reached")
-        }
+         setCurrentPage(currentPage - 1)
+         if ((currentPage - 1) % pageNumberLimit == 0) {
+            setmaxpageNumberLimit(maxpageNumberLimit - pageNumberLimit);
+            setminpageNumberLimit(minpageNumberLimit - pageNumberLimit);
+          }
     }
     function nextPage() {
-        if(currentPage< pages.length){
-            setCurrentPage(currentPage + 1)
+        setCurrentPage(currentPage + 1)
+        if(currentPage+1>maxpageNumberLimit){
+            setmaxpageNumberLimit(maxpageNumberLimit + pageNumberLimit)
+            setminpageNumberLimit(minpageNumberLimit+pageNumberLimit)
         }
-        else{
-            toast.warning("Maximum Page reached")
-        }
+
     }
     return (
         <>
@@ -36,9 +36,15 @@ const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) =>
                 
                 {
                     pages.map((page, index) => {
-                        return (
-                            page==currentPage ? <Button className="btn btn-dark" onClick={() => setCurrentPage(page)}>{page}</Button>: <Button className="btn btn-info" onClick={() => setCurrentPage(page)}>{page}</Button> 
-                        )
+                        if(page <maxpageNumberLimit+1 && page > minpageNumberLimit){
+                           return (
+                            page==currentPage ? <Button className="btn btn-dark" onClick={() => setCurrentPage(page)}>{page}</Button>: <Button className="btn btn-info" onClick={() => setCurrentPage(page)}>{page}</Button>
+                        ) 
+                        }
+                        else{
+                            return null
+                        }
+                        
                     })
                 }
                 {

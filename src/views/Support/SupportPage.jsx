@@ -58,7 +58,7 @@ const SupportPage = () => {
                 gap: "20px",
               }}
             >
-              <p className="m-0">Support / Contact</p>
+              <p className="m-0" style={{color:'var( --text-color'}}>Support / Contact</p>
               <div className="icon">
                 <i className="fa-brands fa-facebook"></i>
                 <i className="fa-brands fa-twitter"></i>

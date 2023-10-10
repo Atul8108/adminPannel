@@ -37,12 +37,16 @@ th {
     text-align: left;
     padding: 8px;
 }
+.table td, .table th{
+    background-color: var(--table-color);
+}
 .Top_post{
     margin: 0px;
     padding: 20px;
     font-weight: 800;
     font-size: 20px;
     text-decoration: underline;
+    color: var(--text-color);
 }
 .heading>p{
     display: flex;

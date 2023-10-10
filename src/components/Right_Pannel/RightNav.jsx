@@ -136,7 +136,7 @@ const RightNav = ({ title }) => {
   return (
     <>
       {/* <div className={`RightNav`}>/ */}
-      <div className="container-fluid bgColor" >
+      <div className="container-fluid bgColor">
         <h4>Create Blog</h4>
         <div className="row m-0">
           <div className="col-md-9">

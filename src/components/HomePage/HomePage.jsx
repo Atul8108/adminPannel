@@ -1,12 +1,11 @@
-import React from 'react'
-import LeftNav from '../Left_Pannel/LeftNav'
-import Header from '../Header/Header'
-import './HomePage.css'
 import $ from "jquery"
-import { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import { PiGlobeStandFill } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
+import Header from '../Header/Header'
+import LeftNav from '../Left_Pannel/LeftNav'
+import './HomePage.css'
 
 const HomePage = () => {
     let view = JSON.parse(localStorage.getItem("blogList"));
@@ -43,8 +42,8 @@ const HomePage = () => {
                 <div className={`main-content ${isOpen ? "openRightNav" : "closeRightNav"}`}>
                     <Header />
                     <div className={`RightNav`}>
-                        <div className='container-fluid' style={{ backgroundColor: "antiquewhite", padding: '10px' }}>
-                            <div className="row" style={{ padding:'20px',display: 'flex', justifyContent: 'space-between' }}>
+                        <div className='container-fluid' style={{ backgroundColor: "var(--total-card)", padding: '10px' }}>
+                            <div className="row" style={{ padding: '20px', display: 'flex', justifyContent: 'space-between' }}>
                                 <div className='col-sm-3 col-6 '>
                                     <div className="total_post">
                                         <p className='post'>Total Post:</p>
@@ -83,7 +82,7 @@ const HomePage = () => {
 
 
                         <div className='table mb-5'>
-                            <table style={{ border: '1px solid black', maxWidth: "70vw" }}>
+                            <table style={{ border: '13px solid #bfbaba', maxWidth: "70vw" }}>
                                 <tr >
                                     <th>S.no</th>
                                     <th>Post Name</th>
@@ -95,7 +94,7 @@ const HomePage = () => {
                                     <th>Author Name</th>
                                     <th >View Blog</th>
                                 </tr>
-                                
+
                                 {element?.length < 0 ? <tr><td colspan='9' style={{ color: 'red', textAlign: 'center' }}>No data found</td></tr> :
                                     element?.map((data, index) => {
                                         return (

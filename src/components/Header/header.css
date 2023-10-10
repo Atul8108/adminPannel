@@ -1,4 +1,5 @@
-nav{
+.navbar{
+    background-color: var(--header-bg) !important;
     /* margin-left: 25vw;
     width: 75vw; */
     /* max-width: 100%;

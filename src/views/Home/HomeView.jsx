@@ -8,7 +8,6 @@ import $ from 'jquery'
 const HomeView = () => {
 
   const [isOpen, setIsOpen] = useState( window.innerWidth >=600 );
-  console.log(window.innerWidth)
 
   useEffect(() => {
     $(".navbar-toggler").click(() => {

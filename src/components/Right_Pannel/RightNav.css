@@ -3,7 +3,7 @@
     width:100%;
 }
 .bgColor{
-    background-color: rgb(223, 237, 250);
+    background-color: var(--background-color);
 }
 .global-layout .closeRightNav{
     width: 100vw !important;
@@ -15,6 +15,7 @@
 }
 
 .container-fluid>h4{
+    color:  var(--text-color);
     padding-top: 10px !important;
     padding-left: 20px !important;
 
@@ -26,7 +27,7 @@
 .Card1{
     padding: 15px;
     margin-bottom: 25px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--Card1-bg);
     border-radius: 20px;
 }
 .Card1>p{
@@ -41,7 +42,7 @@
     width: 350px;
     height: 120px;
     border-radius: 5px;
-    background-color: aliceblue;
+    background-color: var(--Card1-bg);;
 }
 .Publish-btn>p{
     padding: 10px 10px;
@@ -49,6 +50,8 @@
 }
 .card{
     padding: 20px !important;
+    margin-bottom: 16px !important;
+    background-color: var(--Card1-bg);
 }
 .card>img{
     width: 100%;
@@ -68,6 +71,7 @@
     padding: 34px 20px 20px 30px;
     margin-bottom: 30px;
     border-radius: 5px;
+    background-color: var(--Card1-bg) !important;
 }
 .dropdown .dropdown-toggle{
     background-color: transparent !important;

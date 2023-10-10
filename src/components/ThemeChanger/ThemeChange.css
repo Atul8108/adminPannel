@@ -1,0 +1,90 @@
+:root{
+  --color-bg: #ffffff;
+}
+
+[data-theme="light"] {
+    background-color: var(--color-bg)!important;
+    --text-color: black !important;
+    --lightslategrey-color: rgb(70, 69, 69);
+    --comment-box-color: #fff5e8;
+    --total-card:antiquewhite;
+    --background-color: rgb(223, 237, 250);
+    --Card1-bg:#ffff;
+  }
+  
+  [data-theme="dark"] {
+    --background-color:#302F2F;
+    --description-color:turquoise;
+    --date-time-color: yellow ;
+    --header-bg: #a2a6b1;
+    --card-bg: #4b4b4b ;
+    --color-bg: rgb(48, 47, 47) !important;
+    --text-color: rgb(255, 255, 255) !important; 
+    --title-color: #ffffff;
+    --author-color:cyan;
+    --text-color: #ffffff;
+    --lightslategrey-color : lightslategrey;
+    --comment-box-color: #656565;
+    --total-card: #adb5bd;
+    --table-color: silver;
+    --Card1-bg:rgb(206, 209, 211);
+  }
+
+  /* The switch - the box around the slider */
+.switch {
+    display: block;
+    --width-of-switch: 3.5em;
+    --height-of-switch: 2em;
+    /* size of sliding icon -- sun and moon */
+    --size-of-icon: 1.4em;
+    /* it is like a inline-padding of switch */
+    --slider-offset: 0.3em;
+    position: relative;
+    width: var(--width-of-switch);
+    height: var(--height-of-switch);
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #dedee5;
+    transition: .4s;
+    border-radius: 30px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: var(--size-of-icon,1.4em);
+    width: var(--size-of-icon,1.4em);
+    border-radius: 20px;
+    left: var(--slider-offset,0.3em);
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(40deg,#ff0080,#ff8c00 70%);
+    ;
+   transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #5c5e67;
+  }
+  
+  input:checked + .slider:before {
+    left: calc(100% - (var(--size-of-icon,1.4em) + var(--slider-offset,0.3em)));
+    background: #5c5e67;
+    /* change the value of second inset in box-shadow to change the angle and direction of the moon  */
+    box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+  }

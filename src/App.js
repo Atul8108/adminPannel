@@ -16,6 +16,7 @@ import ViewBlog from "./views/ViewBlog/ViewBlog";
 import { useEffect } from "react";
 
 function App() {
+
   const [isFetching, setIsFetching] = useState(true);
   useEffect(() => {
     setTimeout(function () {
