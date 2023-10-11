@@ -100,6 +100,10 @@ const LeftNav = () => {
             <TbPageBreak />
             &emsp;Test Page
           </NavLink>
+          <NavLink to="/test-page2" eventKey="link-8" className="nav_item">
+            <TbPageBreak />
+            &emsp;Test Page2
+          </NavLink>
           <NavLink to="/edit-user" eventKey="link-9" className="nav_item">
             <CgProfile />
             &emsp;Profile

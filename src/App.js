@@ -14,6 +14,7 @@ import UserDetail from "./views/UserDetails/UserDetail";
 import BlogPage from "./views/ViewBlog/BlogPage";
 import ViewBlog from "./views/ViewBlog/ViewBlog";
 import { useEffect } from "react";
+import TestPage2 from "./views/TestPage/TestPage2";
 
 function App() {
 
@@ -49,6 +50,7 @@ function App() {
         <Route path="/blog-page" element={<BlogPage />} />
         <Route path="/edit-page" element={<EditPage />} />
         <Route path="/test-page" element={<TestPage />} />
+        <Route path="/test-page2" element={<TestPage2 />} />
         <Route path="/support-page" element={<SupportPage />} />
         <Route path="/user-details" element={<UserDetail />} />
         <Route path="/signUp" element={<SignUp />} />

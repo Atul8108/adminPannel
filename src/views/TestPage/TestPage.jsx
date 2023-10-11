@@ -1,14 +1,12 @@
-import React from "react";
-import LeftNav from "../../components/Left_Pannel/LeftNav";
-import Header from "../../components/Header/Header";
 import $ from "jquery";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Dropdown, DropdownButton } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
+import Header from "../../components/Header/Header";
+import LeftNav from "../../components/Left_Pannel/LeftNav";
 
 const TestPage = () => {
-  const [stateValue, setStateValue] = useState(null);
-  const [city, setCityValue] = useState(null);
+  const [state, setState] = useState(null);
+  const [city, setCity] = useState(null);
+  const [cityValue, setCityValue] = useState(false);
   let stateAndCity = [
     {
       state: "West Bengal",
@@ -38,7 +36,8 @@ const TestPage = () => {
       ],
     },
   ];
-  console.log(stateAndCity);
+
+  console.log(stateAndCity)
   const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
@@ -46,12 +45,28 @@ const TestPage = () => {
     });
   }, [isOpen]);
 
-  function handleSelect(e) {
-    setStateValue(e);
+  function handleChange(e) {
+    setState(e.target.value);
+    setCity(stateAndCity.find((item) => item.state === e.target.value)?.cities);
+    setCityValue(true)
 
   }
-  function handleChange(e) {
+  function handleUpdate(e) {
     setCityValue(e);
+  }
+  function values() {
+    let checkboxes = document.querySelectorAll('input[name="city-checkbox"]');
+    for (let i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) {
+        console.log(checkboxes[i].value);
+      }
+    }
+    // const values =checkboxes?.map((checkbox)=>checkbox.value)
+    // console.log(values)
+  }
+
+  function handleShow(){
+    console.log("Working")
   }
 
   return (
@@ -69,63 +84,70 @@ const TestPage = () => {
               className="d-flex"
               style={{ justifyContent: "center", alignItems: "center" }}
             >
-
-              <DropdownButton
-                title={stateValue ?? "state"}
-                id="drop-down"
-                onSelect={(e) => {
-                  handleSelect(e);
-                }}
-                style={{ color: "white !important" }}
-              >
-                {stateAndCity?.map((item, index) => {
-                  return (
-                    <>
-                      <Dropdown.Item id="drop-down" eventKey={item?.state}>
-                        {item?.state}
-                      </Dropdown.Item>
-                      <DropdownButton
-                        title={setCityValue ?? "city"}
-                        id="drop-down1"
-                        onSelect={(e) => {
-                          handleChange(e);
-                        }}
-                        style={{ color: "white !important" }}
-                      >
-                        {
-                          item?.map((item1, index) => {
-                            return (
-                              <Dropdown.Item
-                                id="drop-down1"
-                                eventKey={item1?.cities}
-                              >
-                                {item1?.cities}
-                              </Dropdown.Item>
-                            )
-                          })
-                        }
-
-                      </DropdownButton>
-                    </>
-                  );
-                })}
-
-              </DropdownButton>
-
               <div>
-                <select state="language" id="state">
+                <select
+                  onChange={(e) => {
+                    handleChange(e);
+                  }}
+                >
+                  <option>states</option>
+                  {stateAndCity.map((states, index) => {
+                    return (
+                      <>
+                        <option value={states.state}>
+                          {states.state}
+                        </option>
+                      </>
+                    );
+                  })}
+                </select>
+                <br />
+                <br />
+                <div className="d-flex" style={{ gap: "10px", justifyContent: 'center', alignItems: 'center' }}>
                   {
-                    stateAndCity.map((item, index) => {
+                    city?.map((data, index) => {
                       return (
                         <>
-                          <option value={item.state}>{item.state}</option>
+                          <input type="checkbox" name="city-checkbox" value={data} />
+                          <p className="m-0" id={index} style={{ color: "var(--text-color)" }}>{data}</p>
                         </>
                       )
                     })
                   }
-                </select>
-              </div>
+                </div>
+                <br />
+                <button className="btn btn-primary" onClick={values}>submit</button>
+                <div style={{ color: "white" }}>
+                  <h3>Table</h3>
+                  <table>
+                    <tr>
+                      <th>State</th>
+                      <th>City</th>
+                      <th>shortCode</th>
+                    </tr>
+                    {
+                      stateAndCity.map((data, index) => {
+                        return (
+                          <tr>
+                            <td>{data?.state}</td>
+                            <td>
+                              <tr>
+                                <td><button className="btn btn-primary" onClick={handleShow}>View City</button></td>
+                              </tr>
+                            </td>
+                            <td>
+                              {
+                                <p>{data?.shortCode}</p>
+                              }
+                            </td>
+                          </tr>
 
+                        )
+                      })
+                    }
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
