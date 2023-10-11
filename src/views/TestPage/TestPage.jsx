@@ -65,8 +65,11 @@ const TestPage = () => {
     // console.log(values)
   }
 
-  function handleShow(){
-    console.log("Working")
+  function handleShow() {
+    const state = document.querySelector("select")?.value;
+    const city = stateAndCity.find((item) => item.state === state)?.cities;
+    console.log(city)
+    window.alert(`The cities of the selected state ${state} are: ${city?.join(", ")}`);
   }
 
   return (
@@ -85,7 +88,7 @@ const TestPage = () => {
               style={{ justifyContent: "center", alignItems: "center" }}
             >
               <div>
-                <select
+                {/* <select
                   onChange={(e) => {
                     handleChange(e);
                   }}
@@ -116,7 +119,7 @@ const TestPage = () => {
                   }
                 </div>
                 <br />
-                <button className="btn btn-primary" onClick={values}>submit</button>
+                <button className="btn btn-primary" onClick={values}>submit</button> */}
                 <div style={{ color: "white" }}>
                   <h3>Table</h3>
                   <table>
@@ -141,7 +144,6 @@ const TestPage = () => {
                               }
                             </td>
                           </tr>
-
                         )
                       })
                     }
