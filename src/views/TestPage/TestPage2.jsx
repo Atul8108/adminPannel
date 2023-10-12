@@ -65,16 +65,17 @@ const TestPage2 = () => {
         const { categoryId, categoryName, name } = item;
         if (!groupedItems[categoryId]) {
             groupedItems[categoryId] = {
-            categoryId,
-            categoryName,
-            name: [],
-          };
+                categoryId,
+                categoryName,
+                name: [],
+            };
         }
         groupedItems[categoryId].name.push(name);
         return groupedItems;
-      }, {});
-      
-      console.log(groupedItems);
+    }, []);
+    const names = Array.from(item.name);
+    console.log(names)
+    console.log(groupedItems);
     return (
         <>
             <div className="w-100 main d-flex global-layout">
@@ -88,11 +89,21 @@ const TestPage2 = () => {
                         <div style={{ display: "flex", flexDirection: "column", color: "white", alignItems: 'center', gap: "10px", margin: '20px' }}>
 
                             {
-                                sortItem.map((data, index) => {
+                                groupedItems.map((data, index) => {
+                                    console.log(data)
                                     return (
                                         <>
                                             <p className="m-0">{data.categoryId}</p>
                                             <h4 className="m-0">{data.categoryName}</h4>
+                                            <p>{data.name}</p>
+                                            {
+                                                groupedItems?.name.map((item, index) => {
+                                                    return (
+                                                        <input type="checkbox" value={item} />
+
+                                                    )
+                                                })
+                                            }
                                         </>
                                     )
                                 })
@@ -100,7 +111,7 @@ const TestPage2 = () => {
 
                         </div>
                         <div>
-                            <input type="checkbox" value={""} />
+
                         </div>
                     </div>
                 </div>
