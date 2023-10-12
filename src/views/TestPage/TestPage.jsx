@@ -2,8 +2,9 @@ import $ from "jquery";
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header/Header";
 import LeftNav from "../../components/Left_Pannel/LeftNav";
+import TestModal from "./TestModal";
 
-const TestPage = () => {
+const TestPage = ({arr}) => {
   const [state, setState] = useState(null);
   const [city, setCity] = useState(null);
   const [cityValue, setCityValue] = useState(false);
@@ -37,7 +38,6 @@ const TestPage = () => {
     },
   ];
 
-  console.log(stateAndCity)
   const [isOpen, setIsOpen] = useState(true);
   useEffect(() => {
     $(".navbar-toggler").click(() => {
@@ -65,11 +65,11 @@ const TestPage = () => {
     // console.log(values)
   }
 
-  function handleShow() {
-    const state = document.querySelector("select")?.value;
-    const city = stateAndCity.find((item) => item.state === state)?.cities;
+  function  showCity(e) {
+    const city = stateAndCity.find((item) => item.state === e)?.cities;
+    const cityList = city
     console.log(city)
-    window.alert(`The cities of the selected state ${state} are: ${city?.join(", ")}`);
+    // window.alert(`The cities of the selected state ${e} are: ${cityList}`);
   }
 
   return (
@@ -135,7 +135,7 @@ const TestPage = () => {
                             <td>{data?.state}</td>
                             <td>
                               <tr>
-                                <td><button className="btn btn-primary" onClick={handleShow}>View City</button></td>
+                                <td><TestModal arr={data?.cities} state={data?.state} stateAndCity={stateAndCity}/></td>
                               </tr>
                             </td>
                             <td>

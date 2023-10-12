@@ -12,51 +12,69 @@ const TestPage2 = () => {
             setIsOpen(!isOpen);
         });
     }, [isOpen]);
-    let stateAndCity = [
-        {
-            state: "West Bengal",
-            shortCode: "WB",
-            cities: ["Kolkata", "Asansol", "Darjeeling"],
-        },
-        {
-            state: "Maharastra",
-            shortCode: "MH",
-            cities: ["Mumbai", "Pune", "Nagpur", "Solapur"],
-        },
-        {
-            state: "Chennai",
-            shortCode: "CH",
-            cities: ["Avadi", "Tiruvottiyur"],
-        },
-        {
-            state: "Delhi",
-            shortCode: "DE",
-            cities: [
-                "New Delhi",
-                "Meheruli",
-                "Fatehpur Beri",
-                "Taj Pul",
-                "Kair",
-                "Karala Village",
-            ],
-        },
-    ];
-    console.log(stateAndCity)
 
-    const [city, setCity] = useState([]);
 
-    function getCityListByStateId(stateId) {
-        if (stateId) {
-            for (const item of stateAndCity) {
-                if (item?.shortCode == stateId) {
-                    setCity(item?.cities);
-                }
-            }
-        } else {
-            setCity([]);
+    let item = [
+        {
+            categoryId: 1,
+            categoryName: "Game",
+            name: "Cricket"
+        }, {
+            categoryId: 2,
+            categoryName: "Event",
+            name: "Wedding"
+        }, {
+            categoryId: 3,
+            categoryName: "Lights",
+            name: "Red Lights"
+        }, {
+            categoryId: 1,
+            categoryName: "Game",
+            name: "Football"
+        }, {
+            categoryId: 5,
+            categoryName: "Drinks",
+            name: "Smoothy"
+        }, {
+            categoryId: 4,
+            categoryName: "Food",
+            name: "Rice"
+        }, {
+            categoryId: 1,
+            categoryName: "Game",
+            name: "BaseBall"
+        }, {
+            categoryId: 3,
+            categoryName: "Lights",
+            name: "Green Lights"
+        }, {
+            categoryId: 2,
+            categoryName: "Game",
+            name: "Annual Meeting"
+        }, {
+            categoryId: 5,
+            categoryName: "Drinks",
+            name: "Package Water"
+        }, {
+            categoryId: 1,
+            categoryName: "Game",
+            name: "Hockey"
+        },
+    ]
+    const groupedItems = item.reduce((groupedItems, item) => {
+        const { categoryId, categoryName, name } = item;
+        if (!groupedItems[categoryId]) {
+            groupedItems[categoryId] = {
+            categoryId,
+            categoryName,
+            name: [],
+          };
         }
-    }
-
+        groupedItems[categoryId].name.push(name);
+        return groupedItems;
+      }, {});
+      
+      console.log(groupedItems);
     return (
         <>
             <div className="w-100 main d-flex global-layout">
@@ -66,29 +84,24 @@ const TestPage2 = () => {
                         }`}
                 >
                     <Header />
+                    <div className="mt-5">
+                        <div style={{ display: "flex", flexDirection: "column", color: "white", alignItems: 'center', gap: "10px", margin: '20px' }}>
 
-                    <div className="text-center mt-5">
-                        <p style={{ color: "var(--text-color)" }}>States</p>
+                            {
+                                sortItem.map((data, index) => {
+                                    return (
+                                        <>
+                                            <p className="m-0">{data.categoryId}</p>
+                                            <h4 className="m-0">{data.categoryName}</h4>
+                                        </>
+                                    )
+                                })
+                            }
 
-                        <select onChange={(e) => getCityListByStateId(e.target.value)}
-                        >
-                            <option value="">-- Select State--</option>
-                            {stateAndCity?.map((data, index) => {
-                                return <option value={data.shortCode}>{data.state}</option>;
-                            })}
-                        </select>
-
-                        {city?.length > 1 && (
-                            <>
-                                <p style={{ color: "var(--text-color)" }}>Cities</p>
-                                <select>
-                                    <option value="">-- Select City--</option>
-                                    {city?.map((data, index) => {
-                                        return <option value={data}>{data}</option>;
-                                    })}
-                                </select>
-                            </>
-                        )}
+                        </div>
+                        <div>
+                            <input type="checkbox" value={""} />
+                        </div>
                     </div>
                 </div>
             </div>
