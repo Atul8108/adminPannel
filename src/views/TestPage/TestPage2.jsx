@@ -1,9 +1,8 @@
-import React from "react";
-import LeftNav from "../../components/Left_Pannel/LeftNav";
-import Header from "../../components/Header/Header";
-import { useState } from "react";
 import $ from "jquery";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Header from "../../components/Header/Header";
+import LeftNav from "../../components/Left_Pannel/LeftNav";
+import "./TestModal.css"
 
 const TestPage2 = () => {
     const [isOpen, setIsOpen] = useState(true);
@@ -12,37 +11,43 @@ const TestPage2 = () => {
             setIsOpen(!isOpen);
         });
     }, [isOpen]);
-
-
     let item = [
         {
             categoryId: 1,
             categoryName: "Game",
-            name: "Cricket"
+            name: "Cricket",
+            selected: true
         }, {
             categoryId: 2,
             categoryName: "Event",
-            name: "Wedding"
+            name: "Wedding",
+            selected: false
         }, {
             categoryId: 3,
             categoryName: "Lights",
-            name: "Red Lights"
+            name: "Red Lights",
+            selected: true
+
         }, {
             categoryId: 1,
             categoryName: "Game",
-            name: "Football"
+            name: "Football",
+            selected: true
         }, {
             categoryId: 5,
             categoryName: "Drinks",
-            name: "Smoothy"
+            name: "Smoothy",
+            selected: false
         }, {
             categoryId: 4,
             categoryName: "Food",
-            name: "Rice"
+            name: "Rice",
+            selected: true
         }, {
             categoryId: 1,
             categoryName: "Game",
-            name: "BaseBall"
+            name: "BaseBall",
+            selected: false
         }, {
             categoryId: 3,
             categoryName: "Lights",
@@ -50,68 +55,89 @@ const TestPage2 = () => {
         }, {
             categoryId: 2,
             categoryName: "Game",
-            name: "Annual Meeting"
+            name: "Annual Meeting",
+            selected: true
         }, {
             categoryId: 5,
             categoryName: "Drinks",
-            name: "Package Water"
+            name: "Package Water",
+            selected: false
         }, {
             categoryId: 1,
             categoryName: "Game",
-            name: "Hockey"
+            name: "Hockey",
+            selected: false
         },
     ]
     const groupedItems = item.reduce((groupedItems, item) => {
-        const { categoryId, categoryName, name } = item;
+
+        const { categoryId, categoryName, name, selected } = item;
         if (!groupedItems[categoryId]) {
             groupedItems[categoryId] = {
                 categoryId,
                 categoryName,
                 name: [],
+                selected
             };
         }
-        groupedItems[categoryId].name.push(name);
-        return groupedItems;
-    }, []);
-    const names = Array.from(item.name);
-    console.log(names)
-    console.log(groupedItems);
+        groupedItems[categoryId].name.push(item);
+        return Object.values(groupedItems);
+    }, {});
+    function handleSubmit() {
+        let checkboxValue = document.querySelectorAll('input[name="checkbox"]:checked')
+        for (let i = 0; i < checkboxValue.length; i++) {
+            if (checkboxValue[i].checked) {
+                console.log(checkboxValue[i].value);
+            }
+        }
+    }
     return (
         <>
             <div className="w-100 main d-flex global-layout">
                 <LeftNav />
                 <div
-                    className={`main-content  ${isOpen ? "openRightNav" : "closeRightNav"
-                        }`}
+                    className={`main-content  ${isOpen ? "openRightNav" : "closeRightNav"}`}
                 >
                     <Header />
                     <div className="mt-5">
-                        <div style={{ display: "flex", flexDirection: "column", color: "white", alignItems: 'center', gap: "10px", margin: '20px' }}>
-
+                        <div className="test-bg">
                             {
-                                groupedItems.map((data, index) => {
-                                    console.log(data)
+                                groupedItems?.map((data, index) => {
                                     return (
                                         <>
-                                            <p className="m-0">{data.categoryId}</p>
-                                            <h4 className="m-0">{data.categoryName}</h4>
-                                            <p>{data.name}</p>
-                                            {
-                                                groupedItems?.name.map((item, index) => {
-                                                    return (
-                                                        <input type="checkbox" value={item} />
+                                            <div className="serialNo-heading">
+                                                <p className="m-0 mr-2">{index + 1 + "."}</p>
+                                                <h3 className="m-0">{data.categoryName}</h3>
 
-                                                    )
-                                                })
-                                            }
+                                            </div>
+                                            <div className="input-fields-container">
+                                                {
+                                                    data?.name.map((input, index) => {
+                                                        return (
+                                                            <>
+                                                                <div className="input-fields">
+                                                                    <p className="m-0">{index + 1 + "."}</p>
+                                                                    <div style={{marginLeft:'10px',display:"flex",justifyContent:"center",alignItems:"center"}}>
+                                                                        <input type="checkbox"
+                                                                            id={index}
+                                                                            name="checkbox"
+                                                                            defaultChecked={input.selected}
+                                                                            htmlFor="checkbox"
+                                                                            value={input.name} />
+                                                                        <label id={index} className="m-0">{input.name}</label>
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+
                                         </>
                                     )
                                 })
                             }
-
-                        </div>
-                        <div>
-
+                            <div className="d-flex" style={{justifyContent:"center"}}><button className="btn-primary submit-button" onClick={handleSubmit}>Submit details</button></div>
                         </div>
                     </div>
                 </div>
