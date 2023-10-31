@@ -89,7 +89,8 @@ const TestPage2 = () => {
             groupedItemsS[item.categoryId] = item;
             groupedItemsS[item.categoryId].subItems = [];
         }
-        groupedItemsS[item.categoryId].subItems.push(item);
+        
+        groupedItemsS[item.categoryId].subItems.push(item)
         return groupedItemsS;
     }, {});
     console.log(groupedItems)

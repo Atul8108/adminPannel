@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import { Button, Dropdown, DropdownButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -15,11 +15,11 @@ import "./RightNav.css";
 
 // this is parent component
 const RightNav = ({ title }) => {
-  let [value, setValue] = useState(null);
+  const [value, setValue] = useState(null);
   const editorRef = useRef(null);
-  let [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
   // here storeing the image 
-  let [imageToShow, setImageToShow] = useState(null)
+  const [imageToShow, setImageToShow] = useState(null)
   const [imageToShowSecond, setImageToShowSecond] = useState([]);
   const [blog, setBlog] = useState([])
   
