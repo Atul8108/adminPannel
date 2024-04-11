@@ -18,7 +18,6 @@ const TextEditor = ({ editorRef,value }) => {
            "undo redo print spellcheckdialog formatpainter | blocks fontfamily fontsize | bold italic underline forecolor backcolor | link image addcomment showcomments  | alignleft aligncenter alignright alignjustify lineheight | checklist bullist numlist indent outdent | removeformat",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-          
         }}
       />
     </>

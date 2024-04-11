@@ -37,10 +37,10 @@ const ViewBlog = () => {
     setCurrentPage(1);
     setValue(e);
     if (e === "ALL") {
-      setbloglist(JSON.parse(localStorage.getItem("blogList")).reverse());
+      setbloglist(JSON.parse(localStorage.getItem("blogList"))?.reverse());
     } else {
       setbloglist(
-        JSON.parse(localStorage.getItem("blogList")).filter(
+        JSON.parse(localStorage.getItem("blogList"))?.filter(
           (blog) => blog?.status == e
         )
       );
@@ -51,10 +51,10 @@ const ViewBlog = () => {
     setCurrentPage(1);
     setCategoryValue(e);
     if (e === "ALL") {
-      setbloglist(JSON.parse(localStorage.getItem("blogList")).reverse());
+      setbloglist(JSON.parse(localStorage.getItem("blogList"))?.reverse());
     } else {
       setbloglist(
-        JSON.parse(localStorage.getItem("blogList")).filter(
+        JSON.parse(localStorage.getItem("blogList"))?.filter(
           (blog) => blog?.dropdownValue == e
         )
       );

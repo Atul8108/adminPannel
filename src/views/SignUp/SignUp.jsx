@@ -29,7 +29,7 @@ const SignUp = () => {
     const password = document.getElementById("password");
     if (phoneNumber.value.length != 10) {
       toast.warning("phone Number Should Be 10 Digits Only !!!");
-    } else if (password.value.length != 6) {
+  } else if (password.value.length <=6) {
       toast.warning("Password length should Grater then 6 Charater");
     } else if (phoneNumber.value && password.value) {
       let signUpData = {

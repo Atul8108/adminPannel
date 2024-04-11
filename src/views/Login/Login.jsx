@@ -28,53 +28,53 @@ const Login = () => {
   }, []);
 
 
-  function handleEntry(event){
-    if (event.KeyCode=== 13) {
+  function handleEntry(event) {
+    if (event.KeyCode === 13) {
       const form = event.target.form;
       const index = Array.prototype.indexOf.call(form, event.target)
-      const lastIndex = form.elements.length-1;
-      if(index === lastIndex){
+      const lastIndex = form.elements.length - 1;
+      if (index === lastIndex) {
         handleSubmit();
       }
-      else{
+      else {
         form.elements[index + 1].focus();
       }
       event.preventDefault();
     }
-}
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-      const phoneNumber = document.getElementById("phoneNumber");
-      const password = document.getElementById("password");
-      if (phoneNumber.value.length != 10) {
-        toast.warning("phone Number Should Be 10 Digits Only !!!");
-      } else if (password.value.length != 6) {
-        toast.warning("Password length should Grater then 6 Charater");
-      } else if (phoneNumber.value && password.value) {
-        if (phoneNumber.value == PHONENUMBER() && password.value == PASSWORD()) {
-          let LogInData = {
-            phoneNumber: phoneNumber?.value,
-            Password: password?.value,
-          };
-          localStorage.setItem("LogInNumber", LogInData.phoneNumber);
-          localStorage.setItem("LogInPassword", LogInData.Password);
-          if (
-            phoneNumber.value == PHONENUMBER() &&
-            password.value == PASSWORD()
-          ) {
-            navigate("/create-blog", { replace: true });
-          } else if (PHONENUMBER() != "NODATA" && PASSWORD() != "NODATA") {
-            if (JSON.parse(USERINFO())?.isComplete) {
-              navigate("/Dashbord", { replace: true });
-            } else {
-              navigate("/user-details", { replace: true });
-            }
+    const phoneNumber = document.getElementById("phoneNumber");
+    const password = document.getElementById("password");
+    if (phoneNumber.value.length != 10) {
+      toast.warning("phone Number Should Be 10 Digits Only !!!");
+    } else if (password.value.length >= 6) {
+      toast.warning("Password length should Grater then 6 Charater");
+    } else if (phoneNumber.value && password.value) {
+      if (phoneNumber.value == PHONENUMBER() && password.value == PASSWORD()) {
+        let LogInData = {
+          phoneNumber: phoneNumber?.value,
+          Password: password?.value,
+        };
+        localStorage.setItem("LogInNumber", LogInData.phoneNumber);
+        localStorage.setItem("LogInPassword", LogInData.Password);
+        if (
+          phoneNumber.value == PHONENUMBER() &&
+          password.value == PASSWORD()
+        ) {
+          navigate("/create-blog", { replace: true });
+        } else if (PHONENUMBER() != "NODATA" && PASSWORD() != "NODATA") {
+          if (JSON.parse(USERINFO())?.isComplete) {
+            navigate("/Dashbord", { replace: true });
+          } else {
+            navigate("/user-details", { replace: true });
           }
-        } else {
-          toast.error("Username Or Password Not Matching !!!");
         }
+      } else {
+        toast.error("Username Or Password Not Matching !!!");
       }
+    }
   };
   return (
     <>

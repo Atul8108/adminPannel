@@ -114,10 +114,8 @@ const TestPage = ({ arr }) => {
           <Header />
           <div className={`RightNav`}>
             <p>Page is Down</p>
-            <div
-              className="d-flex"
-              style={{ justifyContent: "center", alignItems: "center" }}
-            >
+            <div  className="d-flex" style={{ justifyContent: "center", alignItems: "center",border:"2px solid black",height:"200px"}}>
+              <div style={{width:"fit-content",border:"1px solid black"}}>1</div>
             </div>
           </div>
         </div>

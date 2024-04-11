@@ -28,7 +28,7 @@ const Pagination = ({ totalPost, postsPerPage, setCurrentPage, currentPage }) =>
     }
     return (
         <>
-            <NavLink style={{display:'flex',justifyContent:'center',alignItems:'center',gap:'10px',margin:"30px", cursor:'not-allowed'}}>
+            <NavLink style={{display:'flex',justifyContent:'center',alignItems:'center',gap:'10px',margin:"30px", cursor:'not-allowed'}} >
             {
                 currentPage>1 ?<Button className="btn btn-info" onClick={() => { previousPage() }}>Previous Page</Button>:
                 <Button className="btn btn-secondary" onClick={() => { previousPage() }} disabled>Previous Page</Button>

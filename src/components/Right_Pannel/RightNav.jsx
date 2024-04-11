@@ -273,6 +273,7 @@ const RightNav = ({ title }) => {
             <div className="card mt-3">
               <span style={{ fontWeight: '500', marginBottom: 'none' }}>Category</span>
               <DropdownButton
+              style={{background:"red !important"}}
                 alignright="true"
                 title={value ?? "NEWS"}
                 id="dropdown-menu-align-left"

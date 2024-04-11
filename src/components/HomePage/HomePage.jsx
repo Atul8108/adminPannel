@@ -34,7 +34,6 @@ const HomePage = () => {
             setIsOpen(!isOpen);
         })
     }, [isOpen])
-    console.log(element?.length)
     return (
         <>
             <div className="w-100 main d-flex global-layout">
